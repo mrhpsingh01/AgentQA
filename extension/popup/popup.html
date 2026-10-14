@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentQA Recorder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <span class="logo-text">AgentQA</span>
+      </div>
+      <div id="status-pill" class="status-pill idle">
+        <span class="status-dot"></span>
+        <span id="status-text">IDLE</span>
+      </div>
+    </header>
+
+    <!-- Main Controls -->
+    <section class="controls">
+      <button id="btn-start" class="btn btn-primary">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon>
+        </svg>
+        Start Recording
+      </button>
+
+      <div class="btn-group">
+        <button id="btn-pause" class="btn btn-secondary" disabled>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+          Pause
+        </button>
+        <button id="btn-stop" class="btn btn-danger" disabled>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="6" y="6" width="12" height="12" fill="currentColor"></rect>
+          </svg>
+          Stop
+        </button>
+      </div>
+    </section>
+
+    <!-- Steps Counter & Summary -->
+    <section class="steps-section">
+      <div class="section-header">
+        <span class="section-title">Recorded Actions</span>
+        <span id="step-count-badge" class="badge">0 steps</span>
+      </div>
+
+      <div id="steps-container" class="steps-container">
+        <div id="empty-state" class="empty-state">
+          No actions recorded yet. Click "Start Recording" to begin.
+        </div>
+        <ul id="steps-list" class="steps-list"></ul>
+      </div>
+    </section>
+
+    <!-- Export & Integration -->
+    <section class="export-section">
+      <div class="section-header">
+        <span class="section-title">Export Script</span>
+      </div>
+
+      <div class="export-controls">
+        <select id="export-format-select" class="select-input">
+          <option value="playwright-ts">Playwright (TypeScript)</option>
+          <option value="playwright-py">Playwright (Python)</option>
+          <option value="cypress">Cypress (JS)</option>
+          <option value="selenium">Selenium (Python)</option>
+          <option value="json">Puppeteer Replay (JSON)</option>
+        </select>
+
+        <div class="export-buttons">
+          <button id="btn-copy" class="btn btn-small" disabled>Copy</button>
+          <button id="btn-download" class="btn btn-small btn-primary" disabled>Export</button>
+        </div>
+      </div>
+
+      <!-- Backend Connection -->
+      <div class="backend-sync">
+        <input type="text" id="backend-url" class="text-input" placeholder="http://localhost:8000" value="http://localhost:8000">
+        <button id="btn-send-backend" class="btn btn-secondary btn-full" disabled>
+          ✨ Polish with AI Backend
+        </button>
+        <div id="sync-status" class="sync-status"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button id="btn-clear" class="btn-link">Clear Session</button>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="export-service.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
