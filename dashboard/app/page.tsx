@@ -18,9 +18,17 @@ import { Header } from "@/components/Header";
 import { MetricCard } from "@/components/MetricCard";
 import { StatusBadge } from "@/components/StatusBadge";
 import { api, OverviewMetrics, TestRun, HealedSelector } from "@/lib/api";
+import { BackendRequired } from "@/components/BackendRequired";
+import { DemoOverview } from "@/components/DemoOverview";
+import { DEMO_MODE } from "@/lib/demo";
 import { formatDuration, formatDate } from "@/lib/utils";
 
 export default function OverviewPage() {
+  return DEMO_MODE ? <DemoOverview /> : <LiveOverview />;
+}
+
+function LiveOverview() {
+  const [error, setError] = useState<string | null>(null);
   const [metrics, setMetrics] = useState<OverviewMetrics | null>(null);
   const [runs, setRuns] = useState<TestRun[]>([]);
   const [cachedSelectors, setCachedSelectors] = useState<HealedSelector[]>([]);
@@ -37,8 +45,9 @@ export default function OverviewPage() {
       setMetrics(m);
       setRuns(r);
       setCachedSelectors(c);
+      setError(null);
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "The backend could not be reached.");
     } finally {
       setIsLoading(false);
     }
@@ -74,31 +83,33 @@ export default function OverviewPage() {
         }}
       />
 
+      {error && <BackendRequired message={error} />}
+
       {/* KPI Metrics */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Total Test Runs"
           value={metrics ? metrics.total_runs : "..."}
-          trend="Continuous CI/CD execution"
+          trend="runs recorded by the backend"
           icon={PlayCircle}
         />
         <MetricCard
           title="Suite Pass Rate"
           value={metrics ? `${metrics.pass_rate_pct}%` : "..."}
-          trend="+4.2% since self-healing enabled"
+          trend="runs that passed or healed"
           icon={CheckCircle2}
         />
         <MetricCard
           title="Self-Healing Events"
           value={metrics ? metrics.total_healing_events : "..."}
-          trend="⚡ 68.5% recovery rate"
+          trend={metrics ? `${metrics.healing_success_rate_pct}% of repairs validated` : undefined}
           highlight
           icon={Zap}
         />
         <MetricCard
-          title="Engineer Hours Saved"
-          value={metrics ? `${metrics.engineer_hours_saved} hrs` : "..."}
-          trend="~40 mins per healed selector"
+          title="Verified selectors in cache"
+          value={metrics ? metrics.active_healed_selectors_in_cache : "..."}
+          trend="repairs proven by passing assertions"
           icon={Clock}
         />
       </section>

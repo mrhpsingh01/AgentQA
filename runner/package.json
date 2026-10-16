@@ -1,11 +1,14 @@
 {
   "name": "agentqa-runner",
   "version": "1.0.0",
-  "description": "AgentQA Playwright Test Runner with Self-Healing Proxy & Visual Matcher",
+  "description": "AgentQA Playwright runner: self-healing ladder, guardrails, assertion enforcement and reporter",
   "main": "dist/executor.js",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit -p .",
     "test": "playwright test",
+    "demo": "playwright test -c demo/playwright.config.ts",
+    "bench": "playwright test -c bench/playwright.config.ts",
     "run:test": "ts-node src/executor.ts"
   },
   "dependencies": {

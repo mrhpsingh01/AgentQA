@@ -4,13 +4,19 @@ import { useEffect, useState } from "react";
 import { AlertTriangle, ShieldCheck, ShieldAlert, CheckCircle2, XCircle } from "lucide-react";
 import { Header } from "@/components/Header";
 import { api, FlakyTest } from "@/lib/api";
+import { BackendRequired } from "@/components/BackendRequired";
 
 export default function FlakyQuarantinePage() {
   const [flakyTests, setFlakyTests] = useState<FlakyTest[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const loadFlaky = async () => {
-    const data = await api.getFlakyTests();
-    setFlakyTests(data);
+    try {
+      setFlakyTests(await api.getFlakyTests());
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "The backend could not be reached.");
+    }
   };
 
   useEffect(() => {
@@ -32,6 +38,7 @@ export default function FlakyQuarantinePage() {
         subtitle="Automatic detection of non-deterministic test suites to protect CI/CD build reliability"
         onRefresh={loadFlaky}
       />
+      {error && <BackendRequired message={error} />}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {flakyTests.map((test) => (

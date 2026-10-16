@@ -14,15 +14,22 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { api, HealedSelector } from "@/lib/api";
+import { BackendRequired } from "@/components/BackendRequired";
+import { DEMO_MODE } from "@/lib/demo";
 import { formatDate } from "@/lib/utils";
 
 export default function HealingCachePage() {
   const [selectors, setSelectors] = useState<HealedSelector[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const loadCache = async () => {
-    const data = await api.getHealedSelectors();
-    setSelectors(data);
+    try {
+      setSelectors(await api.getHealedSelectors());
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "The backend could not be reached.");
+    }
   };
 
   useEffect(() => {
@@ -30,14 +37,22 @@ export default function HealingCachePage() {
   }, []);
 
   const handleAccept = async (id: string) => {
-    await api.acceptHealedSelector(id, true);
-    await loadCache();
+    try {
+      await api.acceptHealedSelector(id, true);
+      await loadCache();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not accept the selector.");
+    }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm("Delete this healed selector from cache? Subsequent runs will re-evaluate.")) {
-      await api.deleteHealedSelector(id);
-      await loadCache();
+      try {
+        await api.deleteHealedSelector(id);
+        await loadCache();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Could not delete the selector.");
+      }
     }
   };
 
@@ -55,6 +70,8 @@ export default function HealingCachePage() {
         subtitle="Redis & PostgreSQL shared cache with cross-repo component fingerprinting"
         onRefresh={loadCache}
       />
+
+      {error && <BackendRequired message={error} />}
 
       {/* Cross-Repo Cache Explainer Banner */}
       <div className="p-4 rounded-xl border border-purple/30 bg-purple/10 flex items-start gap-3">
@@ -145,6 +162,7 @@ export default function HealingCachePage() {
                     </td>
 
                     <td className="py-3.5 px-4 text-right space-x-2">
+                      {DEMO_MODE ? <span className="text-[11px] text-slate-500">read-only demo</span> : (<>
                       <button
                         onClick={() => handleAccept(item.id)}
                         className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded transition-colors"
@@ -159,6 +177,7 @@ export default function HealingCachePage() {
                       >
                         <Trash2 className="w-3.5 h-3.5 inline" />
                       </button>
+                    </>)}
                     </td>
                   </tr>
                 ))

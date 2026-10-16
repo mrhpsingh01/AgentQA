@@ -11,7 +11,7 @@ export default function SettingsPage() {
   const [openaiKey, setOpenaiKey] = useState("");
   const [ollamaUrl, setOllamaUrl] = useState("http://localhost:11434");
   const [slackWebhook, setSlackWebhook] = useState("https://hooks.slack.com/services/T00/B00/XXXX");
-  const [healingThreshold, setHealingThreshold] = useState(55);
+  const [healingThreshold, setHealingThreshold] = useState(70);
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
@@ -90,7 +90,7 @@ export default function SettingsPage() {
                 className="w-full accent-primary"
               />
               <span className="text-[11px] text-slate-500">
-                Selectors repaired with confidence below {healingThreshold}% will escalate to visual matching and decomposition.
+                Repairs below this confidence are refused and the ladder escalates to the next level; nothing is applied under the threshold. This slider is a preview only: the enforced value is HEALING_CONFIDENCE_THRESHOLD on the backend and AGENTQA_MIN_CONFIDENCE in the runner (default 70%).
               </span>
             </div>
           </div>

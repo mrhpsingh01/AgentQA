@@ -15,6 +15,7 @@ import {
 import { Header } from "@/components/Header";
 import { StatusBadge } from "@/components/StatusBadge";
 import { api, TestRun } from "@/lib/api";
+import { BackendRequired } from "@/components/BackendRequired";
 import { formatDuration, formatDate } from "@/lib/utils";
 
 export default function TestRunsPage() {
@@ -22,10 +23,15 @@ export default function TestRunsPage() {
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedRunId, setExpandedRunId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const loadRuns = async () => {
-    const data = await api.getTestRuns();
-    setRuns(data);
+    try {
+      setRuns(await api.getTestRuns());
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "The backend could not be reached.");
+    }
   };
 
   useEffect(() => {
@@ -47,6 +53,7 @@ export default function TestRunsPage() {
         subtitle="Complete log of Playwright test executions, real-time durations, and self-healing events"
         onRefresh={loadRuns}
       />
+      {error && <BackendRequired message={error} />}
 
       {/* Filters & Search */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl border border-border bg-card">

@@ -1,23 +1,69 @@
 """
 AgentQA Multi-Provider LLM Gateway
-Provides unified asynchronous completion across Gemini, Anthropic, OpenAI, and Ollama,
-with automatic fallback chaining and deterministic offline mock capabilities.
+
+Unified asynchronous completion across Gemini, Anthropic, OpenAI, NVIDIA NIM and Ollama.
+
+There is deliberately NO simulated-model fallback: when no provider is configured the gateway raises
+``LLMNotConfigured`` and callers must skip their LLM-dependent step (the self-healing ladder skips
+Levels 2 and 5; test generation falls back to its algorithmic synthesizer). A system that quietly
+answers "as if" an LLM had run would make every benchmark number meaningless.
 """
 
-import json
+import asyncio
 import os
+import time
 from typing import Any, Optional
+
 import httpx
 import structlog
+
 from src.core.config import settings
 
 logger = structlog.get_logger()
 
+PROVIDER_ORDER = ("openai_compat", "nvidia", "gemini", "anthropic", "openai", "ollama")
+
+
+class LLMNotConfigured(RuntimeError):
+    """No LLM provider has credentials / an endpoint configured."""
+
+
+class LLMCallFailed(RuntimeError):
+    """Every configured provider failed."""
+
+
+def _key(setting_value: Optional[str], env_name: str) -> Optional[str]:
+    return setting_value or os.getenv(env_name) or None
+
 
 class LLMGateway:
-    def __init__(self):
+    def __init__(self) -> None:
         self.default_provider = settings.DEFAULT_LLM_PROVIDER
+        self.last_provider: Optional[str] = None
 
+    # ------------------------------------------------------------------ configuration
+    def configured_providers(self) -> list[str]:
+        """Providers that can actually be called right now (explicit credentials / endpoint only)."""
+        found: list[str] = []
+        if _key(settings.LLM_API_KEY, "LLM_API_KEY") and settings.LLM_BASE_URL and settings.LLM_MODEL:
+            found.append("openai_compat")
+        if _key(settings.NVIDIA_API_KEY, "NVIDIA_API_KEY") or _key(settings.NVIDIA_ESCALATION_API_KEY, "NVIDIA_ESCALATION_API_KEY"):
+            found.append("nvidia")
+        if _key(settings.GEMINI_API_KEY, "GEMINI_API_KEY"):
+            found.append("gemini")
+        if _key(settings.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY"):
+            found.append("anthropic")
+        if _key(settings.OPENAI_API_KEY, "OPENAI_API_KEY"):
+            found.append("openai")
+        # Ollama has no secret: it only counts when the operator pointed us at a server on purpose.
+        if os.getenv("OLLAMA_HOST") or os.getenv("OLLAMA_BASE_URL") or "OLLAMA_BASE_URL" in settings.model_fields_set:
+            found.append("ollama")
+        return found
+
+    def is_configured(self) -> bool:
+        return bool(self.configured_providers())
+
+    # ------------------------------------------------------------------ completion
     async def generate_completion(
         self,
         prompt: str,
@@ -25,100 +71,183 @@ class LLMGateway:
         provider: Optional[str] = None,
         temperature: float = 0.2,
         max_tokens: int = 2048,
-        response_json: bool = False
+        response_json: bool = False,
+        tier: str = "repair",
     ) -> str:
-        """
-        Executes an LLM completion with fallback escalation:
-        Target Provider -> OpenAI -> Anthropic -> Gemini -> Local Ollama -> Offline Fallback
-        """
-        selected_provider = provider or self.default_provider
-        providers_to_try = [selected_provider]
+        """Run a completion on the first configured provider that succeeds (preferred one first)."""
+        available = self.configured_providers()
+        if not available:
+            raise LLMNotConfigured(
+                "No LLM provider configured (set NVIDIA_API_KEY, GEMINI_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY or OLLAMA_HOST)."
+            )
 
-        # Add remaining fallback providers
-        for p in ["gemini", "anthropic", "openai", "ollama"]:
-            if p not in providers_to_try:
-                providers_to_try.append(p)
+        preferred = provider or self.default_provider
+        order = [p for p in (preferred, *PROVIDER_ORDER) if p in available]
+        order = list(dict.fromkeys(order))
+        if settings.LLM_STRICT_PROVIDER:
+            order = [preferred] if preferred in available else []
+            if not order:
+                raise LLMNotConfigured(f"LLM_STRICT_PROVIDER is on and provider {preferred!r} is not configured")
 
-        last_error = None
-        for p in providers_to_try:
+        last_error: Optional[Exception] = None
+        for name in order:
             try:
-                if p == "gemini":
-                    return await self._call_gemini(prompt, system_instruction, temperature, response_json)
-                elif p == "anthropic":
-                    return await self._call_anthropic(prompt, system_instruction, temperature, max_tokens)
-                elif p == "openai":
-                    return await self._call_openai(prompt, system_instruction, temperature, response_json)
-                elif p == "ollama":
-                    return await self._call_ollama(prompt, system_instruction, temperature)
-            except Exception as e:
-                logger.warning("LLM provider attempt failed, trying fallback", provider=p, error=str(e))
-                last_error = e
-
-        # Final deterministic offline fallback to guarantee system resilience
-        logger.warning("All LLM providers unavailable or unconfigured, utilizing built-in rule engine")
-        return self._offline_deterministic_fallback(prompt, response_json)
+                if name == "openai_compat":
+                    text = await self._call_openai_compat(prompt, system_instruction, temperature, max_tokens, tier)
+                elif name == "nvidia":
+                    text = await self._call_nvidia(prompt, system_instruction, temperature, max_tokens, tier)
+                elif name == "gemini":
+                    text = await self._call_gemini(prompt, system_instruction, temperature, response_json)
+                elif name == "anthropic":
+                    text = await self._call_anthropic(prompt, system_instruction, temperature, max_tokens)
+                elif name == "openai":
+                    text = await self._call_openai(prompt, system_instruction, temperature, response_json)
+                else:
+                    text = await self._call_ollama(prompt, system_instruction, temperature)
+                self.last_provider = name
+                return text
+            except Exception as exc:  # try the next configured provider
+                detail = f"{type(exc).__name__}: {exc}"
+                if isinstance(exc, httpx.HTTPStatusError):
+                    detail = f"HTTP {exc.response.status_code}"
+                logger.warning("LLM provider failed", provider=name, error=detail)
+                last_error = RuntimeError(f"{name}: {detail}")
+        raise LLMCallFailed(f"All configured LLM providers failed: {last_error}")
 
     async def _call_gemini(self, prompt: str, system: Optional[str], temp: float, json_mode: bool) -> str:
-        api_key = settings.GEMINI_API_KEY or os.getenv("GEMINI_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY not configured")
-
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-        
+        api_key = _key(settings.GEMINI_API_KEY, "GEMINI_API_KEY")
+        url = (
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            f"gemini-2.5-flash:generateContent?key={api_key}"
+        )
         contents = []
         if system:
             contents.append({"role": "user", "parts": [{"text": f"System Instructions:\n{system}"}]})
             contents.append({"role": "model", "parts": [{"text": "Understood. I will follow these instructions."}]})
         contents.append({"role": "user", "parts": [{"text": prompt}]})
-
-        body: dict[str, Any] = {
-            "contents": contents,
-            "generationConfig": {
-                "temperature": temp,
-            }
-        }
+        body: dict[str, Any] = {"contents": contents, "generationConfig": {"temperature": temp}}
         if json_mode:
             body["generationConfig"]["responseMimeType"] = "application/json"
-
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(url, json=body)
             resp.raise_for_status()
-            data = resp.json()
-            return data["candidates"][0]["content"]["parts"][0]["text"]
+            return resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+
+    _last_call = 0.0
+    _throttle_lock: Optional[asyncio.Lock] = None
+
+    async def _throttle(self) -> None:
+        """Space calls at least 60/LLM_RPM seconds apart (free tiers enforce requests-per-minute)."""
+        if settings.LLM_RPM <= 0:
+            return
+        if self._throttle_lock is None:
+            self._throttle_lock = asyncio.Lock()
+        async with self._throttle_lock:
+            wait = self._last_call + 60.0 / settings.LLM_RPM - time.monotonic()
+            if wait > 0:
+                await asyncio.sleep(wait)
+            self._last_call = time.monotonic()
+
+    async def _call_openai_compat(
+        self, prompt: str, system: Optional[str], temp: float, max_tokens: int, tier: str
+    ) -> str:
+        """Generic OpenAI-compatible endpoint. Retries once on HTTP 429 after the server's Retry-After."""
+        escalation = tier == "escalation"
+        api_key = (
+            (_key(settings.LLM_ESCALATION_API_KEY, "LLM_ESCALATION_API_KEY") if escalation else None)
+            or _key(settings.LLM_API_KEY, "LLM_API_KEY")
+        )
+        model = (settings.LLM_ESCALATION_MODEL if escalation else None) or settings.LLM_MODEL
+        if not (api_key and settings.LLM_BASE_URL and model):
+            raise LLMNotConfigured("LLM_BASE_URL, LLM_API_KEY and LLM_MODEL must all be set")
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt + "\n\nRespond with a single JSON object and nothing else."})
+        body: dict[str, Any] = {"model": model, "messages": messages, "temperature": temp, "max_tokens": max(max_tokens, 4096)}
+        if settings.LLM_REASONING_EFFORT:
+            body["reasoning_effort"] = settings.LLM_REASONING_EFFORT
+        if settings.LLM_JSON_MODE:
+            body["response_format"] = {"type": "json_object"}
+        url = f"{settings.LLM_BASE_URL.rstrip('/')}/chat/completions"
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            for attempt in (1, 2):
+                await self._throttle()
+                resp = await client.post(url, headers={"Authorization": f"Bearer {api_key}"}, json=body)
+                if resp.status_code == 429 and attempt == 1:
+                    try:
+                        delay = min(float(resp.headers.get("retry-after", "10")), 60.0)
+                    except ValueError:
+                        delay = 10.0
+                    await asyncio.sleep(delay)
+                    continue
+                resp.raise_for_status()
+                break
+            content = resp.json()["choices"][0]["message"].get("content")
+        if not content:
+            raise LLMCallFailed(f"{model} returned no final answer (reasoning may have used the token budget)")
+        return content
+
+    async def _call_nvidia(
+        self, prompt: str, system: Optional[str], temp: float, max_tokens: int, tier: str
+    ) -> str:
+        """NVIDIA NIM chat completions. ``tier`` picks the model and its own key: "repair" (Level 2, thinking off
+        for latency) or "escalation" (Level 5, thinking on). The reasoning trace is discarded; only the final
+        ``content`` is returned. No ``response_format``: some of these models do not support structured output,
+        so callers parse JSON out of the text."""
+        escalation = tier == "escalation"
+        api_key = (
+            _key(settings.NVIDIA_ESCALATION_API_KEY, "NVIDIA_ESCALATION_API_KEY")
+            if escalation
+            else _key(settings.NVIDIA_API_KEY, "NVIDIA_API_KEY")
+        )
+        if not api_key:
+            raise LLMNotConfigured(f"no NVIDIA API key configured for the {tier} tier")
+        model = settings.NVIDIA_ESCALATION_MODEL if escalation else settings.NVIDIA_MODEL
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt + "\n\nRespond with a single JSON object and nothing else."})
+        body: dict[str, Any] = {
+            "model": model,
+            "messages": messages,
+            "temperature": temp,
+            "max_tokens": max(max_tokens, 8192) if escalation else max_tokens,
+            "chat_template_kwargs": {"enable_thinking": escalation},
+            "stream": False,
+        }
+        async with httpx.AsyncClient(timeout=180.0 if escalation else 60.0) as client:
+            resp = await client.post(
+                f"{settings.NVIDIA_BASE_URL.rstrip('/')}/chat/completions",
+                headers={"Authorization": f"Bearer {api_key}"},
+                json=body,
+            )
+            resp.raise_for_status()
+            content = resp.json()["choices"][0]["message"].get("content")
+        if not content:
+            raise LLMCallFailed(f"NVIDIA {model} returned no final answer (reasoning may have used the token budget)")
+        return content
 
     async def _call_openai(self, prompt: str, system: Optional[str], temp: float, json_mode: bool) -> str:
-        api_key = settings.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not configured")
-
+        api_key = _key(settings.OPENAI_API_KEY, "OPENAI_API_KEY")
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
-
-        body: dict[str, Any] = {
-            "model": "gpt-4o-mini",
-            "messages": messages,
-            "temperature": temp,
-        }
+        body: dict[str, Any] = {"model": "gpt-4o-mini", "messages": messages, "temperature": temp}
         if json_mode:
             body["response_format"] = {"type": "json_object"}
-
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(
                 "https://api.openai.com/v1/chat/completions",
                 headers={"Authorization": f"Bearer {api_key}"},
-                json=body
+                json=body,
             )
             resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
+            return resp.json()["choices"][0]["message"]["content"]
 
     async def _call_anthropic(self, prompt: str, system: Optional[str], temp: float, max_tokens: int) -> str:
-        api_key = settings.ANTHROPIC_API_KEY or os.getenv("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY not configured")
-
+        api_key = _key(settings.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY")
         body: dict[str, Any] = {
             "model": "claude-3-5-sonnet-20241022",
             "max_tokens": max_tokens,
@@ -127,185 +256,34 @@ class LLMGateway:
         }
         if system:
             body["system"] = system
-
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(
                 "https://api.anthropic.com/v1/messages",
                 headers={
-                    "x-api-key": api_key,
+                    "x-api-key": api_key or "",
                     "anthropic-version": "2023-06-01",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
                 },
-                json=body
+                json=body,
             )
             resp.raise_for_status()
-            data = resp.json()
-            return data["content"][0]["text"]
+            return resp.json()["content"][0]["text"]
 
     async def _call_ollama(self, prompt: str, system: Optional[str], temp: float) -> str:
-        url = f"{settings.OLLAMA_BASE_URL}/api/generate"
+        base = os.getenv("OLLAMA_HOST") or settings.OLLAMA_BASE_URL
+        if not base.startswith("http"):
+            base = f"http://{base}"
         body = {
             "model": settings.OLLAMA_MODEL,
             "prompt": prompt,
             "system": system or "",
             "stream": False,
-            "options": {"temperature": temp}
+            "options": {"temperature": temp},
         }
-        async with httpx.AsyncClient(timeout=1.5) as client:
-            resp = await client.post(url, json=body)
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            resp = await client.post(f"{base.rstrip('/')}/api/generate", json=body)
             resp.raise_for_status()
-            data = resp.json()
-            return data.get("response", "")
-
-    def _offline_deterministic_fallback(self, prompt: str, json_mode: bool) -> str:
-        """
-        Deterministic rule-based response when external APIs are not connected.
-        Ensures tests, demo runs, and offline healing validation always succeed with high accuracy.
-        """
-        import re
-        if "healed_selector" in prompt or "selector repair" in prompt.lower():
-            # Extract metadata from prompt
-            action_match = re.search(r"User Action:\s*(\w+)", prompt, re.IGNORECASE)
-            action_type = action_match.group(1).lower() if action_match else "click"
-
-            orig_sel_match = re.search(r"Original Broken Selector:\s*(.+)", prompt)
-            orig_sel = orig_sel_match.group(1).strip() if orig_sel_match else ""
-
-            info_match = re.search(r"Original Element Metadata:\s*(\{.*?\})", prompt, re.DOTALL)
-            element_info = {}
-            if info_match:
-                try:
-                    element_info = json.loads(info_match.group(1))
-                except Exception:
-                    pass
-
-            text_preview = element_info.get("textPreview", "").strip()
-            tag_name = element_info.get("tagName", "").strip().lower()
-
-            # Isolate DOM section
-            dom_section = prompt.split("Compressed DOM Snapshot:")[-1] if "Compressed DOM Snapshot:" in prompt else prompt
-
-            # Parse candidate interactive elements from DOM
-            tag_pattern = re.compile(r'<([a-zA-Z0-9_-]+)([^>]*?)>(?:([^<]*)</\1>)?', re.IGNORECASE)
-
-            candidates = []
-            for m in tag_pattern.finditer(dom_section):
-                tag_lower = m.group(1).lower()
-                attrs_str = m.group(2)
-                clean_text = (m.group(3) or "").strip()
-                
-                # Extract attributes
-                attrs = {}
-                for m in re.finditer(r'([a-zA-Z0-9_-]+)=["\']([^"\']*)["\']', attrs_str):
-                    attrs[m.group(1).lower()] = m.group(2)
-                
-                # Check if it's an actionable element
-                is_actionable = tag_lower in ["button", "a", "input", "select", "textarea"] or \
-                                attrs.get("role") in ["button", "link", "searchbox", "textbox"] or \
-                                "data-testid" in attrs or "onclick" in attrs
-                if not is_actionable:
-                    continue
-
-                # Calculate score
-                score = 0
-
-                # 1. Text preview match
-                if text_preview:
-                    if text_preview.lower() in clean_text.lower():
-                        score += 60
-                    elif text_preview.lower() in attrs.get("aria-label", "").lower():
-                        score += 55
-                    elif text_preview.lower() in attrs.get("placeholder", "").lower():
-                        score += 40
-
-                # 2. Tag match
-                if tag_name and tag_lower == tag_name:
-                    score += 25
-
-                # 3. Action type compatibility
-                if action_type == "click":
-                    if tag_lower in ["button", "a"] or attrs.get("role") == "button" or attrs.get("type") in ["button", "submit"]:
-                        score += 30
-                    elif tag_lower == "input" and attrs.get("type") not in ["button", "submit"]:
-                        score -= 40
-                elif action_type == "fill":
-                    if tag_lower in ["input", "textarea"] or attrs.get("role") in ["textbox", "searchbox"]:
-                        score += 30
-                    elif tag_lower in ["button", "a"]:
-                        score -= 40
-
-                # 4. Token overlap with original selector
-                orig_tokens = [tok.lower() for tok in re.findall(r'[a-zA-Z0-9]+', orig_sel) if len(tok) > 2]
-                for tok in orig_tokens:
-                    if tok in ["old", "broken", "the"]:
-                        continue
-                    if tok in attrs.get("data-testid", "").lower():
-                        score += 30
-                    if tok in attrs.get("id", "").lower():
-                        score += 25
-                    if tok in attrs.get("name", "").lower():
-                        score += 20
-                    if tok in attrs.get("aria-label", "").lower():
-                        score += 20
-                    if tok in clean_text.lower():
-                        score += 15
-
-                # Preference for data-testid
-                if "data-testid" in attrs:
-                    score += 15
-
-                candidates.append({
-                    "tag": tag_lower,
-                    "attrs": attrs,
-                    "text": clean_text,
-                    "score": score
-                })
-
-            healed = None
-            sel_type = "css"
-            if candidates:
-                candidates.sort(key=lambda c: c["score"], reverse=True)
-                best = candidates[0]
-                attrs = best["attrs"]
-                tag = best["tag"]
-
-                if "data-testid" in attrs:
-                    healed = f"[data-testid='{attrs['data-testid']}']"
-                    sel_type = "testid"
-                elif "aria-label" in attrs:
-                    healed = f"{tag}[aria-label='{attrs['aria-label']}']"
-                    sel_type = "role"
-                elif "id" in attrs and not re.search(r'[0-9a-f]{6,}', attrs["id"]):
-                    healed = f"#{attrs['id']}"
-                    sel_type = "css"
-                elif "name" in attrs:
-                    healed = f"{tag}[name='{attrs['name']}']"
-                    sel_type = "css"
-                elif best["text"] and len(best["text"]) < 30:
-                    healed = f"{tag}:has-text('{best['text']}')"
-                    sel_type = "text"
-
-            if not healed:
-                # Ultimate fallback
-                testid_match = re.search(r'data-testid=["\']([^"\']+)["\']', dom_section)
-                if testid_match:
-                    healed = f"[data-testid='{testid_match.group(1)}']"
-                    sel_type = "testid"
-                else:
-                    healed = "button:has-text('Submit')"
-
-            payload = {
-                "healed_selector": healed,
-                "selector_type": sel_type,
-                "confidence": 0.88,
-                "reasoning": f"Identified actionable '{sel_type}' element matching user action '{action_type}' and semantic intent."
-            }
-            return json.dumps(payload) if json_mode else payload["healed_selector"]
-
-        # Default fallback
-        if json_mode:
-            return json.dumps({"status": "ok", "message": "Fallback generation successful"})
-        return "Deterministic fallback response generated."
+            return resp.json().get("response", "")
 
 
 llm_gateway = LLMGateway()

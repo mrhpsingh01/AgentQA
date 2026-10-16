@@ -1,0 +1,84 @@
+name: AgentQA heal report
+
+# Runs the AgentQA suite and, when a test needed a selector repair, posts ONE sticky pull-request comment with the
+# before/after selector diff, the healing level, confidence, DOM evidence, the assertions that verified the repair,
+# and a copy-pasteable patch. A repair whose assertions did not pass is shown as NOT applied and the job fails.
+#
+# This workflow runs the repository's demo checkout (`python demo.py`) so it works with no secrets. To use it on your
+# own tests, replace the "Run the suite" step with `npx playwright test` in your runner directory (using
+# `src/fixtures.ts`) and set AGENTQA_REPORT to the path the "Build the comment" step reads.
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  heal-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: runner/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          pip install rich
+          cd runner
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run the suite (3 UI states, offline healing, no API key)
+        run: python demo.py
+
+      - name: Build the comment
+        if: always()
+        run: |
+          python scripts/pr_comment.py \
+            artifacts/demo/refactored/report.json \
+            artifacts/demo/broken/report.json \
+            artifacts/demo/broken-removed/report.json \
+            --base-dir runner -o agentqa-comment.md
+          cat agentqa-comment.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentqa-evidence
+          path: |
+            artifacts/demo/**/report.json
+            artifacts/demo/**/*.png
+            artifacts/demo/**/*.dom.html
+            agentqa-comment.md
+
+      - name: Post or update the sticky comment
+        if: always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('agentqa-comment.md', 'utf8');
+            const marker = '<!-- agentqa-report -->';
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }

@@ -16,7 +16,9 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
+/backend/lib/
+# NOTE: a bare `lib/` here used to ignore dashboard/lib (api.ts, utils.ts), so a clean clone could not build the dashboard
 lib64/
 parts/
 sdist/
@@ -64,3 +66,14 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Local databases and run artifacts
+*.db
+*.sqlite3
+.agentqa/
+runner/agentqa-report.json
+runner/test-results/
+runner/playwright-report/
+artifacts/
+node_modules/
+.next/

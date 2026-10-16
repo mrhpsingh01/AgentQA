@@ -11,7 +11,7 @@ Welcome to **AgentQA**, the autonomous AI QA engineering platform for web applic
    - [A. Chrome Extension Recorder (MV3)](#a-chrome-extension-recorder-mv3)
    - [B. FastAPI AI Backend Service](#b-fastapi-ai-backend-service)
    - [C. Next.js 14 Dashboard](#c-nextjs-14-dashboard)
-   - [D. Playwright Runner & Self-Healing Proxy](#d-playwright-runner--self-healing-proxy)
+   - [D. Playwright Runner & Self-Healing Ladder](#d-playwright-runner--self-healing-ladder)
 4. [Step-by-Step Workflow Guide](#step-by-step-workflow-guide)
    - [Step 1: Record a Flow](#step-1-record-a-flow)
    - [Step 2: AI-Polished Page Object Model Generation](#step-2-ai-polished-page-object-model-generation)
@@ -48,7 +48,7 @@ Welcome to **AgentQA**, the autonomous AI QA engineering platform for web applic
 ┌────────────────────────┐ ┌──────────────┐ ┌────────────────────┐
 │   NEXT.JS DASHBOARD    │ │ SELECTOR DB  │ │ PLAYWRIGHT RUNNER  │
 │  • Real-time KPIs      │ │ Redis Cache  │ │ • DOM Compressor   │
-│  • Healing Inspector   │ │ PostgreSQL   │ │ • Healing Proxy    │
+│  • Healing Inspector   │ │ PostgreSQL   │ │ • Healing Ladder   │
 │  • Visual Regression   │ │ (agentqa.db) │ │ • Custom Reporter  │
 │  • Flaky Quarantine    │ └──────────────┘ └────────────────────┘
 └────────────────────────┘
@@ -96,13 +96,13 @@ Located in [`extension/`](file:///e:/project/projects/AgentQA/extension/)
 Located in [`backend/`](file:///e:/project/projects/AgentQA/backend/)
 - **Authentication**: JWT access & refresh tokens plus `X-API-Key` headers (`sk_live_...`) for CI/CD runners.
 - **Multi-LLM Gateway**: Connects to Gemini, Claude, GPT-4o, or local Ollama with automatic fallback chaining and offline rule engines.
-- **Self-Healing Engine**: Implements the 5-level escalation algorithm with stale-cache invalidation.
+- **Self-Healing Engine (server side)**: the verified selector cache and the LLM levels (2 and 5); the deterministic levels (1, 3, 4) run in the runner against the live page.
 - **Cross-Repo Intelligence**: Selectors are indexed by both `(url_pattern, selector_hash)` and `component_fingerprint` to share fixes across projects.
 
 ### C. Next.js 14 Dashboard
 Located in [`dashboard/`](file:///e:/project/projects/AgentQA/dashboard/)
 - Built with **Next.js 14 App Router**, **TypeScript**, and **Tailwind CSS**.
-- **Overview**: Real-time suite pass rates, self-healing events, and developer hours saved.
+- **Overview**: Pass rates and self-healing events from the backend, or the bundled real demo and benchmark results in demo mode (`NEXT_PUBLIC_DEMO_MODE=true`).
 - **Test Runs (`/runs`)**: Full run histories with expandable trace drawers and healing details.
 - **Self-Healing Cache (`/healing`)**: Inspector for before/after selectors, confidence ratings, and manual accept/reject actions.
 - **Visual Regression (`/visual`)**: Golden baseline comparison per branch/environment with pixel-diff metrics.
@@ -111,11 +111,12 @@ Located in [`dashboard/`](file:///e:/project/projects/AgentQA/dashboard/)
 - **Data-Driven Studio (`/data-driven`)**: Bind CSV/JSON datasets to parameterized Playwright specs.
 - **Settings (`/settings`)**: LLM provider switching, API keys, and Slack/Jira webhook alerts.
 
-### D. Playwright Runner & Self-Healing Proxy
-Located in [`runner/`](file:///e:/project/projects/AgentQA/runner/)
-- **DOM Compressor**: Strips scripts, inline styles, and dynamic framework classes down to **~8KB**.
-- **Healing Proxy**: Wraps actions (`healedClick`, `healedFill`). If a selector breaks, it requests a repair from the backend, validates it, and continues the test without crashing.
-- **Agent Reporter**: Streams step-by-step progress, duration, and healing outcomes directly back to the database.
+### D. Playwright Runner & Self-Healing Ladder
+Located in [`runner/`](runner/)
+- **Fixtures** (`src/fixtures.ts`): `test` / `expect` with an `agentqa` fixture (`click`, `fill`, `check`, `selectOption`, `press`, `hover`). A selector that breaks is repaired by the ladder; the repair counts only if the test's own assertions pass afterwards.
+- **Ladder** (`src/healing/ladder.ts`): Levels 1, 3, 4 run offline at $0.00; Levels 2 and 5 call the backend's LLM gateway only if a provider is configured, and are skipped otherwise.
+- **DOM Compressor**: strips scripts, styles, media and framework class noise and collapses long runs of look-alike siblings (the demo shop's 44KB page becomes about 1.7KB).
+- **Reporter** (`src/reporters/agent-reporter.ts`): writes `agentqa-report.json` (per-test heals with verdicts, refusals, named assertion steps) and can publish validated results to the backend.
 
 ---
 
@@ -149,46 +150,48 @@ cd e:\project\projects\AgentQA\runner
 npm test
 ```
 **What happens when a UI redesign breaks a selector?**
-1. Playwright attempts to locate the element.
-2. The selector times out.
-3. The **Self-Healing Proxy** intercepts the error.
-4. It compresses the current DOM and sends it to the AgentQA Backend API.
-5. The AI identifies the updated element (e.g., `#old-btn` changed to `[data-testid='submit-btn']`).
-6. The test retries with the healed selector, clicks the element, and passes!
-7. The fix is cached in Redis & PostgreSQL so subsequent runs heal in `<50ms`.
+1. The fixture waits briefly for the selector; it does not resolve.
+2. The ladder runs cheapest first: Level 1 (retry), Level 3 (selectors recorded when the element last worked), Level 4 (DOM geometry and layout match). Levels 2 and 5 (LLM) run only if a provider is configured.
+3. Each candidate must resolve to exactly one visible, enabled element and pass the intent guardrails (no *Place order* to *Cancel*, minimum confidence, no ambiguity).
+4. The action is performed and the heal is **pending** until the test's own assertions pass afterwards. If they fail, or none ran, the heal is not counted and the test fails.
+5. Validated heals update the remembered fingerprint and, through the backend, the verified selector cache.
+
+Try the whole story offline with `python demo.py` (see [`TRY_IT.md`](TRY_IT.md)).
 
 ### Step 4: Inspect Live Metrics in Dashboard
 Open `http://localhost:3000` to inspect:
 - Total runs and pass rate percentage.
 - The **Self-Healing Selector Intelligence** table showing the broken locator, repaired locator, and confidence score.
-- Developer hours saved (`healing_events × 0.66 hrs`).
 
 ---
 
 ## Self-Healing Deep Dive (5-Level Escalation)
 
-When a selector fails at runtime, AgentQA escalates through 5 levels:
+Level numbers are fixed identities; the **execution order is cheapest-first: 1 → 3 → 4 → 2 → 5**.
 
 ```mermaid
 flowchart TD
-    FAIL["Locator Failure / TimeoutError"] --> L1{"Level 1: Smart Cache Hit?"}
-    L1 -->|Verified in DOM| PASS["✓ Test Continues"]
-    L1 -->|Not Cached or Stale| L2{"Level 2: AI DOM Analysis"}
-    L2 -->|LLM returns valid selector| PASS
-    L2 -->|Unresolved / Low confidence| L3{"Level 3: Multi-Selector Fallback"}
-    L3 -->|Alternative matches in DOM| PASS
-    L3 -->|All fallbacks failed| L4{"Level 4: Visual Matching"}
-    L4 -->|Coordinates & geometry match| PASS
-    L4 -->|Not found| L5{"Level 5: Decompose & Rebuild"}
-    L5 -->|Tag + text reconstructed| PASS
-    L5 -->|Failed| ERROR["Report Failure with Root Cause"]
+    FAIL["Selector does not resolve"] --> L1{"Level 1: Smart Retry (+ verified cache)"}
+    L1 -->|resolves| PEND
+    L1 -->|miss| L3{"Level 3: Multi-Selector Fallback"}
+    L3 -->|one agreeing alternate| PEND
+    L3 -->|miss| L4{"Level 4: DOM Geometry & Layout Matcher"}
+    L4 -->|confident, unambiguous| PEND
+    L4 -->|miss| L2{"Level 2: LLM DOM Repair (needs provider)"}
+    L2 -->|candidate| PEND
+    L2 -->|miss or skipped| L5{"Level 5: LLM Decompose & Rebuild (needs provider)"}
+    L5 -->|candidate| PEND
+    L5 -->|miss or skipped| REFUSE["Refuse: the test fails with the ladder trace"]
+    PEND["Candidate proven on the live page + guardrails"] --> APPLY["Action performed; heal is PENDING"]
+    APPLY --> ASSERT{"Test's own assertions pass afterwards?"}
+    ASSERT -->|yes| OK["heal VALIDATED"]
+    ASSERT -->|no, or none ran| NO["heal REJECTED / UNVERIFIED: test stays failed"]
 ```
 
-1. **Level 1 (Smart Cache)**: Looks up cached repairs keyed by `(url_pattern, selector_hash)` or `component_fingerprint`. Validates against live DOM before accepting.
-2. **Level 2 (AI DOM Regeneration)**: Sends compressed ~8KB DOM snapshot to the LLM Gateway (Gemini, Claude, GPT, or Ollama) to identify the intended element.
-3. **Level 3 (Multi-Selector Fallback)**: Tries alternative locators recorded during the initial session (`data-testid`, ARIA, stable attributes).
-4. **Level 4 (Visual Geometry Matcher)**: Uses element bounding boxes and spatial coordinates to locate elements that changed structure.
-5. **Level 5 (Decompose & Rebuild)**: Decomposes composite selectors into semantic tag + visible text anchors (e.g., `button:has-text('Submit')`).
+1. **Level 1 (Smart Retry)** re-resolves the original selector for a short window (late renders), then consults the verified cache (only repairs a previous run proved).
+2. **Level 3 (Multi-Selector Fallback)** tries alternates recorded when the element last worked (test id, role + name, `name=`, aria-label, label text). Alternates pointing at different elements are refused.
+3. **Level 4 (DOM Geometry & Layout Matcher)** scores live controls against the recorded fingerprint using text, role, attributes, ancestors, **DOM bounding boxes** and intent polarity. It does not compare screenshots.
+4. **Level 2 (LLM DOM Repair)** and **Level 5 (LLM Decompose & Rebuild)** use the backend LLM gateway (Gemini, Claude, GPT or Ollama). With no provider configured they are skipped and reported as skipped; nothing is simulated.
 
 ---
 
@@ -215,24 +218,7 @@ flowchart TD
 ## CI/CD & Alert Webhooks
 
 ### GitHub Actions Integration
-Included in [`.github/workflows/playwright.yml`](file:///e:/project/projects/AgentQA/.github/workflows/playwright.yml):
-```yaml
-name: AgentQA Self-Healing CI Pipeline
-on: [pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Start AgentQA Backend
-        run: |
-          cd backend && uvicorn src.main:app --port 8000 &
-      - name: Run Playwright with Self-Healing
-        run: |
-          cd runner && npm test
-        env:
-          AGENTQA_BACKEND_URL: http://localhost:8000
-```
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the backend tests, the runner's per-level suites and builds the dashboard. [`.github/workflows/agentqa.yml`](.github/workflows/agentqa.yml) runs the demo suite and posts one sticky pull-request comment (selector diff, level, confidence, evidence, verifying assertions, copy-pasteable patch) generated by `scripts/pr_comment.py` from the runner's `agentqa-report.json`. To use it on your own tests, replace the "Run the suite" step with `npx playwright test` in your runner and point `AGENTQA_REPORT` at the report file.
 
 ### Slack & Jira Webhooks
 Configure your webhook URLs in **Settings (`/settings`)**:
@@ -262,32 +248,6 @@ In the Next.js Dashboard, navigate to **Data-Driven Studio (`/data-driven`)**:
 
 ---
 
-## Ground-Truth Evaluation Benchmark
+## Evaluation Benchmark
 
-To verify self-healing accuracy against academic benchmarks (ARES 2026), run the 10-case evaluation suite:
-```powershell
-cd e:\project\projects\AgentQA
-python eval/benchmark_eval_set.py
-```
-**Benchmark Output**:
-```text
-=================================================================
- AgentQA Self-Healing Benchmark Evaluation Suite (ARES 2026)
-=================================================================
-[CASE-01] Tailwind Utility Class Refactoring         [PASS] RECOVERED (L2, 88%)
-[CASE-02] Legacy ID Renaming                         [PASS] RECOVERED (L2, 88%)
-[CASE-03] Form Input Name Attribute Update           [PASS] RECOVERED (L2, 88%)
-[CASE-04] Structural DOM Wrapper Added               [PASS] RECOVERED (L2, 88%)
-[CASE-05] ARIA Label Copy Polish                     [PASS] RECOVERED (L3, 85%)
-[CASE-06] Button Tag Replaced with Anchor            [PASS] RECOVERED (L2, 88%)
-[CASE-07] Modal Confirmation Button Hierarchy        [PASS] RECOVERED (L2, 88%)
-[CASE-08] Search Box Input Type and Placeholder      [PASS] RECOVERED (L2, 88%)
-[CASE-09] Checkout Submit Button TestID              [PASS] RECOVERED (L2, 88%)
-[CASE-10] Dynamic Hash Class Invalidation (CSS)      [PASS] RECOVERED (L2, 88%)
------------------------------------------------------------------
-Total Test Cases:    10
-Successfully Healed: 10
-Recovery Rate:       100.0% (Benchmark Target: > 55%)
-=================================================================
-SUCCESS: Benchmark passed! Meets or exceeds state-of-the-art healing baseline.
-```
+The 50-scenario mutation benchmark (6 UI patterns, 38 harmless refactors and 12 real regressions) lives in `runner/bench/` and is run by `python scripts/run_benchmark.py`. Results, method and limits are in [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md); the headline is in the [README](README.md). The earlier ground-truth set that counted a repair as "recovered" whenever the new selector string appeared anywhere in the HTML was removed because it could not detect a wrong or destructive repair.

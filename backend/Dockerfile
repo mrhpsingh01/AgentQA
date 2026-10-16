@@ -16,7 +16,7 @@ with open('pyproject.toml', 'rb') as f:
     d = tomllib.load(f)
 for dep in d['project']['dependencies']:
     print(dep)
-") || pip install --no-cache-dir fastapi uvicorn pydantic pydantic-settings sqlalchemy asyncpg aiosqlite pyjwt pwdlib[argon2] redis httpx structlog jinja2 beautifulsoup4
+") || pip install --no-cache-dir fastapi uvicorn pydantic pydantic-settings email-validator sqlalchemy asyncpg aiosqlite pyjwt pwdlib[argon2] redis httpx structlog jinja2 beautifulsoup4 lxml taskiq taskiq-redis rich
 
 # Runner stage
 FROM python:3.12-slim-bookworm AS runner

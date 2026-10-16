@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend tests (no LLM key, no Redis, no Postgres)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - name: Install and test
+        working-directory: backend
+        run: |
+          uv sync
+          uv run pytest -q
+
+  runner:
+    name: Healing levels, guardrails and assertion enforcement (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: runner/package-lock.json
+      - name: Install
+        working-directory: runner
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Type-check
+        working-directory: runner
+        run: npx tsc --noEmit -p .
+      - name: Per-level regression tests
+        working-directory: runner
+        run: npx playwright test
+        env:
+          AGENTQA_REPORT: ${{ runner.temp }}/levels-report.json
+
+  dashboard:
+    name: Dashboard builds in demo mode
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - working-directory: dashboard
+        run: |
+          npm ci
+          npm run build
+        env:
+          NEXT_PUBLIC_DEMO_MODE: "true"

@@ -1,0 +1,253 @@
+{
+  "generatedAt": "2026-10-16T05:49:06.930Z",
+  "tests": [
+    {
+      "title": "customer buys a pair of trail shoes",
+      "file": "demo\\checkout.spec.ts",
+      "status": "healed",
+      "durationMs": 10897,
+      "errors": [],
+      "heals": [
+        {
+          "testTitle": "customer buys a pair of trail shoes",
+          "file": "demo/checkout.spec.ts",
+          "line": 27,
+          "url": "http://127.0.0.1:63575/?state=refactored",
+          "original": "#add-to-cart-3",
+          "healed": "[data-testid=\"t896bee\"]",
+          "action": "click",
+          "level": 4,
+          "levelName": "DOM Geometry & Layout Matcher",
+          "confidence": 0.7904999080680752,
+          "reasoning": "best layout match: text, role, position and structure agree (text 0.5, role 1, attrs 1, position 0.999, size 0.993, context 1, intent 0.4)",
+          "steps": [
+            {
+              "level": 1,
+              "name": "Smart Retry",
+              "status": "miss",
+              "reason": "still failing after 500ms: matches no element",
+              "ms": 544
+            },
+            {
+              "level": 3,
+              "name": "Multi-Selector Fallback",
+              "status": "miss",
+              "reason": "1 alternates tried, none resolves to a single visible element",
+              "ms": 4
+            },
+            {
+              "level": 4,
+              "name": "DOM Geometry & Layout Matcher",
+              "status": "selected",
+              "reason": "best layout match: text, role, position and structure agree (text 0.5, role 1, attrs 1, position 0.999, size 0.993, context 1, intent 0.4)",
+              "ms": 57
+            }
+          ],
+          "domBytesRaw": 45439,
+          "domBytesCompressed": 1696,
+          "elapsedMs": 617,
+          "llmCostUsd": 0,
+          "verdict": "validated",
+          "verdictReason": "5 assertion(s) passed after the repair",
+          "assertionsAfter": 5,
+          "evidence": {
+            "text": 0.5,
+            "role": 1,
+            "attrs": 1,
+            "position": 0.999,
+            "size": 0.993,
+            "context": 1,
+            "intent": 0.4,
+            "score": 0.79,
+            "coverage": 1,
+            "selectorKind": "testid"
+          },
+          "timestamp": 1792129738766
+        },
+        {
+          "testTitle": "customer buys a pair of trail shoes",
+          "file": "demo/checkout.spec.ts",
+          "line": 28,
+          "url": "http://127.0.0.1:63575/?state=refactored",
+          "original": "#checkout-btn",
+          "healed": "[data-testid=\"t56f440\"]",
+          "action": "click",
+          "level": 4,
+          "levelName": "DOM Geometry & Layout Matcher",
+          "confidence": 0.9098848251115816,
+          "reasoning": "best layout match: text, role, position and structure agree (text 0.72, role 1, attrs 1, position 0.963, size 0.877, context 1, intent 1)",
+          "steps": [
+            {
+              "level": 1,
+              "name": "Smart Retry",
+              "status": "miss",
+              "reason": "still failing after 500ms: matches no element",
+              "ms": 552
+            },
+            {
+              "level": 3,
+              "name": "Multi-Selector Fallback",
+              "status": "miss",
+              "reason": "2 alternates tried, none resolves to a single visible element",
+              "ms": 6
+            },
+            {
+              "level": 4,
+              "name": "DOM Geometry & Layout Matcher",
+              "status": "selected",
+              "reason": "best layout match: text, role, position and structure agree (text 0.72, role 1, attrs 1, position 0.963, size 0.877, context 1, intent 1)",
+              "ms": 24
+            }
+          ],
+          "domBytesRaw": 45439,
+          "domBytesCompressed": 1696,
+          "elapsedMs": 588,
+          "llmCostUsd": 0,
+          "verdict": "validated",
+          "verdictReason": "5 assertion(s) passed after the repair",
+          "assertionsAfter": 5,
+          "evidence": {
+            "text": 0.72,
+            "role": 1,
+            "attrs": 1,
+            "position": 0.963,
+            "size": 0.877,
+            "context": 1,
+            "intent": 1,
+            "score": 0.91,
+            "coverage": 1,
+            "selectorKind": "testid"
+          },
+          "timestamp": 1792129741405
+        },
+        {
+          "testTitle": "customer buys a pair of trail shoes",
+          "file": "demo/checkout.spec.ts",
+          "line": 40,
+          "url": "http://127.0.0.1:63575/?state=refactored#/checkout",
+          "original": "#email",
+          "healed": "input[name=\"email\"]",
+          "action": "fill",
+          "level": 3,
+          "levelName": "Multi-Selector Fallback",
+          "confidence": 0.862,
+          "reasoning": "recorded alternate selector still identifies one element (2/3 alternates agree)",
+          "steps": [
+            {
+              "level": 1,
+              "name": "Smart Retry",
+              "status": "miss",
+              "reason": "still failing after 500ms: matches no element",
+              "ms": 554
+            },
+            {
+              "level": 3,
+              "name": "Multi-Selector Fallback",
+              "status": "selected",
+              "reason": "recorded alternate selector still identifies one element (2/3 alternates agree)",
+              "ms": 54
+            }
+          ],
+          "domBytesRaw": 45448,
+          "domBytesCompressed": 1696,
+          "elapsedMs": 613,
+          "llmCostUsd": 0,
+          "verdict": "validated",
+          "verdictReason": "4 assertion(s) passed after the repair",
+          "assertionsAfter": 4,
+          "evidence": {
+            "alternatesTried": 3,
+            "alternatesMatching": 2,
+            "similarity": 0.6
+          },
+          "timestamp": 1792129744124
+        },
+        {
+          "testTitle": "customer buys a pair of trail shoes",
+          "file": "demo/checkout.spec.ts",
+          "line": 41,
+          "url": "http://127.0.0.1:63575/?state=refactored#/checkout",
+          "original": "#place-order",
+          "healed": "[data-testid=\"t3e4210\"]",
+          "action": "click",
+          "level": 4,
+          "levelName": "DOM Geometry & Layout Matcher",
+          "confidence": 0.7125747272459301,
+          "reasoning": "best layout match: text, role, position and structure agree (text 0.075, role 1, attrs 1, position 0.948, size 0.824, context 0.833, intent 1)",
+          "steps": [
+            {
+              "level": 1,
+              "name": "Smart Retry",
+              "status": "miss",
+              "reason": "still failing after 500ms: matches no element",
+              "ms": 537
+            },
+            {
+              "level": 3,
+              "name": "Multi-Selector Fallback",
+              "status": "miss",
+              "reason": "3 alternates tried, none resolves to a single visible element",
+              "ms": 9
+            },
+            {
+              "level": 4,
+              "name": "DOM Geometry & Layout Matcher",
+              "status": "selected",
+              "reason": "best layout match: text, role, position and structure agree (text 0.075, role 1, attrs 1, position 0.948, size 0.824, context 0.833, intent 1)",
+              "ms": 15
+            }
+          ],
+          "domBytesRaw": 45448,
+          "domBytesCompressed": 1696,
+          "elapsedMs": 565,
+          "llmCostUsd": 0,
+          "verdict": "validated",
+          "verdictReason": "4 assertion(s) passed after the repair",
+          "assertionsAfter": 4,
+          "evidence": {
+            "text": 0.075,
+            "role": 1,
+            "attrs": 1,
+            "position": 0.948,
+            "size": 0.824,
+            "context": 0.833,
+            "intent": 1,
+            "score": 0.713,
+            "coverage": 1,
+            "selectorKind": "testid"
+          },
+          "timestamp": 1792129746738
+        }
+      ],
+      "blocked": [],
+      "steps": [
+        {
+          "title": "URL navigated to the confirmation view",
+          "ok": true,
+          "durationMs": 36
+        },
+        {
+          "title": "order confirmation text is shown",
+          "ok": true,
+          "durationMs": 4
+        },
+        {
+          "title": "API state changed: exactly one order exists for jane@example.com",
+          "ok": true,
+          "durationMs": 5
+        }
+      ],
+      "tags": []
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "healed": 1,
+    "failed": 0,
+    "healsValidated": 4,
+    "healsRejected": 0,
+    "healsUnverified": 0,
+    "healsBlocked": 0
+  }
+}

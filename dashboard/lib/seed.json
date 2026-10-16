@@ -1,0 +1,7147 @@
+{
+ "generatedAt": "2026-10-16T03:34:06",
+ "provenance": "Copied from `python demo.py` (artifacts/demo) and `python scripts/run_benchmark.py` (BENCHMARK_RESULTS.json). Not hand-written.",
+ "demo": {
+  "expectations": [
+   {
+    "claim": "plain Playwright fails on every changed state (the selectors really broke)",
+    "met": true
+   },
+   {
+    "claim": "original: passes with 0 heals",
+    "met": true
+   },
+   {
+    "claim": "refactored: heals and passes (every heal validated)",
+    "met": true
+   },
+   {
+    "claim": "broken: FAILS, no heal claimed as valid",
+    "met": true
+   },
+   {
+    "claim": "broken-removed: FAILS and refuses to heal onto Cancel",
+    "met": true
+   }
+  ],
+  "seconds": 60.5,
+  "states": {
+   "original": {
+    "status": "passed",
+    "verdict": "PASS",
+    "note": "0 heals needed",
+    "valid": 0,
+    "plain": {
+     "status": "passed",
+     "error": ""
+    },
+    "screenshot": "/demo/original.png",
+    "dom": {
+     "rawBytes": 44902,
+     "compressedBytes": 1663
+    },
+    "domLines": [
+     "<body>",
+     "<header class=\"top\">",
+     "<span class=\"brand\">Trailhead Outfitters</span>",
+     "<nav>",
+     "<a href=\"#/\">Shop</a>",
+     "<a href=\"#/help\">Help</a>",
+     "<button id=\"checkout-btn\" data-testid=\"checkout-btn\" class=\"btn primary\" type=\"button\">Checkout <span class=\"badge\" id=\"cart-count\">1</span>",
+     "</button>",
+     "</nav>",
+     "</header>",
+     "<main>",
+     "<section class=\"view on\">",
+     "<div class=\"grid\">",
+     "<article class=\"card\">",
+     "<h3>Trail Running Shoes</h3>",
+     "<div class=\"price\">$89</div>",
+     "<button id=\"add-to-cart-1\" data-testid=\"add-1\" class=\"btn primary\" type=\"button\">Add to cart</button>",
+     "</article>",
+     "<article class=\"card\">",
+     "<h3>Merino Base Layer</h3>",
+     "<div class=\"price\">$64</div>",
+     "<button id=\"add-to-cart-2\" data-testid=\"add-2\" class=\"btn primary\" type=\"button\">Add to cart</button>",
+     "</article>",
+     "<article class=\"card\">",
+     "<h3>Insulated Bottle 750ml</h3>",
+     "<div class=\"price\">$29</div>",
+     "<button id=\"add-to-cart-3\" data-testid=\"add-3\" class=\"btn primary\" type=\"button\">Add to cart</button>",
+     "</article>",
+     "<!-- 69 more <article> siblings omitted -->",
+     "</div>",
+     "</section>",
+     "<section class=\"view\">",
+     "<div class=\"panel\">",
+     "<h2>Checkout</h2>",
+     "<label class=\"field\">Email <input id=\"email\" name=\"email\" type=\"email\" placeholder=\"you@example.com\" data-testid=\"email\">",
+     "</label>",
+     "<div class=\"row\">",
+     "<button data-testid=\"back\" class=\"btn\" type=\"button\">Back to cart</button>",
+     "<button data-testid=\"cancel\" class=\"btn danger\" type=\"button\">Cancel</button>",
+     "<button id=\"place-order\" data-testid=\"place-order\" class=\"btn primary\" type=\"button\">Place order</button>",
+     "</div>",
+     "</div>",
+     "</section>",
+     "<section class=\"view\">",
+     "<div class=\"panel\">",
+     "<h2>Order confirmed <span id=\"order-no\">",
+     "</span>",
+     "</h2>",
+     "</div>",
+     "</section>",
+     "</main>",
+     "<footer class=\"foot\">\u00a9 Trailhead Outfitters. Prices in USD. Free returns within 3\u2026</footer>",
+     "</body>"
+    ],
+    "test": {
+     "title": "customer buys a pair of trail shoes",
+     "file": "demo\\checkout.spec.ts",
+     "status": "passed",
+     "durationMs": 531,
+     "errors": [],
+     "heals": [],
+     "blocked": [],
+     "steps": [
+      {
+       "title": "URL navigated to the confirmation view",
+       "ok": true,
+       "durationMs": 41
+      },
+      {
+       "title": "order confirmation text is shown",
+       "ok": true,
+       "durationMs": 5
+      },
+      {
+       "title": "API state changed: exactly one order exists for jane@example.com",
+       "ok": true,
+       "durationMs": 5
+      }
+     ],
+     "tags": []
+    }
+   },
+   "refactored": {
+    "status": "healed",
+    "verdict": "PASS (valid heal)",
+    "note": "4 selector(s) healed, all assertions passed",
+    "valid": 4,
+    "plain": {
+     "status": "failed",
+     "error": "TimeoutError: locator.waitFor: Timeout 2000ms exceeded."
+    },
+    "screenshot": "/demo/refactored.png",
+    "dom": {
+     "rawBytes": 45439,
+     "compressedBytes": 1696
+    },
+    "domLines": [
+     "<body>",
+     "<header>",
+     "<span class=\"cfac1ee\">Trailhead Outfitters</span>",
+     "<nav>",
+     "<a href=\"#/\">Shop</a>",
+     "<a href=\"#/help\">Help</a>",
+     "<button id=\"e156e1f\" data-testid=\"t56f440\" class=\"c559eb1 c701b44\" type=\"button\">Go to checkout <span class=\"c7df557\" id=\"ec20cbd\">1</span>",
+     "</button>",
+     "</nav>",
+     "</header>",
+     "<main>",
+     "<section class=\"cb1f6e5\">",
+     "<div class=\"c6f03d2\">",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Trail Running Shoes</h3>",
+     "<div class=\"c395d1c\">$89</div>",
+     "<button id=\"e607ab3\" data-testid=\"t50a42e\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Merino Base Layer</h3>",
+     "<div class=\"c395d1c\">$64</div>",
+     "<button id=\"eafd9ef\" data-testid=\"tc5c822\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Insulated Bottle 750ml</h3>",
+     "<div class=\"c395d1c\">$29</div>",
+     "<button id=\"ec1bc1f\" data-testid=\"t896bee\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<!-- 69 more <article> siblings omitted -->",
+     "</div>",
+     "</section>",
+     "<section>",
+     "<div class=\"cfef97b\">",
+     "<h2>Checkout</h2>",
+     "<label>Email <input id=\"e7fa906\" name=\"email\" type=\"email\" placeholder=\"you@example.com\" data-testid=\"t806592\">",
+     "</label>",
+     "<div class=\"ce857ca\">",
+     "<button data-testid=\"t0ac76b\" class=\"c559eb1\" type=\"button\">Back to cart</button>",
+     "<button data-testid=\"t7203bb\" class=\"c559eb1 c60e758\" type=\"button\">Cancel</button>",
+     "<div class=\"c592c61\">",
+     "<span>",
+     "<button id=\"ee656ab\" data-testid=\"t3e4210\" class=\"c559eb1 c701b44\" type=\"button\">Complete purchase</button>",
+     "</span>",
+     "</div>",
+     "</div>",
+     "</div>",
+     "</section>",
+     "<section>",
+     "<div class=\"cfef97b\">",
+     "<h2>Order confirmed <span id=\"ecf8ff2\">",
+     "</span>",
+     "</h2>",
+     "</div>",
+     "</section>",
+     "</main>",
+     "<footer class=\"cbd715d\">\u00a9 Trailhead Outfitters. Prices in USD. Free returns within 3\u2026</footer>",
+     "</body>"
+    ],
+    "test": {
+     "title": "customer buys a pair of trail shoes",
+     "file": "demo\\checkout.spec.ts",
+     "status": "healed",
+     "durationMs": 10858,
+     "errors": [],
+     "heals": [
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 27,
+       "url": "http://127.0.0.1:63016/?state=refactored",
+       "original": "#add-to-cart-3",
+       "healed": "[data-testid=\"t896bee\"]",
+       "action": "click",
+       "level": 4,
+       "levelName": "DOM Geometry & Layout Matcher",
+       "confidence": 0.7904999080680752,
+       "reasoning": "best layout match: text, role, position and structure agree (text 0.5, role 1, attrs 1, position 0.999, size 0.993, context 1, intent 0.4)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 544
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "miss",
+         "reason": "1 alternates tried, none resolves to a single visible element",
+         "ms": 3
+        },
+        {
+         "level": 4,
+         "name": "DOM Geometry & Layout Matcher",
+         "status": "selected",
+         "reason": "best layout match: text, role, position and structure agree (text 0.5, role 1, attrs 1, position 0.999, size 0.993, context 1, intent 0.4)",
+         "ms": 53
+        }
+       ],
+       "domBytesRaw": 45439,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 612,
+       "llmCostUsd": 0,
+       "verdict": "validated",
+       "verdictReason": "5 assertion(s) passed after the repair",
+       "assertionsAfter": 5,
+       "evidence": {
+        "text": 0.5,
+        "role": 1,
+        "attrs": 1,
+        "position": 0.999,
+        "size": 0.993,
+        "context": 1,
+        "intent": 0.4,
+        "score": 0.79,
+        "coverage": 1,
+        "selectorKind": "testid"
+       },
+       "timestamp": 1792130449466
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 28,
+       "url": "http://127.0.0.1:63016/?state=refactored",
+       "original": "#checkout-btn",
+       "healed": "[data-testid=\"t56f440\"]",
+       "action": "click",
+       "level": 4,
+       "levelName": "DOM Geometry & Layout Matcher",
+       "confidence": 0.9098848251115816,
+       "reasoning": "best layout match: text, role, position and structure agree (text 0.72, role 1, attrs 1, position 0.963, size 0.877, context 1, intent 1)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 537
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "miss",
+         "reason": "2 alternates tried, none resolves to a single visible element",
+         "ms": 6
+        },
+        {
+         "level": 4,
+         "name": "DOM Geometry & Layout Matcher",
+         "status": "selected",
+         "reason": "best layout match: text, role, position and structure agree (text 0.72, role 1, attrs 1, position 0.963, size 0.877, context 1, intent 1)",
+         "ms": 22
+        }
+       ],
+       "domBytesRaw": 45439,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 571,
+       "llmCostUsd": 0,
+       "verdict": "validated",
+       "verdictReason": "5 assertion(s) passed after the repair",
+       "assertionsAfter": 5,
+       "evidence": {
+        "text": 0.72,
+        "role": 1,
+        "attrs": 1,
+        "position": 0.963,
+        "size": 0.877,
+        "context": 1,
+        "intent": 1,
+        "score": 0.91,
+        "coverage": 1,
+        "selectorKind": "testid"
+       },
+       "timestamp": 1792130452087
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 40,
+       "url": "http://127.0.0.1:63016/?state=refactored#/checkout",
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "action": "fill",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.862,
+       "reasoning": "recorded alternate selector still identifies one element (2/3 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 537
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (2/3 alternates agree)",
+         "ms": 55
+        }
+       ],
+       "domBytesRaw": 45448,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 596,
+       "llmCostUsd": 0,
+       "verdict": "validated",
+       "verdictReason": "4 assertion(s) passed after the repair",
+       "assertionsAfter": 4,
+       "evidence": {
+        "alternatesTried": 3,
+        "alternatesMatching": 2,
+        "similarity": 0.6
+       },
+       "timestamp": 1792130454790
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 41,
+       "url": "http://127.0.0.1:63016/?state=refactored#/checkout",
+       "original": "#place-order",
+       "healed": "[data-testid=\"t3e4210\"]",
+       "action": "click",
+       "level": 4,
+       "levelName": "DOM Geometry & Layout Matcher",
+       "confidence": 0.7125747272459301,
+       "reasoning": "best layout match: text, role, position and structure agree (text 0.075, role 1, attrs 1, position 0.948, size 0.824, context 0.833, intent 1)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 541
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "miss",
+         "reason": "3 alternates tried, none resolves to a single visible element",
+         "ms": 8
+        },
+        {
+         "level": 4,
+         "name": "DOM Geometry & Layout Matcher",
+         "status": "selected",
+         "reason": "best layout match: text, role, position and structure agree (text 0.075, role 1, attrs 1, position 0.948, size 0.824, context 0.833, intent 1)",
+         "ms": 18
+        }
+       ],
+       "domBytesRaw": 45448,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 571,
+       "llmCostUsd": 0,
+       "verdict": "validated",
+       "verdictReason": "4 assertion(s) passed after the repair",
+       "assertionsAfter": 4,
+       "evidence": {
+        "text": 0.075,
+        "role": 1,
+        "attrs": 1,
+        "position": 0.948,
+        "size": 0.824,
+        "context": 0.833,
+        "intent": 1,
+        "score": 0.713,
+        "coverage": 1,
+        "selectorKind": "testid"
+       },
+       "timestamp": 1792130457404
+      }
+     ],
+     "blocked": [],
+     "steps": [
+      {
+       "title": "URL navigated to the confirmation view",
+       "ok": true,
+       "durationMs": 35
+      },
+      {
+       "title": "order confirmation text is shown",
+       "ok": true,
+       "durationMs": 5
+      },
+      {
+       "title": "API state changed: exactly one order exists for jane@example.com",
+       "ok": true,
+       "durationMs": 7
+      }
+     ],
+     "tags": []
+    }
+   },
+   "broken": {
+    "status": "failed",
+    "verdict": "FAIL (heal rejected)",
+    "note": "4 repair(s) applied but the assertions failed -> not counted",
+    "valid": 0,
+    "plain": {
+     "status": "failed",
+     "error": "TimeoutError: locator.waitFor: Timeout 2000ms exceeded."
+    },
+    "screenshot": "/demo/broken.png",
+    "dom": {
+     "rawBytes": 45430,
+     "compressedBytes": 1696
+    },
+    "domLines": [
+     "<body>",
+     "<header>",
+     "<span class=\"cfac1ee\">Trailhead Outfitters</span>",
+     "<nav>",
+     "<a href=\"#/\">Shop</a>",
+     "<a href=\"#/help\">Help</a>",
+     "<button id=\"e156e1f\" data-testid=\"t56f440\" class=\"c559eb1 c701b44\" type=\"button\">Go to checkout <span class=\"c7df557\" id=\"ec20cbd\">1</span>",
+     "</button>",
+     "</nav>",
+     "</header>",
+     "<main>",
+     "<section>",
+     "<div class=\"c6f03d2\">",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Trail Running Shoes</h3>",
+     "<div class=\"c395d1c\">$89</div>",
+     "<button id=\"e607ab3\" data-testid=\"t50a42e\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Merino Base Layer</h3>",
+     "<div class=\"c395d1c\">$64</div>",
+     "<button id=\"eafd9ef\" data-testid=\"tc5c822\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Insulated Bottle 750ml</h3>",
+     "<div class=\"c395d1c\">$29</div>",
+     "<button id=\"ec1bc1f\" data-testid=\"t896bee\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<!-- 69 more <article> siblings omitted -->",
+     "</div>",
+     "</section>",
+     "<section class=\"cb1f6e5\">",
+     "<div class=\"cfef97b\">",
+     "<h2>Checkout</h2>",
+     "<label>Email <input id=\"e7fa906\" name=\"email\" type=\"email\" placeholder=\"you@example.com\" data-testid=\"t806592\">",
+     "</label>",
+     "<div class=\"ce857ca\">",
+     "<button data-testid=\"t0ac76b\" class=\"c559eb1\" type=\"button\">Back to cart</button>",
+     "<button data-testid=\"t7203bb\" class=\"c559eb1 c60e758\" type=\"button\">Cancel</button>",
+     "<div class=\"c592c61\">",
+     "<span>",
+     "<button id=\"ee656ab\" data-testid=\"t3e4210\" class=\"c559eb1 c701b44\" type=\"button\">Complete purchase</button>",
+     "</span>",
+     "</div>",
+     "</div>",
+     "</div>",
+     "</section>",
+     "<section>",
+     "<div class=\"cfef97b\">",
+     "<h2>Order confirmed <span id=\"ecf8ff2\">",
+     "</span>",
+     "</h2>",
+     "</div>",
+     "</section>",
+     "</main>",
+     "<footer class=\"cbd715d\">\u00a9 Trailhead Outfitters. Prices in USD. Free returns within 3\u2026</footer>",
+     "</body>"
+    ],
+    "test": {
+     "title": "customer buys a pair of trail shoes",
+     "file": "demo\\checkout.spec.ts",
+     "status": "failed",
+     "durationMs": 12884,
+     "errors": [
+      "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /#\\/confirmation$/\nReceived string:  \"http://127.0.0.1:63016/?state=broken#/checkout\"\nTimeout: 2000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 2000ms\n    20 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\n       - unexpected value \"http://127.0.0.1:63016/?state=broken#/checkout\"\n"
+     ],
+     "heals": [
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 27,
+       "url": "http://127.0.0.1:63016/?state=broken",
+       "original": "#add-to-cart-3",
+       "healed": "[data-testid=\"t896bee\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (2/2 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 541
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (2/2 alternates agree)",
+         "ms": 65
+        }
+       ],
+       "domBytesRaw": 45430,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 620,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 2,
+       "evidence": {
+        "alternatesTried": 2,
+        "alternatesMatching": 2,
+        "similarity": 1
+       },
+       "timestamp": 1792130466999
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 28,
+       "url": "http://127.0.0.1:63016/?state=broken",
+       "original": "#checkout-btn",
+       "healed": "[data-testid=\"t56f440\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (3/3 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 549
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (3/3 alternates agree)",
+         "ms": 55
+        }
+       ],
+       "domBytesRaw": 45430,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 609,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 2,
+       "evidence": {
+        "alternatesTried": 3,
+        "alternatesMatching": 3,
+        "similarity": 1
+       },
+       "timestamp": 1792130469654
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 40,
+       "url": "http://127.0.0.1:63016/?state=broken#/checkout",
+       "original": "#email",
+       "healed": "[data-testid=\"t806592\"]",
+       "action": "fill",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.862,
+       "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 538
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+         "ms": 58
+        }
+       ],
+       "domBytesRaw": 45439,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 602,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 1,
+       "evidence": {
+        "alternatesTried": 4,
+        "alternatesMatching": 4,
+        "similarity": 0.6
+       },
+       "timestamp": 1792130472349
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 41,
+       "url": "http://127.0.0.1:63016/?state=broken#/checkout",
+       "original": "#place-order",
+       "healed": "[data-testid=\"t3e4210\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 536
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+         "ms": 67
+        }
+       ],
+       "domBytesRaw": 45439,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 608,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 1,
+       "evidence": {
+        "alternatesTried": 4,
+        "alternatesMatching": 4,
+        "similarity": 1
+       },
+       "timestamp": 1792130474990
+      }
+     ],
+     "blocked": [],
+     "steps": [
+      {
+       "title": "URL navigated to the confirmation view",
+       "ok": false,
+       "durationMs": 2015,
+       "error": "Error: expect(page).toHaveURL(expected) failed"
+      }
+     ],
+     "tags": []
+    }
+   },
+   "broken-removed": {
+    "status": "failed",
+    "verdict": "FAIL (refused to heal)",
+    "note": "#place-order blocked: ambiguous",
+    "valid": 0,
+    "plain": {
+     "status": "failed",
+     "error": "TimeoutError: locator.waitFor: Timeout 2000ms exceeded."
+    },
+    "screenshot": "/demo/broken-removed.png",
+    "dom": {
+     "rawBytes": 45284,
+     "compressedBytes": 1549
+    },
+    "domLines": [
+     "<body>",
+     "<header>",
+     "<span class=\"cfac1ee\">Trailhead Outfitters</span>",
+     "<nav>",
+     "<a href=\"#/\">Shop</a>",
+     "<a href=\"#/help\">Help</a>",
+     "<button id=\"e156e1f\" data-testid=\"t56f440\" class=\"c559eb1 c701b44\" type=\"button\">Go to checkout <span class=\"c7df557\" id=\"ec20cbd\">1</span>",
+     "</button>",
+     "</nav>",
+     "</header>",
+     "<main>",
+     "<section class=\"cb1f6e5\">",
+     "<div class=\"c6f03d2\">",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Trail Running Shoes</h3>",
+     "<div class=\"c395d1c\">$89</div>",
+     "<button id=\"e607ab3\" data-testid=\"t50a42e\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Merino Base Layer</h3>",
+     "<div class=\"c395d1c\">$64</div>",
+     "<button id=\"eafd9ef\" data-testid=\"tc5c822\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<article class=\"cb5c1cc\">",
+     "<h3>Insulated Bottle 750ml</h3>",
+     "<div class=\"c395d1c\">$29</div>",
+     "<button id=\"ec1bc1f\" data-testid=\"t896bee\" class=\"c559eb1 c701b44\" type=\"button\">Add to bag</button>",
+     "</article>",
+     "<!-- 69 more <article> siblings omitted -->",
+     "</div>",
+     "</section>",
+     "<section>",
+     "<div class=\"cfef97b\">",
+     "<h2>Checkout</h2>",
+     "<label>Email <input id=\"e7fa906\" name=\"email\" type=\"email\" placeholder=\"you@example.com\" data-testid=\"t806592\">",
+     "</label>",
+     "<div class=\"ce857ca\">",
+     "<button data-testid=\"t0ac76b\" class=\"c559eb1\" type=\"button\">Back to cart</button>",
+     "<button data-testid=\"t7203bb\" class=\"c559eb1 c60e758\" type=\"button\">Cancel</button>",
+     "</div>",
+     "</div>",
+     "</section>",
+     "<section>",
+     "<div class=\"cfef97b\">",
+     "<h2>Order confirmed <span id=\"ecf8ff2\">",
+     "</span>",
+     "</h2>",
+     "</div>",
+     "</section>",
+     "</main>",
+     "<footer class=\"cbd715d\">\u00a9 Trailhead Outfitters. Prices in USD. Free returns within 3\u2026</footer>",
+     "</body>"
+    ],
+    "test": {
+     "title": "customer buys a pair of trail shoes",
+     "file": "demo\\checkout.spec.ts",
+     "status": "failed",
+     "durationMs": 10800,
+     "errors": [
+      "AgentQAHealError: AgentQA refused to heal '#place-order' (ambiguous): top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")\n  L1 miss: still failing after 500ms: matches no element\n  L3 miss: 4 alternates tried, none resolves to a single visible element\n  L4 blocked: top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")\n  L2 skipped: no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)\n  L5 skipped: no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)\nOriginal error: locator.waitFor: Timeout 2000ms exceeded."
+     ],
+     "heals": [
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 27,
+       "url": "http://127.0.0.1:63016/?state=broken-removed",
+       "original": "#add-to-cart-3",
+       "healed": "[data-testid=\"t896bee\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (2/2 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 547
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (2/2 alternates agree)",
+         "ms": 63
+        }
+       ],
+       "domBytesRaw": 45284,
+       "domBytesCompressed": 1549,
+       "elapsedMs": 623,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 1,
+       "evidence": {
+        "alternatesTried": 2,
+        "alternatesMatching": 2,
+        "similarity": 1
+       },
+       "timestamp": 1792130486487
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 28,
+       "url": "http://127.0.0.1:63016/?state=broken-removed",
+       "original": "#checkout-btn",
+       "healed": "[data-testid=\"t56f440\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (3/3 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 537
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (3/3 alternates agree)",
+         "ms": 70
+        }
+       ],
+       "domBytesRaw": 45284,
+       "domBytesCompressed": 1549,
+       "elapsedMs": 612,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 1,
+       "evidence": {
+        "alternatesTried": 3,
+        "alternatesMatching": 3,
+        "similarity": 1
+       },
+       "timestamp": 1792130489141
+      },
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 40,
+       "url": "http://127.0.0.1:63016/?state=broken-removed#/checkout",
+       "original": "#email",
+       "healed": "[data-testid=\"t806592\"]",
+       "action": "fill",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.862,
+       "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 550
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+         "ms": 62
+        }
+       ],
+       "domBytesRaw": 45293,
+       "domBytesCompressed": 1549,
+       "elapsedMs": 617,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 0,
+       "evidence": {
+        "alternatesTried": 4,
+        "alternatesMatching": 4,
+        "similarity": 0.6
+       },
+       "timestamp": 1792130491854
+      }
+     ],
+     "blocked": [
+      {
+       "testTitle": "customer buys a pair of trail shoes",
+       "file": "demo/checkout.spec.ts",
+       "line": 41,
+       "url": "http://127.0.0.1:63016/?state=broken-removed#/checkout",
+       "original": "#place-order",
+       "action": "click",
+       "blocked": {
+        "code": "ambiguous",
+        "reason": "top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")",
+        "selector": "[data-testid=\"t7203bb\"]",
+        "elementText": "Cancel"
+       },
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 534
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "miss",
+         "reason": "4 alternates tried, none resolves to a single visible element",
+         "ms": 11
+        },
+        {
+         "level": 4,
+         "name": "DOM Geometry & Layout Matcher",
+         "status": "blocked",
+         "reason": "top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")",
+         "ms": 12
+        },
+        {
+         "level": 2,
+         "name": "LLM DOM Repair",
+         "status": "skipped",
+         "reason": "no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)",
+         "ms": 0
+        },
+        {
+         "level": 5,
+         "name": "LLM Decompose & Rebuild",
+         "status": "skipped",
+         "reason": "no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)",
+         "ms": 0
+        }
+       ],
+       "elapsedMs": 561,
+       "timestamp": 1792130494422
+      }
+     ],
+     "steps": [],
+     "tags": []
+    }
+   }
+  }
+ },
+ "benchmark": {
+  "summaries": {
+   "standard": {
+    "mode": "standard",
+    "scenarios": 50,
+    "positives": 38,
+    "positives_passed": 0,
+    "repair_rate": 0.0,
+    "negatives": 12,
+    "false_passes": 0,
+    "false_pass_ids": [],
+    "false_pass_rate": 0.0,
+    "wrong_element_attempts": 0,
+    "wrong_element_ids": [],
+    "wrong_element_denominator": 8,
+    "refused_scenarios": 0,
+    "positives_needing_no_heal": 0,
+    "validated_heals": 0,
+    "heals_by_level": {
+     "1": 0,
+     "2": 0,
+     "3": 0,
+     "4": 0,
+     "5": 0
+    },
+    "scenarios_by_deepest_level": {
+     "1": 0,
+     "2": 0,
+     "3": 0,
+     "4": 0,
+     "5": 0
+    },
+    "heals_free_offline": 0,
+    "heals_llm": 0,
+    "latency_ms_mean": null,
+    "latency_ms_median": null,
+    "latency_ms_p95": null,
+    "cost_usd_total": 0,
+    "cost_usd_per_heal": 0.0
+   },
+   "deterministic": {
+    "mode": "deterministic",
+    "scenarios": 50,
+    "positives": 38,
+    "positives_passed": 34,
+    "repair_rate": 0.8947368421052632,
+    "negatives": 12,
+    "false_passes": 0,
+    "false_pass_ids": [],
+    "false_pass_rate": 0.0,
+    "wrong_element_attempts": 3,
+    "wrong_element_ids": [
+     "checkout/negative-decoy",
+     "login/negative-decoy",
+     "modal/negative-decoy"
+    ],
+    "wrong_element_denominator": 8,
+    "refused_scenarios": 5,
+    "positives_needing_no_heal": 0,
+    "validated_heals": 61,
+    "heals_by_level": {
+     "1": 2,
+     "2": 0,
+     "3": 57,
+     "4": 2,
+     "5": 0
+    },
+    "scenarios_by_deepest_level": {
+     "1": 2,
+     "2": 0,
+     "3": 30,
+     "4": 2,
+     "5": 0
+    },
+    "heals_free_offline": 61,
+    "heals_llm": 0,
+    "latency_ms_mean": 911.8852459016393,
+    "latency_ms_median": 927,
+    "latency_ms_p95": 957,
+    "cost_usd_total": 0,
+    "cost_usd_per_heal": 0.0
+   },
+   "strict": {
+    "mode": "strict",
+    "scenarios": 50,
+    "positives": 38,
+    "positives_passed": 32,
+    "repair_rate": 0.8421052631578947,
+    "negatives": 12,
+    "false_passes": 0,
+    "false_pass_ids": [],
+    "false_pass_rate": 0.0,
+    "wrong_element_attempts": 1,
+    "wrong_element_ids": [
+     "login/negative-decoy"
+    ],
+    "wrong_element_denominator": 8,
+    "refused_scenarios": 7,
+    "positives_needing_no_heal": 0,
+    "validated_heals": 56,
+    "heals_by_level": {
+     "1": 2,
+     "2": 0,
+     "3": 54,
+     "4": 0,
+     "5": 0
+    },
+    "scenarios_by_deepest_level": {
+     "1": 2,
+     "2": 0,
+     "3": 30,
+     "4": 0,
+     "5": 0
+    },
+    "heals_free_offline": 56,
+    "heals_llm": 0,
+    "latency_ms_mean": 899.5714285714286,
+    "latency_ms_median": 918.5,
+    "latency_ms_p95": 940,
+    "cost_usd_total": 0,
+    "cost_usd_per_heal": 0.0
+   },
+   "full": {
+    "mode": "full",
+    "scenarios": 50,
+    "positives": 38,
+    "positives_passed": 37,
+    "repair_rate": 0.9736842105263158,
+    "negatives": 12,
+    "false_passes": 0,
+    "false_pass_ids": [],
+    "false_pass_rate": 0.0,
+    "wrong_element_attempts": 5,
+    "wrong_element_ids": [
+     "table/negative-removed",
+     "checkout/negative-decoy",
+     "login/negative-decoy",
+     "modal/negative-decoy",
+     "table/negative-decoy"
+    ],
+    "wrong_element_denominator": 8,
+    "refused_scenarios": 3,
+    "positives_needing_no_heal": 0,
+    "validated_heals": 67,
+    "heals_by_level": {
+     "1": 2,
+     "2": 3,
+     "3": 60,
+     "4": 2,
+     "5": 0
+    },
+    "scenarios_by_deepest_level": {
+     "1": 2,
+     "2": 1,
+     "3": 32,
+     "4": 2,
+     "5": 0
+    },
+    "heals_free_offline": 64,
+    "heals_llm": 3,
+    "latency_ms_mean": 2992.134328358209,
+    "latency_ms_median": 2943,
+    "latency_ms_p95": 3004,
+    "cost_usd_total": 0,
+    "cost_usd_per_heal": 0.0
+   }
+  },
+  "scenarios": {
+   "standard": [
+    {
+     "id": "login/rename-id",
+     "pattern": "login",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 650,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/rename-testid",
+     "pattern": "login",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 551,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"user\"]",
+      "[data-testid=\"pass\"]",
+      "[data-testid=\"submit\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/restructure",
+     "pattern": "login",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 564,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > input",
+      "body > main > div:nth-of-type(3) > button:nth-of-type(2)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/class-scramble",
+     "pattern": "login",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 559,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-user",
+      ".btn-pass",
+      ".btn-submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/text-variation",
+     "pattern": "login",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 619,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "button:has-text(\"Sign in\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/combined-hard",
+     "pattern": "login",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 594,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-id",
+     "pattern": "checkout",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 562,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-testid",
+     "pattern": "checkout",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 548,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"email\"]",
+      "[data-testid=\"place\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/restructure",
+     "pattern": "checkout",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 546,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > button:nth-of-type(2)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/class-scramble",
+     "pattern": "checkout",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 564,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-email",
+      ".btn-place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/text-variation",
+     "pattern": "checkout",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 572,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "button:has-text(\"Place order\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/combined-hard",
+     "pattern": "checkout",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 549,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/rename-id",
+     "pattern": "table",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 524,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/rename-testid",
+     "pattern": "table",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 545,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"archive2\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/restructure",
+     "pattern": "table",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 535,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/class-scramble",
+     "pattern": "table",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 529,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-archive2"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/text-variation",
+     "pattern": "table",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 539,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-row=\"2\"] button:has-text(\"Archive\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/combined-hard",
+     "pattern": "table",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 535,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-id",
+     "pattern": "modal",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 609,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-testid",
+     "pattern": "modal",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 611,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"open\"]",
+      "[data-testid=\"name\"]",
+      "[data-testid=\"save\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/restructure",
+     "pattern": "modal",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 589,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > main > button",
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/class-scramble",
+     "pattern": "modal",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 592,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-open",
+      ".btn-name",
+      ".btn-save"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/text-variation",
+     "pattern": "modal",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 658,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "button:has-text(\"Open settings\")",
+      "#name",
+      "button:has-text(\"Save\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/combined-hard",
+     "pattern": "modal",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 587,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-id",
+     "pattern": "navbar",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 548,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-testid",
+     "pattern": "navbar",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 517,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"pricing\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/restructure",
+     "pattern": "navbar",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 515,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > nav > a:nth-of-type(2)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/class-scramble",
+     "pattern": "navbar",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 538,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-pricing"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/text-variation",
+     "pattern": "navbar",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 570,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "a:has-text(\"Pricing\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "navbar/combined-hard",
+     "pattern": "navbar",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 530,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/rename-id",
+     "pattern": "list",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 569,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/rename-testid",
+     "pattern": "list",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 559,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "[data-testid=\"item\"]",
+      "[data-testid=\"add\"]"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/restructure",
+     "pattern": "list",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 555,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "body > main > div > input",
+      "body > main > div > button:nth-of-type(2)"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/class-scramble",
+     "pattern": "list",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 544,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      ".btn-item",
+      ".btn-add"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/text-variation",
+     "pattern": "list",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 574,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "button:has-text(\"Add\")"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/combined-hard",
+     "pattern": "list",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 641,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/delayed-render",
+     "pattern": "checkout",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the primary button renders 700ms late",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 794,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/delayed-render",
+     "pattern": "list",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the Add button renders 700ms late",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 574,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-removed",
+     "pattern": "checkout",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Place order was removed (Cancel remains)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 562,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/negative-removed",
+     "pattern": "login",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Sign in was removed",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 611,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-removed",
+     "pattern": "modal",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Save was removed (Close remains)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 617,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/negative-removed",
+     "pattern": "table",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Archive was removed (Delete remains)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 532,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-decoy",
+     "pattern": "checkout",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Place order replaced by a look-alike \"Save for later\"",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 665,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/negative-decoy",
+     "pattern": "login",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Sign in replaced by \"Sign up\" (different action)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 592,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-decoy",
+     "pattern": "modal",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Save replaced by \"Apply preview\" (does not persist)",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 666,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "table/negative-decoy",
+     "pattern": "table",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Archive replaced by a second Delete-looking control",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 537,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-broken",
+     "pattern": "checkout",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but placing an order silently does nothing",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 566,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "login/negative-broken",
+     "pattern": "login",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but signing in silently does nothing",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 632,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "list/negative-broken",
+     "pattern": "list",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Add silently does nothing",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 663,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-broken",
+     "pattern": "modal",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Save silently does nothing",
+     "mode": "standard",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "locator.waitFor: Timeout 400ms exceeded.",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 625,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [],
+     "refused": []
+    }
+   ],
+   "deterministic": [
+    {
+     "id": "login/rename-id",
+     "pattern": "login",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      945,
+      944,
+      929
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4435,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/rename-testid",
+     "pattern": "login",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      931,
+      915,
+      918
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4237,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#submit",
+     "selectors": [
+      "[data-testid=\"user\"]",
+      "[data-testid=\"pass\"]",
+      "[data-testid=\"submit\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"user\"]",
+       "healed": "#user",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"pass\"]",
+       "healed": "#pass",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"submit\"]",
+       "healed": "#submit",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/restructure",
+     "pattern": "login",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      943,
+      935,
+      935
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4299,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > input",
+      "body > main > div:nth-of-type(3) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > input",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(3) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/class-scramble",
+     "pattern": "login",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      946,
+      910,
+      940
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4257,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      ".btn-user",
+      ".btn-pass",
+      ".btn-submit"
+     ],
+     "healed": [
+      {
+       "original": ".btn-user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/text-variation",
+     "pattern": "login",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      929
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1629,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "button:has-text(\"Sign in\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Sign in\")",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.79,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/combined-hard",
+     "pattern": "login",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      4
+     ],
+     "ladderMs": [
+      917,
+      905,
+      899
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4267,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t956a9d\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"t956a9d\"]",
+       "level": 4,
+       "confidence": 0.75,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-id",
+     "pattern": "checkout",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      1001,
+      933
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3015,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-testid",
+     "pattern": "checkout",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      945,
+      921
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2875,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "[data-testid=\"email\"]",
+      "[data-testid=\"place\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"email\"]",
+       "healed": "#email",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"place\"]",
+       "healed": "#place",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/restructure",
+     "pattern": "checkout",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      966,
+      933
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2921,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/class-scramble",
+     "pattern": "checkout",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      956,
+      924
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2907,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      ".btn-email",
+      ".btn-place"
+     ],
+     "healed": [
+      {
+       "original": ".btn-email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/text-variation",
+     "pattern": "checkout",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      924
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1569,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "button:has-text(\"Place order\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Place order\")",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/combined-hard",
+     "pattern": "checkout",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      4
+     ],
+     "ladderMs": [
+      929,
+      906
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2920,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t82c587\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"t82c587\"]",
+       "level": 4,
+       "confidence": 0.71,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/rename-id",
+     "pattern": "table",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      920
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1511,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/rename-testid",
+     "pattern": "table",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      910
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1470,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#archive2",
+     "selectors": [
+      "[data-testid=\"archive2\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"archive2\"]",
+       "healed": "#archive2",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/restructure",
+     "pattern": "table",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      979
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1589,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/class-scramble",
+     "pattern": "table",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      921
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1515,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      ".btn-archive2"
+     ],
+     "healed": [
+      {
+       "original": ".btn-archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/text-variation",
+     "pattern": "table",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      957
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1594,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "[data-row=\"2\"] button:has-text(\"Archive\")"
+     ],
+     "healed": [
+      {
+       "original": "[data-row=\"2\"] button:has-text(\"Archive\")",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/combined-hard",
+     "pattern": "table",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.90 \"Archive\" vs 0.90 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1518,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.90 \"Archive\" vs 0.90 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "modal/rename-id",
+     "pattern": "modal",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      925,
+      930,
+      953
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4356,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "#name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-testid",
+     "pattern": "modal",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      929,
+      943,
+      922
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4329,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#save",
+     "selectors": [
+      "[data-testid=\"open\"]",
+      "[data-testid=\"name\"]",
+      "[data-testid=\"save\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"open\"]",
+       "healed": "#open",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"name\"]",
+       "healed": "#name",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"save\"]",
+       "healed": "#save",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/restructure",
+     "pattern": "modal",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      935,
+      923,
+      951
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4339,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "body > main > button",
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > button",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/class-scramble",
+     "pattern": "modal",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      954,
+      926,
+      972
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4394,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      ".btn-open",
+      ".btn-name",
+      ".btn-save"
+     ],
+     "healed": [
+      {
+       "original": ".btn-open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/text-variation",
+     "pattern": "modal",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      913
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1645,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "button:has-text(\"Open settings\")",
+      "#name",
+      "button:has-text(\"Save\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Save\")",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/combined-hard",
+     "pattern": "modal",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (low_confidence): confidence 0.68 is below the 0.70 threshold",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      909,
+      893
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4108,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "low_confidence",
+       "reason": "confidence 0.68 is below the 0.70 threshold"
+      }
+     ]
+    },
+    {
+     "id": "navbar/rename-id",
+     "pattern": "navbar",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      927
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1457,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [
+      {
+       "original": "#pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-testid",
+     "pattern": "navbar",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      915
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1447,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#pricing",
+     "selectors": [
+      "[data-testid=\"pricing\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"pricing\"]",
+       "healed": "#pricing",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/restructure",
+     "pattern": "navbar",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      923
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1474,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "body > nav > a:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > nav > a:nth-of-type(2)",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/class-scramble",
+     "pattern": "navbar",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      923
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1466,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      ".btn-pricing"
+     ],
+     "healed": [
+      {
+       "original": ".btn-pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/text-variation",
+     "pattern": "navbar",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      920
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1470,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "a:has-text(\"Pricing\")"
+     ],
+     "healed": [
+      {
+       "original": "a:has-text(\"Pricing\")",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/combined-hard",
+     "pattern": "navbar",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#pricing' (ambiguous): top two matches are within 0.08 (0.58 \"Products\" vs 0.56 \"Plans\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1406,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#pricing",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.58 \"Products\" vs 0.56 \"Plans\")"
+      }
+     ]
+    },
+    {
+     "id": "list/rename-id",
+     "pattern": "list",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      938,
+      915
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2845,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/rename-testid",
+     "pattern": "list",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      916,
+      908
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2817,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "[data-testid=\"item\"]",
+      "[data-testid=\"add\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"item\"]",
+       "healed": "#item",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"add\"]",
+       "healed": "#add",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/restructure",
+     "pattern": "list",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      927,
+      916
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2849,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "body > main > div > input",
+      "body > main > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div > input",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/class-scramble",
+     "pattern": "list",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      933,
+      906
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2811,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      ".btn-item",
+      ".btn-add"
+     ],
+     "healed": [
+      {
+       "original": ".btn-item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/text-variation",
+     "pattern": "list",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      903
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1545,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "button:has-text(\"Add\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Add\")",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/combined-hard",
+     "pattern": "list",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#add' (ambiguous): top two matches are within 0.08 (0.63 \"Create\" vs 0.60 \"Clear all\")",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      916
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2780,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#add",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.63 \"Create\" vs 0.60 \"Clear all\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/delayed-render",
+     "pattern": "checkout",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the primary button renders 700ms late",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      364
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1088,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#place",
+       "healed": "#place",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/delayed-render",
+     "pattern": "list",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the Add button renders 700ms late",
+     "mode": "deterministic",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      349
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 957,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#add",
+       "healed": "#add",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-removed",
+     "pattern": "checkout",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Place order was removed (Cancel remains)",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#place' (low_confidence): confidence 0.60 is below the 0.70 threshold",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      914
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2785,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#place",
+       "code": "low_confidence",
+       "reason": "confidence 0.60 is below the 0.70 threshold"
+      }
+     ]
+    },
+    {
+     "id": "login/negative-removed",
+     "pattern": "login",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Sign in was removed",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#submit' (low_confidence): confidence 0.60 is below the 0.70 threshold",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      909,
+      887
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4082,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#submit",
+       "code": "low_confidence",
+       "reason": "confidence 0.60 is below the 0.70 threshold"
+      }
+     ]
+    },
+    {
+     "id": "modal/negative-removed",
+     "pattern": "modal",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Save was removed (Close remains)",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (ambiguous): top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      903,
+      910
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4142,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")"
+      }
+     ]
+    },
+    {
+     "id": "table/negative-removed",
+     "pattern": "table",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Archive was removed (Delete remains)",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1393,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/negative-decoy",
+     "pattern": "checkout",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Place order replaced by a look-alike \"Save for later\"",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      909,
+      895
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4322,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t6514c4\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"t6514c4\"]",
+       "level": 4,
+       "confidence": 0.8,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/negative-decoy",
+     "pattern": "login",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Sign in replaced by \"Sign up\" (different action)",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      907,
+      904,
+      894
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5943,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t6514c4\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"t6514c4\"]",
+       "level": 4,
+       "confidence": 0.88,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-decoy",
+     "pattern": "modal",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Save replaced by \"Apply preview\" (does not persist)",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      911,
+      891,
+      893
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5717,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t7a8589\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"t7a8589\"]",
+       "level": 4,
+       "confidence": 0.71,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/negative-decoy",
+     "pattern": "table",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Archive replaced by a second Delete-looking control",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1398,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/negative-broken",
+     "pattern": "checkout",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but placing an order silently does nothing",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      944,
+      904
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4353,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Place order\"i]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#place",
+       "healed": "role=button[name=\"Place order\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/negative-broken",
+     "pattern": "login",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but signing in silently does nothing",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      905,
+      899,
+      905
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5623,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Sign in\"i]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "role=button[name=\"Sign in\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/negative-broken",
+     "pattern": "list",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Add silently does nothing",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      901,
+      897
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4281,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Add\"i]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#add",
+       "healed": "role=button[name=\"Add\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-broken",
+     "pattern": "modal",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Save silently does nothing",
+     "mode": "deterministic",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      910,
+      907,
+      898
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5699,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Save\"i]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#save",
+       "healed": "role=button[name=\"Save\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    }
+   ],
+   "strict": [
+    {
+     "id": "login/rename-id",
+     "pattern": "login",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      934,
+      928,
+      924
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4330,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/rename-testid",
+     "pattern": "login",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      926,
+      918,
+      921
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4218,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#submit",
+     "selectors": [
+      "[data-testid=\"user\"]",
+      "[data-testid=\"pass\"]",
+      "[data-testid=\"submit\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"user\"]",
+       "healed": "#user",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"pass\"]",
+       "healed": "#pass",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"submit\"]",
+       "healed": "#submit",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/restructure",
+     "pattern": "login",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      924,
+      926,
+      915
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4207,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > input",
+      "body > main > div:nth-of-type(3) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > input",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(3) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/class-scramble",
+     "pattern": "login",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      917,
+      940,
+      938
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4252,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      ".btn-user",
+      ".btn-pass",
+      ".btn-submit"
+     ],
+     "healed": [
+      {
+       "original": ".btn-user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/text-variation",
+     "pattern": "login",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      897
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1587,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "button:has-text(\"Sign in\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Sign in\")",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.79,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/combined-hard",
+     "pattern": "login",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#submit' (low_confidence): strict mode: \"Continue\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      908,
+      895
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4085,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#submit",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Continue\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "checkout/rename-id",
+     "pattern": "checkout",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      926,
+      912
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2844,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-testid",
+     "pattern": "checkout",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      916,
+      918
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2826,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "[data-testid=\"email\"]",
+      "[data-testid=\"place\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"email\"]",
+       "healed": "#email",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"place\"]",
+       "healed": "#place",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/restructure",
+     "pattern": "checkout",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      938,
+      922
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2872,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/class-scramble",
+     "pattern": "checkout",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      938,
+      925
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2865,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      ".btn-email",
+      ".btn-place"
+     ],
+     "healed": [
+      {
+       "original": ".btn-email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/text-variation",
+     "pattern": "checkout",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      898
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1507,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "button:has-text(\"Place order\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Place order\")",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/combined-hard",
+     "pattern": "checkout",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#place' (low_confidence): strict mode: \"Pay now\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      923
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2769,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#place",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Pay now\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "table/rename-id",
+     "pattern": "table",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      898
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1460,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/rename-testid",
+     "pattern": "table",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      898
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1442,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#archive2",
+     "selectors": [
+      "[data-testid=\"archive2\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"archive2\"]",
+       "healed": "#archive2",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/restructure",
+     "pattern": "table",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      902
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1471,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/class-scramble",
+     "pattern": "table",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      914
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1449,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      ".btn-archive2"
+     ],
+     "healed": [
+      {
+       "original": ".btn-archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/text-variation",
+     "pattern": "table",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      901
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1456,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "[data-row=\"2\"] button:has-text(\"Archive\")"
+     ],
+     "healed": [
+      {
+       "original": "[data-row=\"2\"] button:has-text(\"Archive\")",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/combined-hard",
+     "pattern": "table",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.90 \"Archive\" vs 0.90 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1362,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.90 \"Archive\" vs 0.90 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "modal/rename-id",
+     "pattern": "modal",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      922,
+      909,
+      926
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4240,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "#name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-testid",
+     "pattern": "modal",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      910,
+      911,
+      906
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4212,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#save",
+     "selectors": [
+      "[data-testid=\"open\"]",
+      "[data-testid=\"name\"]",
+      "[data-testid=\"save\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"open\"]",
+       "healed": "#open",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"name\"]",
+       "healed": "#name",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"save\"]",
+       "healed": "#save",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/restructure",
+     "pattern": "modal",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      942,
+      931,
+      917
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4279,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "body > main > button",
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > button",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/class-scramble",
+     "pattern": "modal",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      930,
+      914,
+      921
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4241,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      ".btn-open",
+      ".btn-name",
+      ".btn-save"
+     ],
+     "healed": [
+      {
+       "original": ".btn-open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/text-variation",
+     "pattern": "modal",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      902
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1584,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "button:has-text(\"Open settings\")",
+      "#name",
+      "button:has-text(\"Save\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Save\")",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/combined-hard",
+     "pattern": "modal",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (low_confidence): strict mode: \"Update profile\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      911,
+      900
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4151,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Update profile\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "navbar/rename-id",
+     "pattern": "navbar",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      922
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1446,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [
+      {
+       "original": "#pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-testid",
+     "pattern": "navbar",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      919
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1454,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#pricing",
+     "selectors": [
+      "[data-testid=\"pricing\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"pricing\"]",
+       "healed": "#pricing",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/restructure",
+     "pattern": "navbar",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      946
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1513,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "body > nav > a:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > nav > a:nth-of-type(2)",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/class-scramble",
+     "pattern": "navbar",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      989
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1531,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      ".btn-pricing"
+     ],
+     "healed": [
+      {
+       "original": ".btn-pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/text-variation",
+     "pattern": "navbar",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      906
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1471,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "a:has-text(\"Pricing\")"
+     ],
+     "healed": [
+      {
+       "original": "a:has-text(\"Pricing\")",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/combined-hard",
+     "pattern": "navbar",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#pricing' (ambiguous): top two matches are within 0.08 (0.58 \"Products\" vs 0.56 \"Plans\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1396,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#pricing",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.58 \"Products\" vs 0.56 \"Plans\")"
+      }
+     ]
+    },
+    {
+     "id": "list/rename-id",
+     "pattern": "list",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      935,
+      905
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2838,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/rename-testid",
+     "pattern": "list",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      910,
+      905
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2810,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "[data-testid=\"item\"]",
+      "[data-testid=\"add\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"item\"]",
+       "healed": "#item",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"add\"]",
+       "healed": "#add",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/restructure",
+     "pattern": "list",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      923,
+      920
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2850,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "body > main > div > input",
+      "body > main > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div > input",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/class-scramble",
+     "pattern": "list",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      939,
+      916
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2864,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      ".btn-item",
+      ".btn-add"
+     ],
+     "healed": [
+      {
+       "original": ".btn-item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/text-variation",
+     "pattern": "list",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      901
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1506,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "button:has-text(\"Add\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Add\")",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/combined-hard",
+     "pattern": "list",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#add' (ambiguous): top two matches are within 0.08 (0.63 \"Create\" vs 0.60 \"Clear all\")",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      909
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2751,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#add",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.63 \"Create\" vs 0.60 \"Clear all\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/delayed-render",
+     "pattern": "checkout",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the primary button renders 700ms late",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      341
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 952,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#place",
+       "healed": "#place",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/delayed-render",
+     "pattern": "list",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the Add button renders 700ms late",
+     "mode": "strict",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      344
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 948,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#add",
+       "healed": "#add",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-removed",
+     "pattern": "checkout",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Place order was removed (Cancel remains)",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#place' (low_confidence): strict mode: \"Cancel\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      916
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2761,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#place",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Cancel\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "login/negative-removed",
+     "pattern": "login",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Sign in was removed",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#submit' (low_confidence): strict mode: \"Forgot password\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      916,
+      899
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4069,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#submit",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Forgot password\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "modal/negative-removed",
+     "pattern": "modal",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Save was removed (Close remains)",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (ambiguous): top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      909,
+      899
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4097,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")"
+      }
+     ]
+    },
+    {
+     "id": "table/negative-removed",
+     "pattern": "table",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Archive was removed (Delete remains)",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1364,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/negative-decoy",
+     "pattern": "checkout",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Place order replaced by a look-alike \"Save for later\"",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#place' (low_confidence): strict mode: \"Save for later\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      902
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 2743,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#place",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Save for later\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "login/negative-decoy",
+     "pattern": "login",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Sign in replaced by \"Sign up\" (different action)",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      906,
+      909,
+      893
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5620,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t6514c4\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"t6514c4\"]",
+       "level": 4,
+       "confidence": 0.88,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-decoy",
+     "pattern": "modal",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Save replaced by \"Apply preview\" (does not persist)",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (low_confidence): strict mode: \"Apply preview\" shares no words with the original control's label (word overlap 0.00)",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      912,
+      901
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4112,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "low_confidence",
+       "reason": "strict mode: \"Apply preview\" shares no words with the original control's label (word overlap 0.00)"
+      }
+     ]
+    },
+    {
+     "id": "table/negative-decoy",
+     "pattern": "table",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Archive replaced by a second Delete-looking control",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#archive2' (ambiguous): top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")",
+     "healsApplied": 0,
+     "healsValidated": 0,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [],
+     "llmCostUsd": 0,
+     "durationMs": 1399,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [],
+     "refused": [
+      {
+       "original": "#archive2",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.93 \"Archive\" vs 0.93 \"Archive\")"
+      }
+     ]
+    },
+    {
+     "id": "checkout/negative-broken",
+     "pattern": "checkout",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but placing an order silently does nothing",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      922,
+      902
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4317,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Place order\"i]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#place",
+       "healed": "role=button[name=\"Place order\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/negative-broken",
+     "pattern": "login",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but signing in silently does nothing",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      903,
+      902,
+      893
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5604,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Sign in\"i]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "role=button[name=\"Sign in\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/negative-broken",
+     "pattern": "list",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Add silently does nothing",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      902,
+      911
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 4332,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Add\"i]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#add",
+       "healed": "role=button[name=\"Add\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-broken",
+     "pattern": "modal",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Save silently does nothing",
+     "mode": "strict",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      922,
+      904,
+      899
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 5677,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Save\"i]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#save",
+       "healed": "role=button[name=\"Save\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    }
+   ]
+  }
+ }
+}

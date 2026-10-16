@@ -5,6 +5,8 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
   async rewrites() {
+    // the read-only demo is fully static: no backend to proxy to
+    if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') return [];
     return [
       {
         source: '/api/v1/:path*',

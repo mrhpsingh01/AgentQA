@@ -1,109 +1,175 @@
 /**
- * AgentQA Custom Playwright Reporter
- * Collects test execution outcomes, healing events, and durations,
- * and publishes results to the AgentQA Backend API.
+ * AgentQA Playwright Reporter
+ *
+ * Writes `agentqa-report.json` (path: AGENTQA_REPORT) with, per test: outcome, every applied heal with its
+ * ladder trace and verdict, every refused heal, and a summary. A test is reported as:
+ *   passed  - passed with no heal
+ *   healed  - passed AND every heal in it was validated by assertions
+ *   failed  - anything else (including a heal that was applied but not proven)
+ * Optionally publishes validated results to the AgentQA backend (AGENTQA_RUN_ID + AGENTQA_BACKEND_URL).
  */
 
-import type {
-  FullConfig,
-  FullResult,
-  Reporter,
-  Suite,
-  TestCase,
-  TestResult,
-} from '@playwright/test/reporter';
-import { sessionHealingTracker } from '../healing/healing-proxy';
+import fs from 'node:fs';
+import path from 'node:path';
+import type { FullConfig, FullResult, Reporter, Suite, TestCase, TestResult, TestStep } from '@playwright/test/reporter';
+import type { BlockedRecord, HealRecord } from '../healing/types';
+
+export interface ReportStep {
+  title: string;
+  ok: boolean;
+  durationMs: number;
+  error?: string;
+}
+
+export interface ReportTest {
+  title: string;
+  file: string;
+  status: 'passed' | 'healed' | 'failed' | 'skipped';
+  durationMs: number;
+  errors: string[];
+  heals: HealRecord[];
+  blocked: BlockedRecord[];
+  /** named `test.step`s, e.g. the assertions that verify a heal */
+  steps: ReportStep[];
+  tags: string[];
+}
+
+export interface AgentQAReport {
+  generatedAt: string;
+  tests: ReportTest[];
+  summary: {
+    total: number;
+    passed: number;
+    healed: number;
+    failed: number;
+    healsValidated: number;
+    healsRejected: number;
+    healsUnverified: number;
+    healsBlocked: number;
+  };
+}
+
+const ANSI = new RegExp(String.fromCharCode(27) + '\\[[0-9;]*m', 'g');
+const stripAnsi = (text: string) => text.replace(ANSI, '');
+
+function flattenSteps(steps: TestStep[], out: ReportStep[] = []): ReportStep[] {
+  for (const st of steps) {
+    if (st.category === 'test.step') {
+      const firstLine = stripAnsi(st.error?.message ?? '').split(String.fromCharCode(10))[0] || undefined;
+      out.push({ title: st.title, ok: !st.error, durationMs: st.duration, error: firstLine });
+    }
+    flattenSteps(st.steps, out);
+  }
+  return out;
+}
+
+function parseAll<T>(test: TestCase, type: string): T[] {
+  const out: T[] = [];
+  for (const a of test.annotations) {
+    if (a.type === type && a.description) {
+      try {
+        out.push(JSON.parse(a.description));
+      } catch {
+        /* ignore malformed annotation */
+      }
+    }
+  }
+  return out;
+}
 
 export default class AgentQAReporter implements Reporter {
-  private startTime: number = Date.now();
-  private runId: string | null = process.env.AGENTQA_RUN_ID || null;
-  private backendUrl: string = (process.env.AGENTQA_BACKEND_URL || 'http://localhost:8000').replace(/\/$/, '');
-  private apiKey: string | null = process.env.AGENTQA_API_KEY || null;
+  private started = Date.now();
+  private tests: ReportTest[] = [];
 
-  private healingEvents: any[] = [];
-  private testResults: Array<{
-    title: string;
-    status: string;
-    duration: number;
-    errors: string[];
-  }> = [];
-
-  onBegin(config: FullConfig, suite: Suite): void {
-    this.startTime = Date.now();
-    this.healingEvents = [];
-    console.log(`[AgentQA Reporter] Suite initiated with ${suite.allTests().length} test specs.`);
+  onBegin(_config: FullConfig, suite: Suite): void {
+    this.started = Date.now();
+    console.log(`[AgentQA] ${suite.allTests().length} test(s)`);
   }
 
   onTestEnd(test: TestCase, result: TestResult): void {
-    const errors = result.errors.map(e => e.message || '');
-    this.testResults.push({
-      title: test.title,
-      status: result.status,
-      duration: result.duration,
-      errors
-    });
+    const heals = parseAll<HealRecord>(test, 'agentqa-heal');
+    const blocked = parseAll<BlockedRecord>(test, 'agentqa-blocked');
+    let status: ReportTest['status'];
+    if (result.status === 'skipped') status = 'skipped';
+    else if (test.expectedStatus === 'failed' && result.status === 'failed') status = 'passed'; // test.fail(): the failure was the point
+    else if (result.status !== 'passed') status = 'failed';
+    else if (heals.length > 0 && heals.every((h) => h.verdict === 'validated')) status = 'healed';
+    else if (heals.length > 0) status = 'failed';
+    else status = 'passed';
 
-    test.annotations.forEach(a => {
-      if (a.type === 'agentqa-healing' && a.description) {
-        try {
-          this.healingEvents.push(JSON.parse(a.description));
-        } catch (_) {}
-      }
+    this.tests.push({
+      title: test.title,
+      file: path.relative(process.cwd(), test.location.file),
+      status,
+      durationMs: result.duration,
+      errors: result.errors.map((e) => (e.message || '').replace(/\u001b\[[0-9;]*m/g, '')),
+      heals,
+      blocked,
+      steps: flattenSteps(result.steps),
+      tags: test.tags ?? [],
     });
   }
 
   async onEnd(result: FullResult): Promise<void> {
-    const totalDuration = Date.now() - this.startTime;
-    const sessionEvents = sessionHealingTracker.getEvents();
-    const healingEvents = this.healingEvents.length > 0 ? this.healingEvents : sessionEvents;
+    const heals = this.tests.flatMap((t) => t.heals);
+    const report: AgentQAReport = {
+      generatedAt: new Date().toISOString(),
+      tests: this.tests,
+      summary: {
+        total: this.tests.length,
+        passed: this.tests.filter((t) => t.status === 'passed').length,
+        healed: this.tests.filter((t) => t.status === 'healed').length,
+        failed: this.tests.filter((t) => t.status === 'failed').length,
+        healsValidated: heals.filter((h) => h.verdict === 'validated').length,
+        healsRejected: heals.filter((h) => h.verdict === 'rejected').length,
+        healsUnverified: heals.filter((h) => h.verdict === 'unverified').length,
+        healsBlocked: this.tests.reduce((n, t) => n + t.blocked.length, 0),
+      },
+    };
 
-    let finalStatus = result.status;
-    if (result.status === 'passed' && healingEvents.length > 0) {
-      finalStatus = 'passed'; // or mark as healed
+    const out = process.env.AGENTQA_REPORT || 'agentqa-report.json';
+    try {
+      fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
+      fs.writeFileSync(out, JSON.stringify(report, null, 2));
+    } catch (e: any) {
+      console.error(`[AgentQA] could not write ${out}: ${e.message}`);
     }
 
-    console.log(`\n========================================`);
-    console.log(`AgentQA Test Execution Complete`);
-    console.log(`Status: ${finalStatus.toUpperCase()}`);
-    console.log(`Duration: ${totalDuration}ms`);
-    console.log(`Self-Healing Events: ${healingEvents.length}`);
-    console.log(`========================================\n`);
+    const s = report.summary;
+    console.log(
+      `\n[AgentQA] ${s.passed} passed, ${s.healed} healed, ${s.failed} failed | ` +
+        `heals: ${s.healsValidated} validated, ${s.healsRejected} rejected, ${s.healsUnverified} unverified, ${s.healsBlocked} refused | ` +
+        `${Date.now() - this.started}ms (${result.status})`,
+    );
 
-    if (this.runId) {
-      try {
-        const payload = {
-          status: healingEvents.length > 0 && finalStatus === 'passed' ? 'healed' : finalStatus,
-          duration_ms: totalDuration,
-          results: {
-            total_tests: this.testResults.length,
-            passed: this.testResults.filter(t => t.status === 'passed').length,
-            failed: this.testResults.filter(t => t.status === 'failed').length,
-            tests: this.testResults
-          },
-          healing_events: healingEvents,
+    await this.publish(report);
+  }
+
+  /** Best-effort upload of validated results to the AgentQA backend. */
+  private async publish(report: AgentQAReport): Promise<void> {
+    const runId = process.env.AGENTQA_RUN_ID;
+    const backend = (process.env.AGENTQA_BACKEND_URL || '').replace(/\/$/, '');
+    if (!runId || !backend) return;
+    const validated = report.tests.flatMap((t) => t.heals).filter((h) => h.verdict === 'validated');
+    try {
+      await fetch(`${backend}/api/v1/runs/${runId}/results`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(process.env.AGENTQA_API_KEY ? { 'X-API-Key': process.env.AGENTQA_API_KEY } : {}) },
+        body: JSON.stringify({
+          status: report.summary.failed > 0 ? 'failed' : report.summary.healed > 0 ? 'healed' : 'passed',
+          duration_ms: report.tests.reduce((n, t) => n + t.durationMs, 0),
+          results: { total_tests: report.summary.total, passed: report.summary.passed + report.summary.healed, failed: report.summary.failed, tests: report.tests.map((t) => ({ title: t.title, status: t.status, duration: t.durationMs, errors: t.errors })) },
+          healing_events: validated.map((h) => ({ originalSelector: h.original, healedSelector: h.healed, strategyLevel: h.level, confidence: h.confidence, reasoning: h.reasoning, url: h.url, timestamp: h.timestamp })),
           screenshots: [],
-          error_message: this.testResults.find(t => t.errors.length > 0)?.errors[0] || null
-        };
-
-        const res = await fetch(`${this.backendUrl}/api/v1/runs/${this.runId}/results`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(this.apiKey ? { 'X-API-Key': this.apiKey } : {})
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (res.ok) {
-          console.log(`[AgentQA Reporter] Successfully reported run ${this.runId} to backend.`);
-        }
-      } catch (err: any) {
-        console.error(`[AgentQA Reporter] Could not send run report to backend: ${err.message}`);
-      }
+          error_message: report.tests.find((t) => t.errors.length)?.errors[0] ?? null,
+        }),
+      });
+    } catch (e: any) {
+      console.error(`[AgentQA] could not report run ${runId}: ${e.message}`);
     }
   }
 
   printsToStdio(): boolean {
-    return true;
+    return false;
   }
 }

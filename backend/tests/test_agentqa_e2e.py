@@ -12,7 +12,7 @@ import asyncio
 import pytest
 from httpx import AsyncClient, ASGITransport
 from src.main import app
-from src.core.database import init_db
+from src.core.database import async_session_factory, init_db
 
 
 @pytest.mark.asyncio
@@ -113,46 +113,56 @@ async def test_full_agentqa_lifecycle():
         assert "test(" in test_data["code"]
         test_id = test_data["id"]
 
-        # 8. Test Self-Healing Engine (Simulating Broken Selector in Playwright)
+        # 8. Self-healing API without an LLM provider: the LLM tiers are SKIPPED (never simulated) and the
+        #    server says so; the deterministic levels live in the runner and run against the live page.
         compressed_dom = """
         <body>
-          <header class="navbar"><h1>SaaS Dashboard</h1></header>
-          <main>
-            <form id="new-auth-form">
-              <input name="user_email" data-testid="username" type="text" />
-              <!-- The button ID changed from #submit-btn to #signin-button-v2 -->
-              <button id="signin-button-v2" data-testid="submit-btn" type="button">Sign In</button>
-            </form>
-          </main>
+          <form id="new-auth-form">
+            <input name="user_email" data-testid="username" type="text" />
+            <button id="signin-button-v2" data-testid="submit-btn" type="button">Sign In</button>
+          </form>
         </body>
         """
-
-        heal_resp = await client.post("/api/v1/healing/heal", json={
-            "project_id": project_id,
-            "url": "https://app.example.com/login",
-            "original_selector": "#submit-btn",  # Broken selector!
-            "dom_snapshot": compressed_dom,
-            "error_message": "locator('#submit-btn').click: Timeout 5000ms exceeded",
-            "action_type": "click",
-            "element_info": {"tagName": "button", "textPreview": "Sign In"},
-            "fallback_selectors": [["[data-testid='submit-btn']"], ["#signin-button-v2"]]
-        }, headers=ci_headers)
-        assert heal_resp.status_code == 200
-        healed_data = heal_resp.json()
-        assert healed_data["confidence"] >= 0.55
-        assert healed_data["healed_selector"] is not None
-
-        # 9. Verify Smart Cache Hit on Subsequent Execution (Level 1)
-        cache_hit_resp = await client.post("/api/v1/healing/heal", json={
+        heal_body = {
             "project_id": project_id,
             "url": "https://app.example.com/login",
             "original_selector": "#submit-btn",
             "dom_snapshot": compressed_dom,
-            "action_type": "click"
-        }, headers=ci_headers)
-        assert cache_hit_resp.status_code == 200
-        assert cache_hit_resp.json()["is_cached"] is True
-        assert cache_hit_resp.json()["strategy_level"] == 1
+            "error_message": "locator('#submit-btn').click: Timeout 5000ms exceeded",
+            "action_type": "click",
+            "element_info": {"tagName": "button", "textPreview": "Sign In"},
+        }
+        caps = (await client.get("/api/v1/healing/capabilities", headers=ci_headers)).json()
+        assert caps["llm_configured"] is False
+        assert caps["levels"]["2"].startswith("skipped") and caps["levels"]["4"] == "available"
+
+        heal_resp = await client.post("/api/v1/healing/heal", json=heal_body, headers=ci_headers)
+        assert heal_resp.status_code == 200
+        healed_data = heal_resp.json()
+        assert healed_data["status"] == "skipped" and healed_data["healed_selector"] is None
+        assert [s["level"] for s in healed_data["steps"]] == [2, 5]
+
+        # 9. Verified-cache protocol: a repair becomes reusable only after the runner reports that the
+        #    test's own assertions passed with it.
+        from src.modules.healing.cache import selector_cache_service
+
+        async with async_session_factory() as db:
+            pending = await selector_cache_service.save_pending_selector(
+                url="https://app.example.com/login", original_selector="#submit-btn",
+                healed_selector="#signin-button-v2", selector_type="css", confidence=0.9,
+                llm_provider="runner", component_fingerprint=None, db=db, project_id=project_id,
+            )
+        miss = (await client.post("/api/v1/healing/heal", json=heal_body, headers=ci_headers)).json()
+        assert miss["is_cached"] is False  # unverified proposals are never served
+
+        accept = await client.post(
+            f"/api/v1/healing/cache/{pending.id}/accept", json={"is_accepted": True}, headers=ci_headers
+        )
+        assert accept.status_code == 200 and accept.json()["is_verified"] is True
+        cache_hit = (await client.post("/api/v1/healing/heal", json=heal_body, headers=ci_headers)).json()
+        assert cache_hit["is_cached"] is True and cache_hit["strategy_level"] == 1
+        assert cache_hit["healed_selector"] == "#signin-button-v2"
+        healed_data = cache_hit
 
         # 10. Record Test Run Outcome & Metrics
         run_resp = await client.post("/api/v1/runs", json={

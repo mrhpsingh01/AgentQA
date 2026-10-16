@@ -1,0 +1,13 @@
+{
+  "_comment": "Single source of truth for the repair guardrails. Read by backend/src/modules/healing/guardrails.py and runner/src/healing/guardrails.ts. A repair may never flip a control from the 'affirm' polarity to the 'cancel' polarity (or back): healing 'Place order' into 'Cancel' would turn a real regression into a green test.",
+  "affirm": [
+    "submit", "checkout", "check out", "buy", "buy now", "pay", "pay now", "place order", "place your order",
+    "complete purchase", "complete order", "purchase", "confirm", "continue", "next", "save", "log in", "login",
+    "sign in", "sign up", "register", "add to cart", "apply", "send", "create", "finish", "proceed", "order now",
+    "subscribe", "update", "accept", "ok", "yes"
+  ],
+  "cancel": [
+    "cancel", "delete", "remove", "discard", "close", "dismiss", "back", "go back", "reset", "clear", "decline",
+    "deny", "no thanks", "not now", "abort", "undo", "exit", "log out", "logout", "sign out", "unsubscribe", "drop", "no"
+  ]
+}
