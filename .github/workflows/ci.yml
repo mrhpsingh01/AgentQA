@@ -13,12 +13,15 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.8"
+          python-version: "3.12"
       - name: Install and test
         working-directory: backend
         run: |
-          uv sync
-          uv run pytest -q
+          uv sync --locked
+          uv run --locked pytest -q
 
   runner:
     name: Healing levels, guardrails and assertion enforcement (Playwright)
@@ -41,7 +44,7 @@ jobs:
         run: npx tsc --noEmit -p .
       - name: Per-level regression tests
         working-directory: runner
-        run: npx playwright test
+        run: NODE_OPTIONS="--require=$GITHUB_WORKSPACE/scripts/offline_guard.cjs" npm test
         env:
           AGENTQA_REPORT: ${{ runner.temp }}/levels-report.json
 
@@ -59,6 +62,7 @@ jobs:
       - working-directory: dashboard
         run: |
           npm ci
+          npm run lint
           npm run build
         env:
           NEXT_PUBLIC_DEMO_MODE: "true"

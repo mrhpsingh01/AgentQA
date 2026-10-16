@@ -36,12 +36,12 @@ jobs:
 
       - name: Install
         run: |
-          pip install rich
+          pip install rich==15.0.0
           cd runner
           npm ci
           npx playwright install --with-deps chromium
 
-      - name: Run the suite (3 UI states, offline healing, no API key)
+      - name: Run the suite (4 UI states, offline healing, no API key)
         run: python demo.py
 
       - name: Build the comment

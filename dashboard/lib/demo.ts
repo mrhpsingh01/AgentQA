@@ -5,7 +5,12 @@
 
 import seedJson from "./seed.json";
 
-export const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+// Demo mode (bundled real results, no backend) is on when asked for explicitly, and also by default when no backend
+// URL is configured, so a plain deploy to Vercel/Netlify with zero settings shows data instead of failing to fetch.
+// NEXT_PUBLIC_DEMO_MODE=false forces live mode.
+export const DEMO_MODE =
+  process.env.NEXT_PUBLIC_DEMO_MODE === "true" ||
+  (process.env.NEXT_PUBLIC_DEMO_MODE !== "false" && !process.env.NEXT_PUBLIC_BACKEND_URL);
 
 export interface LadderStep {
   level: number;
@@ -61,6 +66,7 @@ export interface DemoTest {
 }
 
 export interface DemoState {
+  executedAt?: string;
   status: string;
   verdict: string;
   note: string;

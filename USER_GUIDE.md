@@ -105,7 +105,7 @@ Located in [`dashboard/`](file:///e:/project/projects/AgentQA/dashboard/)
 - **Overview**: Pass rates and self-healing events from the backend, or the bundled real demo and benchmark results in demo mode (`NEXT_PUBLIC_DEMO_MODE=true`).
 - **Test Runs (`/runs`)**: Full run histories with expandable trace drawers and healing details.
 - **Self-Healing Cache (`/healing`)**: Inspector for before/after selectors, confidence ratings, and manual accept/reject actions.
-- **Visual Regression (`/visual`)**: Golden baseline comparison per branch/environment with pixel-diff metrics.
+- **Visual Regression (`/visual`)**: The backend compares encoded image bytes per branch/environment; decoded-pixel and AI semantic diffing are not implemented. Real checkout screenshots are on `/evidence`.
 - **Flaky Quarantine (`/flaky`)**: Tracks non-deterministic test suites and toggles quarantine to protect PR pipelines.
 - **Coverage-Gap Analyzer (`/coverage`)**: Discovered sitemaps vs tested flows with route coverage percentages.
 - **Data-Driven Studio (`/data-driven`)**: Bind CSV/JSON datasets to parameterized Playwright specs.

@@ -14,8 +14,8 @@ class VisualCompareRequest(BaseModel):
     environment: str = Field(default="staging")
     step_key: str = Field(description="Unique identifier for step or screenshot name")
     screenshot_base64: str = Field(description="Captured screenshot base64")
-    mode: Literal["pixel", "semantic"] = "pixel"
-    pixel_threshold_pct: float = Field(default=0.1, description="Max allowed pixel difference percentage")
+    mode: Literal["pixel", "semantic"] = Field(default="pixel", description="Legacy names; both modes currently compare encoded bytes only")
+    pixel_threshold_pct: float = Field(default=0.1, description="Max allowed encoded-byte difference percentage (legacy field name)")
 
 
 class VisualCompareResponse(BaseModel):

@@ -80,8 +80,8 @@ def run_state(state: str, base_url: str, channel: str | None, healing: bool = Tr
         "AGENTQA_LLM": "auto",
     }
     # the demo shows the OFFLINE ladder: never let a stray backend / key turn on the LLM levels
-    for k in ("AGENTQA_BACKEND_URL", "AGENTQA_API_KEY"):
-        env.pop(k, None)
+    for k in ("AGENTQA_BACKEND_URL", "AGENTQA_API_KEY", "AGENTQA_RUN_ID"):
+        env[k] = ""  # run_playwright overlays this mapping onto the parent environment
     if channel:
         env["AGENTQA_BROWSER_CHANNEL"] = channel
     proc = run_playwright("demo/playwright.config.ts", env, channel)
@@ -203,6 +203,7 @@ def main() -> int:
     finally:
         if not args.keep_server:
             server.shutdown()
+            server.server_close()
 
     dom = {}
     for s in STATES:
@@ -230,6 +231,16 @@ def main() -> int:
     for claim, ok in results:
         out(f"  [{'green' if ok else 'red'}]{'PASS' if ok else 'FAIL'}[/] {claim}" if console else f"  {'PASS' if ok else 'FAIL'} {claim}")
     out(f"\nEvidence written to {OUT.relative_to(ROOT)}  (reports, DOM snapshots, screenshots)")
+    if args.keep_server:
+        out(f"Demo shop remains at {base_url}; press Ctrl+C to stop.")
+        try:
+            while True:
+                time.sleep(0.5)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            server.shutdown()
+            server.server_close()
     return 0 if all(ok for _, ok in results) else 1
 
 

@@ -46,15 +46,15 @@ export default function BenchmarkPage() {
       {full && !full.skipped && (
         <section className="rounded-xl border border-border bg-card p-4 text-sm text-slate-300">
           <h2 className="text-sm font-bold text-white mb-2">AgentQA + LLM (Levels 2, 5): measured, not estimated</h2>
-          <p className="text-xs text-slate-400 mb-3">Groq free tier, openai/gpt-oss-120b for both LLM levels. Single run, no fallback to other providers.</p>
+          <p className="text-xs text-slate-400 mb-3">One browser run with a configured LLM backend. Costs below are estimates from the backend configuration, not billing receipts.</p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 font-mono text-xs">
             <div><div className="text-slate-500">Repair rate</div><div className="text-emerald-300 text-lg">{pct(full.positives_passed ?? 0, full.positives ?? 0)}</div><div className="text-slate-500">{full.positives_passed}/{full.positives}</div></div>
             <div><div className="text-slate-500">False passes</div><div className="text-emerald-300 text-lg">{full.false_passes}/{full.negatives}</div></div>
             <div><div className="text-slate-500">Wrong element clicked</div><div className="text-amber-300 text-lg">{full.wrong_element_attempts}/{full.wrong_element_denominator}</div><div className="text-slate-500">vs {det.wrong_element_attempts}/{det.wrong_element_denominator} deterministic</div></div>
             <div><div className="text-slate-500">Heals needing an LLM</div><div className="text-lg">{full.heals_llm}</div><div className="text-slate-500">of {full.validated_heals}</div></div>
-            <div><div className="text-slate-500">Mean latency / heal</div><div className="text-lg">{full.latency_ms_mean ? `${full.latency_ms_mean.toFixed(0)} ms` : "n/a"}</div><div className="text-slate-500">cost $0.00 (free tier)</div></div>
+            <div><div className="text-slate-500">Mean latency / heal</div><div className="text-lg">{full.latency_ms_mean ? `${full.latency_ms_mean.toFixed(0)} ms` : "n/a"}</div><div className="text-slate-500">estimated cost ${(full.cost_usd_per_heal ?? 0).toFixed(4)} per heal</div></div>
           </div>
-          <p className="text-[11px] text-slate-500 mt-3">The LLM raised the repair rate but also clicked more look-alike controls; the assertions still failed those runs, so no false pass occurred. Not a precision upgrade.</p>
+          <p className="text-[11px] text-slate-500 mt-3">Compare repair rate and wrong-element attempts separately. A clicked look-alike can still be rejected by the downstream assertions. These synthetic cases do not prove universal bug detection.</p>
         </section>
       )}
 
@@ -82,11 +82,12 @@ export default function BenchmarkPage() {
                   <td className="p-3 font-mono text-slate-200">{cat}</td>
                   <td className="p-3 text-slate-400">{n}</td>
                   {MODES.map((m) => {
+                    const available = byMode(m.key).length > 0;
                     const passed = byMode(m.key).filter((r) => r.category === cat && r.passed).length;
                     const bad = neg && passed > 0;
                     return (
                       <td key={m.key} className={cn("p-3 font-mono", bad ? "text-rose-300" : neg ? "text-emerald-300" : passed === n ? "text-emerald-300" : passed === 0 ? "text-slate-500" : "text-amber-300")}>
-                        {passed}/{n}{bad ? " false pass" : ""}
+                        {available ? `${passed}/${n}${bad ? " false pass" : ""}` : "not run"}
                       </td>
                     );
                   })}
@@ -107,7 +108,7 @@ export default function BenchmarkPage() {
                 <td className="p-3 font-mono">{lvl}</td>
                 <td className="p-3 text-slate-200">{LEVEL_NAMES[lvl]}</td>
                 <td className="p-3 font-mono">{det.heals_by_level?.[lvl] ?? 0}</td>
-                <td className="p-3 text-slate-400">{["1", "3", "4"].includes(lvl) ? "$0.00, offline" : full?.skipped ? "not run (no LLM provider)" : `${full?.heals_by_level?.[lvl] ?? 0} heals in the LLM run (free tier, $0.00)`}</td>
+                <td className="p-3 text-slate-400">{["1", "3", "4"].includes(lvl) ? "$0.00, offline" : !full || full.skipped ? "not run" : `${full.heals_by_level?.[lvl] ?? 0} heals in the LLM run (estimated costs above)`}</td>
               </tr>
             ))}
           </tbody>

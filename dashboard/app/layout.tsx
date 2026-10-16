@@ -4,7 +4,7 @@ import { Sidebar } from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "AgentQA — Autonomous AI QA Platform",
-  description: "Self-healing Playwright/Cypress UI automation, POM test generation, and visual regression testing.",
+  description: "Self-healing Playwright tests with real checkout traces, assertion validation, and a reproducible mutation benchmark.",
 };
 
 export default function RootLayout({

@@ -101,8 +101,7 @@ const demoOnly = (what: string) => new BackendUnavailable(`${what} needs the Age
 
 // ---- demo-mode projections of the real seed --------------------------------------------------------------
 function demoRuns(): TestRun[] {
-  const t0 = new Date(seed.generatedAt).getTime();
-  return STATE_ORDER.map((state, i) => {
+  return STATE_ORDER.map((state) => {
     const s = seed.demo.states[state];
     const validated = s.test.heals.filter((h) => h.verdict === "validated");
     return {
@@ -117,7 +116,7 @@ function demoRuns(): TestRun[] {
       })),
       screenshots: [],
       error_message: s.test.errors[0]?.split("\n")[0] ?? null,
-      created_at: new Date(t0 + i * 1000).toISOString(),
+      created_at: s.executedAt ?? seed.generatedAt,
     };
   });
 }
@@ -138,8 +137,8 @@ function demoHealed(): HealedSelector[] {
         llm_provider: `Level ${h.level}: ${h.levelName} (offline, $0)`,
         use_count: 1,
         is_verified: true,
-        created_at: created,
-        last_used_at: created,
+        created_at: new Date(h.timestamp).toISOString(),
+        last_used_at: new Date(h.timestamp).toISOString(),
         component_fingerprint: null,
       });
     }

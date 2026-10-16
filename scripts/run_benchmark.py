@@ -2,7 +2,8 @@
 """
 AgentQA mutation benchmark: runs the 50-scenario suite in each mode and writes BENCHMARK_RESULTS.{md,json}.
 
-    python scripts/run_benchmark.py                          # all modes (about 8 minutes)
+    python scripts/run_benchmark.py                          # the three offline modes (about 6 minutes, no API key)
+    python scripts/run_benchmark.py --modes full             # LLM mode only (needs a backend with a provider, see below)
     python scripts/run_benchmark.py --modes standard,deterministic
     python scripts/run_benchmark.py --aggregate-only         # rebuild the report from artifacts/bench/*.json
 
@@ -58,14 +59,29 @@ def run_mode(mode: str, channel: str | None) -> Path:
         {"AGENTQA_BENCH_MODE": mode, "AGENTQA_BENCH_OUT": str(out)},
         channel,
     )
-    if not out.exists():
+    if proc.returncode != 0 or not out.exists():
         raise SystemExit(f"benchmark mode {mode!r} produced no results:\n{proc.stdout[-2000:]}\n{proc.stderr[-2000:]}")
+    validate_payload(mode, json.loads(out.read_text(encoding="utf-8")))
     print(f"  {mode:14} done in {time.time() - started:5.0f}s")
     return out
 
 
 def pct(n: int, d: int) -> str:
     return f"{100 * n / d:.1f}%" if d else "n/a"
+
+
+def validate_payload(mode: str, payload: dict) -> None:
+    """Never publish partial, duplicated or mislabeled browser runs as a full benchmark."""
+    if payload.get("mode") != mode:
+        raise ValueError(f"benchmark mode mismatch: expected {mode}")
+    if payload.get("skipped") and mode == "full":
+        return
+    results = payload.get("results", [])
+    ids = [r["id"] for r in results]
+    if len(results) != 50 or len(set(ids)) != 50:
+        raise ValueError(f"{mode}: expected 50 unique scenarios, received {len(results)}")
+    if sum(r["kind"] == "positive" for r in results) != 38 or sum(r["kind"] == "negative" for r in results) != 12:
+        raise ValueError(f"{mode}: expected 38 positive and 12 negative scenarios")
 
 
 def summarize(mode: str, payload: dict) -> dict:
@@ -94,6 +110,7 @@ def summarize(mode: str, payload: dict) -> dict:
         "wrong_element_attempts": sum(r["wrongElementAttempt"] for r in threatened),
         "wrong_element_ids": [r["id"] for r in threatened if r["wrongElementAttempt"]],
         "wrong_element_denominator": len(threatened),
+        "wrong_element_rate": sum(r["wrongElementAttempt"] for r in threatened) / len(threatened) if threatened else 0,
         "refused_scenarios": sum(1 for r in neg if r["refusals"] > 0),
         "positives_needing_no_heal": len(unaided),
         "validated_heals": heals_validated,
@@ -146,7 +163,7 @@ def render_markdown(summaries: dict[str, dict], payloads: dict[str, dict]) -> st
     rows = [
         ("**Correct repair rate** on harmless UI refactors", lambda s: f"**{pct(s['positives_passed'], s['positives'])}** ({s['positives_passed']}/{s['positives']})"),
         ("**False-pass rate** on real bugs (target 0%)", lambda s: f"**{pct(s['false_passes'], s['negatives'])}** ({s['false_passes']}/{s['negatives']})"),
-        ("Wrong-element attempts when the right control is gone", lambda s: f"{s['wrong_element_attempts']}/{s['wrong_element_denominator']}"),
+        ("Wrong-element rate when the right control is gone", lambda s: f"{pct(s['wrong_element_attempts'], s['wrong_element_denominator'])} ({s['wrong_element_attempts']}/{s['wrong_element_denominator']})"),
         ("Validated heals fixed at $0.00, offline (Levels 1, 3, 4)", lambda s: str(s["heals_free_offline"])),
         ("Validated heals that needed an LLM (Levels 2, 5)", lambda s: str(s["heals_llm"])),
         ("Mean / median ladder latency per heal", lambda s: "-" if s["latency_ms_mean"] is None else f"{s['latency_ms_mean']:.0f} / {s['latency_ms_median']:.0f} ms"),
@@ -165,7 +182,7 @@ def render_markdown(summaries: dict[str, dict], payloads: dict[str, dict]) -> st
         L += [
             "",
             f"Standard Playwright passed **{base['positives_passed']}/{base['positives']}** of the refactored scenarios "
-            "(every scenario breaks at least one original selector, as designed) and correctly failed all negatives. "
+            f"(every scenario breaks at least one original selector, as designed) and failed {base['negatives'] - base['false_passes']}/{base['negatives']} negatives. "
             f"Default AgentQA recovered **{det['positives_passed']}/{det['positives']}** and reported **{det['false_passes']}** false passes.",
         ]
 
@@ -226,7 +243,7 @@ def render_markdown(summaries: dict[str, dict], payloads: dict[str, dict]) -> st
         "* **A scenario's healed result only counts if the test's own assertions pass afterwards.** A selector that lets a click succeed "
         "is a proposal; heals in a test that then fails are recorded as `rejected`.",
         "* **False pass** = a real regression reported as pass or healed. The negative scenarios are designed so that the only way to "
-        "pass is to genuinely produce the business outcome, so a false pass would mean the assertions were fooled. None occurred.",
+        "pass is to produce the checked outcome, so a false pass would mean the assertions were fooled. Observed counts are reported above; zero on this suite is not a universal guarantee.",
         "* **Wrong-element attempt** is stricter than a false pass: the ladder *applied* a replacement to the primary control although "
         "the right element no longer exists. Level 4 can be fooled by a look-alike that sits in the same place with the same intent "
         "(\"Sign up\" where \"Sign in\" was). The assertion still fails the test, but the wrong control was clicked. Strict mode reduces this at the "
@@ -257,12 +274,29 @@ def render_markdown(summaries: dict[str, dict], payloads: dict[str, dict]) -> st
     return "\n".join(L)
 
 
+def sync_readme_metrics(markdown: str) -> None:
+    """Keep the hiring-manager headline table identical to the generated report."""
+    path = ROOT / "README.md"
+    text = path.read_text(encoding="utf-8")
+    start = "<!-- benchmark-metrics:start -->"
+    end = "<!-- benchmark-metrics:end -->"
+    table = markdown.split("## Headline\n\n", 1)[1].split("\n\n", 1)[0]
+    if start not in text or end not in text:
+        raise ValueError("README is missing generated benchmark table markers")
+    before, remainder = text.split(start, 1)
+    _, after = remainder.split(end, 1)
+    path.write_text(before + start + "\n" + table + "\n" + end + after, encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--modes", default=",".join(MODES), help="comma-separated subset of: " + ", ".join(MODES))
+    ap.add_argument("--modes", default=",".join(m for m in MODES if m != "full"),
+                    help="comma-separated subset of: " + ", ".join(MODES) + " (default: all but `full`, so a keyless run never overwrites stored LLM results)")
     ap.add_argument("--aggregate-only", action="store_true", help="skip running; rebuild the report from artifacts/bench/*.json")
     args = ap.parse_args()
     modes = [m for m in args.modes.split(",") if m]
+    if not modes or any(m not in MODES for m in modes):
+        ap.error("--modes must contain known benchmark modes")
 
     if not args.aggregate_only:
         if not runner_ready():
@@ -278,15 +312,17 @@ def main() -> int:
         f = ARTIFACTS / f"{m}.json"
         if f.exists():
             payloads[m] = json.loads(f.read_text(encoding="utf-8"))
+            validate_payload(m, payloads[m])
     if not payloads:
         print("no results found; run without --aggregate-only first", file=sys.stderr)
         return 2
 
     summaries = {m: summarize(m, p) for m, p in payloads.items()}
     md = render_markdown(summaries, payloads)
+    sync_readme_metrics(md)
     (ROOT / "BENCHMARK_RESULTS.md").write_text(md, encoding="utf-8")
     (ROOT / "BENCHMARK_RESULTS.json").write_text(
-        json.dumps({"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S"), "summaries": summaries, "scenarios": {m: p.get("results", []) for m, p in payloads.items()}}, indent=2),
+        json.dumps({"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S"), "sourceRuns": {m: p.get("generatedAt") for m, p in payloads.items()}, "summaries": summaries, "scenarios": {m: p.get("results", []) for m, p in payloads.items()}}, indent=2),
         encoding="utf-8",
     )
     print("\n" + "\n".join(md.splitlines()[8:30]))

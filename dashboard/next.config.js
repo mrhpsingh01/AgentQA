@@ -6,7 +6,7 @@ const nextConfig = {
   },
   async rewrites() {
     // the read-only demo is fully static: no backend to proxy to
-    if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') return [];
+    if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true' || (process.env.NEXT_PUBLIC_DEMO_MODE !== 'false' && !process.env.NEXT_PUBLIC_BACKEND_URL)) return [];
     return [
       {
         source: '/api/v1/:path*',

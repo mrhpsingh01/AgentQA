@@ -50,6 +50,7 @@ def main() -> int:
             shutil.copyfile(shot, OUT_IMG / f"{s}.png")
         states[s] = {
             "status": info["status"],
+            "executedAt": json.loads((DEMO / s / "report.json").read_text(encoding="utf-8"))["generatedAt"],
             "verdict": info["verdict"],
             "note": info["note"],
             "valid": info["valid"],
@@ -66,7 +67,8 @@ def main() -> int:
         "demo": {"expectations": summary["expectations"], "seconds": summary["seconds"], "states": states},
         "benchmark": {
             "summaries": bench["summaries"],
-            "scenarios": {m: bench["scenarios"].get(m, []) for m in ("standard", "deterministic", "strict")},
+            "sourceRuns": bench.get("sourceRuns", {}),
+            "scenarios": bench["scenarios"],
         },
     }
     OUT_JSON.write_text(json.dumps(seed, indent=1), encoding="utf-8")

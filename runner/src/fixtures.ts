@@ -15,23 +15,44 @@ import { AgentQA, configFromEnv } from './healing/session';
 
 let current: AgentQA | null = null;
 
-const counted = <T extends (...args: any[]) => any>(fn: T): T =>
-  (function (this: unknown, ...args: any[]) {
-    current?.noteAssertion();
-    return fn.apply(this, args);
-  }) as unknown as T;
+// Constructing expect(value) is not an assertion. Count only completed matchers.
+function matchers(value: any): any {
+  return new Proxy(value, {
+    get(target, prop, receiver) {
+      const member = Reflect.get(target, prop, receiver);
+      if (typeof member === 'function') return (...args: any[]) => {
+        const session = current;
+        const result = member.apply(target, args);
+        if (result && typeof result.then === 'function') {
+          return result.then((answer: unknown) => { session?.noteAssertion(); return answer; });
+        }
+        session?.noteAssertion();
+        return result;
+      };
+      return member && typeof member === 'object' ? matchers(member) : member;
+    },
+  });
+}
 
-export const expect = new Proxy(baseExpect, {
+function instrumentExpect(fn: typeof baseExpect): typeof baseExpect {
+  return new Proxy(fn, {
   apply(target, thisArg, args) {
-    current?.noteAssertion();
-    return Reflect.apply(target as any, thisArg, args);
+    return matchers(Reflect.apply(target as any, thisArg, args));
   },
   get(target, prop, receiver) {
     const v = Reflect.get(target, prop, receiver);
-    if ((prop === 'soft' || prop === 'poll') && typeof v === 'function') return counted(v.bind(target));
+    if ((prop === 'soft' || prop === 'poll') && typeof v === 'function') {
+      return (...args: any[]) => matchers(v.apply(target, args));
+    }
+    if ((prop === 'configure' || prop === 'extend') && typeof v === 'function') {
+      return (...args: any[]) => instrumentExpect(v.apply(target, args));
+    }
     return v;
   },
-}) as typeof baseExpect;
+  }) as typeof baseExpect;
+}
+
+export const expect = instrumentExpect(baseExpect);
 
 export const test = base.extend<{ agentqa: AgentQA }>({
   agentqa: async ({ page }, use, testInfo) => {
@@ -41,7 +62,7 @@ export const test = base.extend<{ agentqa: AgentQA }>({
       await use(aq);
     } finally {
       current = null;
+      await aq.finalize();
     }
-    await aq.finalize();
   },
 });

@@ -1,6 +1,6 @@
 # AgentQA mutation benchmark
 
-_Generated 2026-10-16 03:25 by `python scripts/run_benchmark.py`. Every figure below was produced by running the Playwright runner against real pages in a real browser; nothing is simulated._
+_Generated 2026-10-16 12:28 by `python scripts/run_benchmark.py`. Every figure below was produced by running the Playwright runner against real pages in a real browser; nothing is simulated._
 
 50 scenarios: 6 UI patterns (login form, checkout form, data table, modal dialog, navbar, dynamic list) x realistic UI mutations, plus negative cases that are real regressions. A scenario is a test written against the original page (selectors chosen the way a recorder or author would) and run against a mutated page; its assertion checks the **business outcome** (order confirmed, row archived, ...), never the markup.
 
@@ -13,13 +13,13 @@ _Generated 2026-10-16 03:25 by `python scripts/run_benchmark.py`. Every figure b
 |---|---|---|---|---|
 | **Correct repair rate** on harmless UI refactors | **0.0%** (0/38) | **89.5%** (34/38) | **84.2%** (32/38) | **97.4%** (37/38) |
 | **False-pass rate** on real bugs (target 0%) | **0.0%** (0/12) | **0.0%** (0/12) | **0.0%** (0/12) | **0.0%** (0/12) |
-| Wrong-element attempts when the right control is gone | 0/8 | 3/8 | 1/8 | 5/8 |
+| Wrong-element rate when the right control is gone | 0.0% (0/8) | 37.5% (3/8) | 12.5% (1/8) | 62.5% (5/8) |
 | Validated heals fixed at $0.00, offline (Levels 1, 3, 4) | 0 | 61 | 56 | 64 |
 | Validated heals that needed an LLM (Levels 2, 5) | 0 | 0 | 0 | 3 |
-| Mean / median ladder latency per heal | - | 912 / 927 ms | 900 / 918 ms | 2992 / 2943 ms |
+| Mean / median ladder latency per heal | - | 901 / 921 ms | 900 / 919 ms | 3032 / 2945 ms |
 | Estimated LLM cost per heal | $0.0000 | $0.0000 | $0.0000 | $0.0000 |
 
-Standard Playwright passed **0/38** of the refactored scenarios (every scenario breaks at least one original selector, as designed) and correctly failed all negatives. Default AgentQA recovered **34/38** and reported **0** false passes.
+Standard Playwright passed **0/38** of the refactored scenarios (every scenario breaks at least one original selector, as designed) and failed 12/12 negatives. Default AgentQA recovered **34/38** and reported **0** false passes.
 
 ## Results by mutation category
 
@@ -79,7 +79,7 @@ These fail **safely** (the ladder refused rather than guessing). They are the ca
 ## Reading these numbers honestly
 
 * **A scenario's healed result only counts if the test's own assertions pass afterwards.** A selector that lets a click succeed is a proposal; heals in a test that then fails are recorded as `rejected`.
-* **False pass** = a real regression reported as pass or healed. The negative scenarios are designed so that the only way to pass is to genuinely produce the business outcome, so a false pass would mean the assertions were fooled. None occurred.
+* **False pass** = a real regression reported as pass or healed. The negative scenarios are designed so that the only way to pass is to produce the checked outcome, so a false pass would mean the assertions were fooled. Observed counts are reported above; zero on this suite is not a universal guarantee.
 * **Wrong-element attempt** is stricter than a false pass: the ladder *applied* a replacement to the primary control although the right element no longer exists. Level 4 can be fooled by a look-alike that sits in the same place with the same intent ("Sign up" where "Sign in" was). The assertion still fails the test, but the wrong control was clicked. Strict mode reduces this at the cost of recall; the LLM levels or a human are needed to close the gap.
 * The scenario set is synthetic and was fixed before the first run, with one exception disclosed in the changelog below. Recorded fingerprints exist because each scenario is first run on the original page, which is how AgentQA works in practice (the test passes once, then the UI changes).
 * Latency is the time spent inside the ladder per heal (includes Level 1's 800 ms wait for late renders, which every heal pays before escalating). Deterministic levels cost $0.00 by construction.

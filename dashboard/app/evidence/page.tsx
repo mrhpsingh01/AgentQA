@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, ShieldAlert, XCircle } from "lucide-react";
 import { Header } from "@/components/Header";
 import { BackendRequired } from "@/components/BackendRequired";
@@ -148,10 +149,10 @@ export default function EvidencePage() {
       </section>
 
       <section aria-label="Side by side" className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {[["Original", original.screenshot, "original"] as const, [STATE_META[selected].title, state.screenshot, selected] as const].map(([label, src, key]) => (
-          <figure key={key + label} className="rounded-xl border border-border bg-card overflow-hidden">
+        {[["Original", original.screenshot, "original"] as const, [STATE_META[selected].title, state.screenshot, selected] as const].map(([label, src, key], index) => (
+          <figure key={`${key}-${label}-${index}`} className="rounded-xl border border-border bg-card overflow-hidden">
             <figcaption className="px-4 py-2 text-xs font-semibold text-slate-300 border-b border-border">{label} (checkout view, as the browser rendered it)</figcaption>
-            {src ? <img src={src} alt={`${label} checkout screenshot`} className="w-full" /> : <div className="p-8 text-xs text-slate-500">No screenshot recorded.</div>}
+            {src ? <Image src={src} alt={`${label} checkout screenshot`} width={1280} height={800} unoptimized className="w-full h-auto" /> : <div className="p-8 text-xs text-slate-500">No screenshot recorded.</div>}
           </figure>
         ))}
       </section>

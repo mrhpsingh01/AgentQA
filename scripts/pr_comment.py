@@ -99,7 +99,9 @@ def heal_section(h: dict, test: dict, base_dir: Path) -> str:
 
     patch = make_patch(base_dir, h.get("file", ""), h.get("line"), h["original"], h["healed"]) if ok else None
     if ok:
-        out += ["Copy-pasteable patch:", "", "```diff", patch.rstrip() if patch else f"- {h['original']}\n+ {h['healed']}", "```", ""]
+        # A context line containing one space is meaningful in a unified diff.
+        # Stripping whitespace would remove blank context lines without updating hunk counts.
+        out += ["Copy-pasteable patch:", "", "```diff", patch.rstrip("\n") if patch else f"- {h['original']}\n+ {h['healed']}", "```", ""]
     return "\n".join(out)
 
 
@@ -167,7 +169,7 @@ def main() -> int:
     args = ap.parse_args()
     comment = build_comment(merge_reports(args.reports), args.base_dir)
     if args.output:
-        args.output.write_text(comment, encoding="utf-8")
+        args.output.write_text(comment, encoding="utf-8", newline="\n")
     else:
         sys.stdout.write(comment)
     return 0

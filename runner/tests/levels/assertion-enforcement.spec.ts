@@ -65,12 +65,31 @@ pwTest.describe('A heal only counts if the original assertions pass afterwards',
 
 // The real fixture: an unproven heal must make the Playwright test itself fail.
 test.describe('fixture integration', () => {
+  test.fail('bare expect without a matcher cannot validate a heal', async ({ page, agentqa }) => {
+    await serve(page, checkoutPage(ORIGINAL));
+    await agentqa.click('#place-order');
+    await serve(page, checkoutPage(REFACTORED));
+    await agentqa.click('#place-order');
+    expect(page.locator('#out'));
+  });
+
   test('heal followed by a real assertion passes', async ({ page, agentqa }) => {
     await serve(page, checkoutPage(ORIGINAL));
     await agentqa.click('#place-order');
     await serve(page, checkoutPage(REFACTORED));
     await agentqa.click('#place-order');
     await expect(page.locator('#out')).toHaveText('Order confirmed');
+  });
+
+  test('poll, soft, configured and negated matchers verify repairs', async ({ page, agentqa }) => {
+    await serve(page, checkoutPage(ORIGINAL));
+    await agentqa.click('#place-order');
+    await serve(page, checkoutPage(REFACTORED));
+    await agentqa.click('#place-order');
+    await expect.poll(() => page.locator('#out').textContent()).toBe('Order confirmed');
+    await expect.soft(page.locator('#out')).toBeVisible();
+    await expect.configure({ timeout: 1000 })(page.locator('#out')).not.toHaveText('Order cancelled');
+    await expect(Promise.resolve('Order confirmed')).resolves.toBe('Order confirmed');
   });
 
   test.fail('heal with no assertion after it fails the test', async ({ page, agentqa }) => {

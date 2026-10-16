@@ -93,7 +93,7 @@ export default function DataDrivenStudioPage() {
               <pre className="whitespace-pre-wrap">{generatedCode}</pre>
             ) : (
               <div className="h-full flex items-center justify-center text-slate-500 text-xs">
-                Click "Synthesize Parameterized Spec" to bind data rows to automation steps.
+                Click &quot;Synthesize Parameterized Spec&quot; to bind data rows to automation steps.
               </div>
             )}
           </div>

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-16T03:34:06",
+ "generatedAt": "2026-10-16T12:31:55",
  "provenance": "Copied from `python demo.py` (artifacts/demo) and `python scripts/run_benchmark.py` (BENCHMARK_RESULTS.json). Not hand-written.",
  "demo": {
   "expectations": [
@@ -24,10 +24,11 @@
     "met": true
    }
   ],
-  "seconds": 60.5,
+  "seconds": 57.8,
   "states": {
    "original": {
     "status": "passed",
+    "executedAt": "2026-10-16T16:30:30.116Z",
     "verdict": "PASS",
     "note": "0 heals needed",
     "valid": 0,
@@ -96,10 +97,10 @@
      "</body>"
     ],
     "test": {
-     "title": "customer buys a pair of trail shoes",
+     "title": "customer buys an insulated bottle",
      "file": "demo\\checkout.spec.ts",
      "status": "passed",
-     "durationMs": 531,
+     "durationMs": 414,
      "errors": [],
      "heals": [],
      "blocked": [],
@@ -107,7 +108,7 @@
       {
        "title": "URL navigated to the confirmation view",
        "ok": true,
-       "durationMs": 41
+       "durationMs": 34
       },
       {
        "title": "order confirmation text is shown",
@@ -117,7 +118,7 @@
       {
        "title": "API state changed: exactly one order exists for jane@example.com",
        "ok": true,
-       "durationMs": 5
+       "durationMs": 7
       }
      ],
      "tags": []
@@ -125,6 +126,7 @@
    },
    "refactored": {
     "status": "healed",
+    "executedAt": "2026-10-16T16:30:45.164Z",
     "verdict": "PASS (valid heal)",
     "note": "4 selector(s) healed, all assertions passed",
     "valid": 4,
@@ -149,7 +151,7 @@
      "</nav>",
      "</header>",
      "<main>",
-     "<section class=\"cb1f6e5\">",
+     "<section>",
      "<div class=\"c6f03d2\">",
      "<article class=\"cb5c1cc\">",
      "<h3>Trail Running Shoes</h3>",
@@ -169,7 +171,7 @@
      "<!-- 69 more <article> siblings omitted -->",
      "</div>",
      "</section>",
-     "<section>",
+     "<section class=\"cb1f6e5\">",
      "<div class=\"cfef97b\">",
      "<h2>Checkout</h2>",
      "<label>Email <input id=\"e7fa906\" name=\"email\" type=\"email\" placeholder=\"you@example.com\" data-testid=\"t806592\">",
@@ -197,17 +199,17 @@
      "</body>"
     ],
     "test": {
-     "title": "customer buys a pair of trail shoes",
+     "title": "customer buys an insulated bottle",
      "file": "demo\\checkout.spec.ts",
      "status": "healed",
-     "durationMs": 10858,
+     "durationMs": 10723,
      "errors": [],
      "heals": [
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 27,
-       "url": "http://127.0.0.1:63016/?state=refactored",
+       "url": "http://127.0.0.1:61255/?state=refactored",
        "original": "#add-to-cart-3",
        "healed": "[data-testid=\"t896bee\"]",
        "action": "click",
@@ -221,26 +223,26 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 544
+         "ms": 545
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "miss",
          "reason": "1 alternates tried, none resolves to a single visible element",
-         "ms": 3
+         "ms": 2
         },
         {
          "level": 4,
          "name": "DOM Geometry & Layout Matcher",
          "status": "selected",
          "reason": "best layout match: text, role, position and structure agree (text 0.5, role 1, attrs 1, position 0.999, size 0.993, context 1, intent 0.4)",
-         "ms": 53
+         "ms": 50
         }
        ],
        "domBytesRaw": 45439,
        "domBytesCompressed": 1696,
-       "elapsedMs": 612,
+       "elapsedMs": 607,
        "llmCostUsd": 0,
        "verdict": "validated",
        "verdictReason": "5 assertion(s) passed after the repair",
@@ -257,13 +259,13 @@
         "coverage": 1,
         "selectorKind": "testid"
        },
-       "timestamp": 1792130449466
+       "timestamp": 1792168237134
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 28,
-       "url": "http://127.0.0.1:63016/?state=refactored",
+       "url": "http://127.0.0.1:61255/?state=refactored",
        "original": "#checkout-btn",
        "healed": "[data-testid=\"t56f440\"]",
        "action": "click",
@@ -277,7 +279,7 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 537
+         "ms": 551
         },
         {
          "level": 3,
@@ -291,12 +293,12 @@
          "name": "DOM Geometry & Layout Matcher",
          "status": "selected",
          "reason": "best layout match: text, role, position and structure agree (text 0.72, role 1, attrs 1, position 0.963, size 0.877, context 1, intent 1)",
-         "ms": 22
+         "ms": 27
         }
        ],
        "domBytesRaw": 45439,
        "domBytesCompressed": 1696,
-       "elapsedMs": 571,
+       "elapsedMs": 590,
        "llmCostUsd": 0,
        "verdict": "validated",
        "verdictReason": "5 assertion(s) passed after the repair",
@@ -313,13 +315,13 @@
         "coverage": 1,
         "selectorKind": "testid"
        },
-       "timestamp": 1792130452087
+       "timestamp": 1792168239762
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 40,
-       "url": "http://127.0.0.1:63016/?state=refactored#/checkout",
+       "url": "http://127.0.0.1:61255/?state=refactored#/checkout",
        "original": "#email",
        "healed": "input[name=\"email\"]",
        "action": "fill",
@@ -333,19 +335,19 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 537
+         "ms": 539
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (2/3 alternates agree)",
-         "ms": 55
+         "ms": 54
         }
        ],
        "domBytesRaw": 45448,
        "domBytesCompressed": 1696,
-       "elapsedMs": 596,
+       "elapsedMs": 597,
        "llmCostUsd": 0,
        "verdict": "validated",
        "verdictReason": "4 assertion(s) passed after the repair",
@@ -355,13 +357,13 @@
         "alternatesMatching": 2,
         "similarity": 0.6
        },
-       "timestamp": 1792130454790
+       "timestamp": 1792168242444
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 41,
-       "url": "http://127.0.0.1:63016/?state=refactored#/checkout",
+       "url": "http://127.0.0.1:61255/?state=refactored#/checkout",
        "original": "#place-order",
        "healed": "[data-testid=\"t3e4210\"]",
        "action": "click",
@@ -375,26 +377,26 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 541
+         "ms": 539
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "miss",
          "reason": "3 alternates tried, none resolves to a single visible element",
-         "ms": 8
+         "ms": 6
         },
         {
          "level": 4,
          "name": "DOM Geometry & Layout Matcher",
          "status": "selected",
          "reason": "best layout match: text, role, position and structure agree (text 0.075, role 1, attrs 1, position 0.948, size 0.824, context 0.833, intent 1)",
-         "ms": 18
+         "ms": 21
         }
        ],
        "domBytesRaw": 45448,
        "domBytesCompressed": 1696,
-       "elapsedMs": 571,
+       "elapsedMs": 570,
        "llmCostUsd": 0,
        "verdict": "validated",
        "verdictReason": "4 assertion(s) passed after the repair",
@@ -411,7 +413,7 @@
         "coverage": 1,
         "selectorKind": "testid"
        },
-       "timestamp": 1792130457404
+       "timestamp": 1792168245047
       }
      ],
      "blocked": [],
@@ -419,7 +421,7 @@
       {
        "title": "URL navigated to the confirmation view",
        "ok": true,
-       "durationMs": 35
+       "durationMs": 38
       },
       {
        "title": "order confirmation text is shown",
@@ -437,6 +439,7 @@
    },
    "broken": {
     "status": "failed",
+    "executedAt": "2026-10-16T16:31:04.140Z",
     "verdict": "FAIL (heal rejected)",
     "note": "4 repair(s) applied but the assertions failed -> not counted",
     "valid": 0,
@@ -509,19 +512,19 @@
      "</body>"
     ],
     "test": {
-     "title": "customer buys a pair of trail shoes",
+     "title": "customer buys an insulated bottle",
      "file": "demo\\checkout.spec.ts",
      "status": "failed",
-     "durationMs": 12884,
+     "durationMs": 12778,
      "errors": [
-      "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /#\\/confirmation$/\nReceived string:  \"http://127.0.0.1:63016/?state=broken#/checkout\"\nTimeout: 2000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 2000ms\n    20 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\n       - unexpected value \"http://127.0.0.1:63016/?state=broken#/checkout\"\n"
+      "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /#\\/confirmation$/\nReceived string:  \"http://127.0.0.1:61255/?state=broken#/checkout\"\nTimeout: 2000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 2000ms\n    20 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\n       - unexpected value \"http://127.0.0.1:61255/?state=broken#/checkout\"\n"
      ],
      "heals": [
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 27,
-       "url": "http://127.0.0.1:63016/?state=broken",
+       "url": "http://127.0.0.1:61255/?state=broken",
        "original": "#add-to-cart-3",
        "healed": "[data-testid=\"t896bee\"]",
        "action": "click",
@@ -535,35 +538,35 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 541
+         "ms": 543
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (2/2 alternates agree)",
-         "ms": 65
+         "ms": 69
         }
        ],
        "domBytesRaw": 45430,
        "domBytesCompressed": 1696,
-       "elapsedMs": 620,
+       "elapsedMs": 624,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
-       "assertionsAfter": 2,
+       "assertionsAfter": 1,
        "evidence": {
         "alternatesTried": 2,
         "alternatesMatching": 2,
         "similarity": 1
        },
-       "timestamp": 1792130466999
+       "timestamp": 1792168254065
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 28,
-       "url": "http://127.0.0.1:63016/?state=broken",
+       "url": "http://127.0.0.1:61255/?state=broken",
        "original": "#checkout-btn",
        "healed": "[data-testid=\"t56f440\"]",
        "action": "click",
@@ -577,83 +580,41 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 549
+         "ms": 554
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (3/3 alternates agree)",
-         "ms": 55
+         "ms": 57
         }
        ],
        "domBytesRaw": 45430,
        "domBytesCompressed": 1696,
-       "elapsedMs": 609,
+       "elapsedMs": 617,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
-       "assertionsAfter": 2,
+       "assertionsAfter": 1,
        "evidence": {
         "alternatesTried": 3,
         "alternatesMatching": 3,
         "similarity": 1
        },
-       "timestamp": 1792130469654
+       "timestamp": 1792168256730
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 40,
-       "url": "http://127.0.0.1:63016/?state=broken#/checkout",
+       "url": "http://127.0.0.1:61255/?state=broken#/checkout",
        "original": "#email",
        "healed": "[data-testid=\"t806592\"]",
        "action": "fill",
        "level": 3,
        "levelName": "Multi-Selector Fallback",
        "confidence": 0.862,
-       "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
-       "steps": [
-        {
-         "level": 1,
-         "name": "Smart Retry",
-         "status": "miss",
-         "reason": "still failing after 500ms: matches no element",
-         "ms": 538
-        },
-        {
-         "level": 3,
-         "name": "Multi-Selector Fallback",
-         "status": "selected",
-         "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
-         "ms": 58
-        }
-       ],
-       "domBytesRaw": 45439,
-       "domBytesCompressed": 1696,
-       "elapsedMs": 602,
-       "llmCostUsd": 0,
-       "verdict": "rejected",
-       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
-       "assertionsAfter": 1,
-       "evidence": {
-        "alternatesTried": 4,
-        "alternatesMatching": 4,
-        "similarity": 0.6
-       },
-       "timestamp": 1792130472349
-      },
-      {
-       "testTitle": "customer buys a pair of trail shoes",
-       "file": "demo/checkout.spec.ts",
-       "line": 41,
-       "url": "http://127.0.0.1:63016/?state=broken#/checkout",
-       "original": "#place-order",
-       "healed": "[data-testid=\"t3e4210\"]",
-       "action": "click",
-       "level": 3,
-       "levelName": "Multi-Selector Fallback",
-       "confidence": 0.97,
        "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
        "steps": [
         {
@@ -668,22 +629,64 @@
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
-         "ms": 67
+         "ms": 54
         }
        ],
        "domBytesRaw": 45439,
        "domBytesCompressed": 1696,
-       "elapsedMs": 608,
+       "elapsedMs": 594,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
-       "assertionsAfter": 1,
+       "assertionsAfter": 0,
+       "evidence": {
+        "alternatesTried": 4,
+        "alternatesMatching": 4,
+        "similarity": 0.6
+       },
+       "timestamp": 1792168259403
+      },
+      {
+       "testTitle": "customer buys an insulated bottle",
+       "file": "demo/checkout.spec.ts",
+       "line": 41,
+       "url": "http://127.0.0.1:61255/?state=broken#/checkout",
+       "original": "#place-order",
+       "healed": "[data-testid=\"t3e4210\"]",
+       "action": "click",
+       "level": 3,
+       "levelName": "Multi-Selector Fallback",
+       "confidence": 0.97,
+       "reasoning": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+       "steps": [
+        {
+         "level": 1,
+         "name": "Smart Retry",
+         "status": "miss",
+         "reason": "still failing after 500ms: matches no element",
+         "ms": 537
+        },
+        {
+         "level": 3,
+         "name": "Multi-Selector Fallback",
+         "status": "selected",
+         "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
+         "ms": 75
+        }
+       ],
+       "domBytesRaw": 45439,
+       "domBytesCompressed": 1696,
+       "elapsedMs": 615,
+       "llmCostUsd": 0,
+       "verdict": "rejected",
+       "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
+       "assertionsAfter": 0,
        "evidence": {
         "alternatesTried": 4,
         "alternatesMatching": 4,
         "similarity": 1
        },
-       "timestamp": 1792130474990
+       "timestamp": 1792168262064
       }
      ],
      "blocked": [],
@@ -691,7 +694,7 @@
       {
        "title": "URL navigated to the confirmation view",
        "ok": false,
-       "durationMs": 2015,
+       "durationMs": 2007,
        "error": "Error: expect(page).toHaveURL(expected) failed"
       }
      ],
@@ -700,6 +703,7 @@
    },
    "broken-removed": {
     "status": "failed",
+    "executedAt": "2026-10-16T16:31:20.814Z",
     "verdict": "FAIL (refused to heal)",
     "note": "#place-order blocked: ambiguous",
     "valid": 0,
@@ -767,19 +771,19 @@
      "</body>"
     ],
     "test": {
-     "title": "customer buys a pair of trail shoes",
+     "title": "customer buys an insulated bottle",
      "file": "demo\\checkout.spec.ts",
      "status": "failed",
-     "durationMs": 10800,
+     "durationMs": 10715,
      "errors": [
       "AgentQAHealError: AgentQA refused to heal '#place-order' (ambiguous): top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")\n  L1 miss: still failing after 500ms: matches no element\n  L3 miss: 4 alternates tried, none resolves to a single visible element\n  L4 blocked: top two matches are within 0.08 (0.52 \"Cancel\" vs 0.52 \"Go to checkout 1\")\n  L2 skipped: no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)\n  L5 skipped: no backend configured (set AGENTQA_BACKEND_URL and AGENTQA_API_KEY)\nOriginal error: locator.waitFor: Timeout 2000ms exceeded."
      ],
      "heals": [
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 27,
-       "url": "http://127.0.0.1:63016/?state=broken-removed",
+       "url": "http://127.0.0.1:61255/?state=broken-removed",
        "original": "#add-to-cart-3",
        "healed": "[data-testid=\"t896bee\"]",
        "action": "click",
@@ -793,19 +797,19 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 547
+         "ms": 548
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (2/2 alternates agree)",
-         "ms": 63
+         "ms": 68
         }
        ],
        "domBytesRaw": 45284,
        "domBytesCompressed": 1549,
-       "elapsedMs": 623,
+       "elapsedMs": 628,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
@@ -815,13 +819,13 @@
         "alternatesMatching": 2,
         "similarity": 1
        },
-       "timestamp": 1792130486487
+       "timestamp": 1792168272813
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 28,
-       "url": "http://127.0.0.1:63016/?state=broken-removed",
+       "url": "http://127.0.0.1:61255/?state=broken-removed",
        "original": "#checkout-btn",
        "healed": "[data-testid=\"t56f440\"]",
        "action": "click",
@@ -835,19 +839,19 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 537
+         "ms": 536
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (3/3 alternates agree)",
-         "ms": 70
+         "ms": 64
         }
        ],
        "domBytesRaw": 45284,
        "domBytesCompressed": 1549,
-       "elapsedMs": 612,
+       "elapsedMs": 606,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
@@ -857,13 +861,13 @@
         "alternatesMatching": 3,
         "similarity": 1
        },
-       "timestamp": 1792130489141
+       "timestamp": 1792168275463
       },
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 40,
-       "url": "http://127.0.0.1:63016/?state=broken-removed#/checkout",
+       "url": "http://127.0.0.1:61255/?state=broken-removed#/checkout",
        "original": "#email",
        "healed": "[data-testid=\"t806592\"]",
        "action": "fill",
@@ -877,19 +881,19 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 550
+         "ms": 542
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "selected",
          "reason": "recorded alternate selector still identifies one element (4/4 alternates agree)",
-         "ms": 62
+         "ms": 73
         }
        ],
        "domBytesRaw": 45293,
        "domBytesCompressed": 1549,
-       "elapsedMs": 617,
+       "elapsedMs": 619,
        "llmCostUsd": 0,
        "verdict": "rejected",
        "verdictReason": "the test failed after this repair: the original assertions did not confirm it",
@@ -899,15 +903,15 @@
         "alternatesMatching": 4,
         "similarity": 0.6
        },
-       "timestamp": 1792130491854
+       "timestamp": 1792168278154
       }
      ],
      "blocked": [
       {
-       "testTitle": "customer buys a pair of trail shoes",
+       "testTitle": "customer buys an insulated bottle",
        "file": "demo/checkout.spec.ts",
        "line": 41,
-       "url": "http://127.0.0.1:63016/?state=broken-removed#/checkout",
+       "url": "http://127.0.0.1:61255/?state=broken-removed#/checkout",
        "original": "#place-order",
        "action": "click",
        "blocked": {
@@ -922,14 +926,14 @@
          "name": "Smart Retry",
          "status": "miss",
          "reason": "still failing after 500ms: matches no element",
-         "ms": 534
+         "ms": 551
         },
         {
          "level": 3,
          "name": "Multi-Selector Fallback",
          "status": "miss",
          "reason": "4 alternates tried, none resolves to a single visible element",
-         "ms": 11
+         "ms": 8
         },
         {
          "level": 4,
@@ -953,8 +957,8 @@
          "ms": 0
         }
        ],
-       "elapsedMs": 561,
-       "timestamp": 1792130494422
+       "elapsedMs": 575,
+       "timestamp": 1792168280737
       }
      ],
      "steps": [],
@@ -978,6 +982,7 @@
     "wrong_element_attempts": 0,
     "wrong_element_ids": [],
     "wrong_element_denominator": 8,
+    "wrong_element_rate": 0.0,
     "refused_scenarios": 0,
     "positives_needing_no_heal": 0,
     "validated_heals": 0,
@@ -1020,6 +1025,7 @@
      "modal/negative-decoy"
     ],
     "wrong_element_denominator": 8,
+    "wrong_element_rate": 0.375,
     "refused_scenarios": 5,
     "positives_needing_no_heal": 0,
     "validated_heals": 61,
@@ -1039,9 +1045,9 @@
     },
     "heals_free_offline": 61,
     "heals_llm": 0,
-    "latency_ms_mean": 911.8852459016393,
-    "latency_ms_median": 927,
-    "latency_ms_p95": 957,
+    "latency_ms_mean": 901.2131147540983,
+    "latency_ms_median": 921,
+    "latency_ms_p95": 938,
     "cost_usd_total": 0,
     "cost_usd_per_heal": 0.0
    },
@@ -1060,6 +1066,7 @@
      "login/negative-decoy"
     ],
     "wrong_element_denominator": 8,
+    "wrong_element_rate": 0.125,
     "refused_scenarios": 7,
     "positives_needing_no_heal": 0,
     "validated_heals": 56,
@@ -1079,8 +1086,8 @@
     },
     "heals_free_offline": 56,
     "heals_llm": 0,
-    "latency_ms_mean": 899.5714285714286,
-    "latency_ms_median": 918.5,
+    "latency_ms_mean": 900.3571428571429,
+    "latency_ms_median": 919.0,
     "latency_ms_p95": 940,
     "cost_usd_total": 0,
     "cost_usd_per_heal": 0.0
@@ -1104,6 +1111,7 @@
      "table/negative-decoy"
     ],
     "wrong_element_denominator": 8,
+    "wrong_element_rate": 0.625,
     "refused_scenarios": 3,
     "positives_needing_no_heal": 0,
     "validated_heals": 67,
@@ -1123,12 +1131,18 @@
     },
     "heals_free_offline": 64,
     "heals_llm": 3,
-    "latency_ms_mean": 2992.134328358209,
-    "latency_ms_median": 2943,
-    "latency_ms_p95": 3004,
+    "latency_ms_mean": 3031.9701492537315,
+    "latency_ms_median": 2945,
+    "latency_ms_p95": 3181,
     "cost_usd_total": 0,
     "cost_usd_per_heal": 0.0
    }
+  },
+  "sourceRuns": {
+   "standard": "2026-10-16T16:15:18.213Z",
+   "deterministic": "2026-10-16T16:17:48.831Z",
+   "strict": "2026-10-16T16:20:15.569Z",
+   "full": "2026-10-16T16:27:50.185Z"
   },
   "scenarios": {
    "standard": [
@@ -1150,7 +1164,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 650,
+     "durationMs": 601,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1179,7 +1193,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 551,
+     "durationMs": 548,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1208,7 +1222,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 564,
+     "durationMs": 551,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1237,7 +1251,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 559,
+     "durationMs": 528,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1266,7 +1280,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 619,
+     "durationMs": 586,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1295,7 +1309,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 594,
+     "durationMs": 565,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1324,7 +1338,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 562,
+     "durationMs": 525,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1352,7 +1366,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 548,
+     "durationMs": 521,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1380,7 +1394,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 546,
+     "durationMs": 540,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1408,7 +1422,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 564,
+     "durationMs": 538,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1436,7 +1450,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 572,
+     "durationMs": 549,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1464,7 +1478,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 549,
+     "durationMs": 533,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1492,7 +1506,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 524,
+     "durationMs": 520,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1519,7 +1533,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 545,
+     "durationMs": 495,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1546,7 +1560,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 535,
+     "durationMs": 491,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1600,7 +1614,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 539,
+     "durationMs": 500,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1627,7 +1641,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 535,
+     "durationMs": 520,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1654,7 +1668,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 609,
+     "durationMs": 589,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1683,7 +1697,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 611,
+     "durationMs": 557,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1741,7 +1755,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 592,
+     "durationMs": 576,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1770,7 +1784,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 658,
+     "durationMs": 623,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1799,7 +1813,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 587,
+     "durationMs": 554,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1828,7 +1842,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 548,
+     "durationMs": 490,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1855,7 +1869,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 517,
+     "durationMs": 492,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1882,7 +1896,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 515,
+     "durationMs": 492,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1909,7 +1923,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 538,
+     "durationMs": 494,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1936,7 +1950,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 570,
+     "durationMs": 515,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1963,7 +1977,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 530,
+     "durationMs": 508,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -1990,7 +2004,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 569,
+     "durationMs": 526,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2018,7 +2032,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 559,
+     "durationMs": 542,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2046,7 +2060,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 555,
+     "durationMs": 525,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2074,7 +2088,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 544,
+     "durationMs": 510,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2102,7 +2116,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 574,
+     "durationMs": 550,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2130,7 +2144,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 641,
+     "durationMs": 547,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2158,7 +2172,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 794,
+     "durationMs": 552,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2186,7 +2200,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 574,
+     "durationMs": 559,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2214,7 +2228,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 562,
+     "durationMs": 524,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2242,7 +2256,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 611,
+     "durationMs": 542,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2271,7 +2285,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 617,
+     "durationMs": 586,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2300,7 +2314,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 532,
+     "durationMs": 489,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2327,7 +2341,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 665,
+     "durationMs": 522,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2355,7 +2369,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 592,
+     "durationMs": 595,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2384,7 +2398,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 666,
+     "durationMs": 542,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2413,7 +2427,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 537,
+     "durationMs": 491,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2440,7 +2454,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 566,
+     "durationMs": 552,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2468,7 +2482,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 632,
+     "durationMs": 602,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2497,7 +2511,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 663,
+     "durationMs": 550,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2525,7 +2539,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 625,
+     "durationMs": 599,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -2558,12 +2572,12 @@
       3
      ],
      "ladderMs": [
-      945,
-      944,
-      929
+      943,
+      916,
+      919
      ],
      "llmCostUsd": 0,
-     "durationMs": 4435,
+     "durationMs": 4286,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -2616,12 +2630,12 @@
       3
      ],
      "ladderMs": [
-      931,
-      915,
-      918
+      922,
+      922,
+      925
      ],
      "llmCostUsd": 0,
-     "durationMs": 4237,
+     "durationMs": 4219,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#submit",
      "selectors": [
@@ -2674,12 +2688,12 @@
       3
      ],
      "ladderMs": [
-      943,
-      935,
-      935
+      929,
+      921,
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 4299,
+     "durationMs": 4189,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -2732,12 +2746,12 @@
       3
      ],
      "ladderMs": [
-      946,
-      910,
-      940
+      918,
+      911,
+      921
      ],
      "llmCostUsd": 0,
-     "durationMs": 4257,
+     "durationMs": 4148,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -2788,10 +2802,10 @@
       3
      ],
      "ladderMs": [
-      929
+      903
      ],
      "llmCostUsd": 0,
-     "durationMs": 1629,
+     "durationMs": 1548,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -2830,12 +2844,12 @@
       4
      ],
      "ladderMs": [
-      917,
-      905,
-      899
+      910,
+      898,
+      895
      ],
      "llmCostUsd": 0,
-     "durationMs": 4267,
+     "durationMs": 4119,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"t956a9d\"]",
      "selectors": [
@@ -2887,11 +2901,11 @@
       3
      ],
      "ladderMs": [
-      1001,
-      933
+      922,
+      912
      ],
      "llmCostUsd": 0,
-     "durationMs": 3015,
+     "durationMs": 2814,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -2935,11 +2949,11 @@
       3
      ],
      "ladderMs": [
-      945,
-      921
+      910,
+      917
      ],
      "llmCostUsd": 0,
-     "durationMs": 2875,
+     "durationMs": 2795,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#place",
      "selectors": [
@@ -2983,11 +2997,11 @@
       3
      ],
      "ladderMs": [
-      966,
-      933
+      924,
+      923
      ],
      "llmCostUsd": 0,
-     "durationMs": 2921,
+     "durationMs": 2826,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -3031,11 +3045,11 @@
       3
      ],
      "ladderMs": [
-      956,
+      936,
       924
      ],
      "llmCostUsd": 0,
-     "durationMs": 2907,
+     "durationMs": 2849,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -3078,10 +3092,10 @@
       3
      ],
      "ladderMs": [
-      924
+      912
      ],
      "llmCostUsd": 0,
-     "durationMs": 1569,
+     "durationMs": 1518,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -3118,11 +3132,11 @@
       4
      ],
      "ladderMs": [
-      929,
-      906
+      917,
+      893
      ],
      "llmCostUsd": 0,
-     "durationMs": 2920,
+     "durationMs": 2800,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"t82c587\"]",
      "selectors": [
@@ -3165,10 +3179,10 @@
       3
      ],
      "ladderMs": [
-      920
+      900
      ],
      "llmCostUsd": 0,
-     "durationMs": 1511,
+     "durationMs": 1461,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -3203,10 +3217,10 @@
       3
      ],
      "ladderMs": [
-      910
+      905
      ],
      "llmCostUsd": 0,
-     "durationMs": 1470,
+     "durationMs": 1444,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#archive2",
      "selectors": [
@@ -3241,10 +3255,10 @@
       3
      ],
      "ladderMs": [
-      979
+      905
      ],
      "llmCostUsd": 0,
-     "durationMs": 1589,
+     "durationMs": 1455,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -3279,10 +3293,10 @@
       3
      ],
      "ladderMs": [
-      921
+      927
      ],
      "llmCostUsd": 0,
-     "durationMs": 1515,
+     "durationMs": 1435,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -3317,10 +3331,10 @@
       3
      ],
      "ladderMs": [
-      957
+      908
      ],
      "llmCostUsd": 0,
-     "durationMs": 1594,
+     "durationMs": 1449,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -3355,7 +3369,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1518,
+     "durationMs": 1357,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -3390,12 +3404,12 @@
       3
      ],
      "ladderMs": [
-      925,
-      930,
-      953
+      924,
+      915,
+      930
      ],
      "llmCostUsd": 0,
-     "durationMs": 4356,
+     "durationMs": 4231,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -3448,12 +3462,12 @@
       3
      ],
      "ladderMs": [
-      929,
-      943,
-      922
+      951,
+      933,
+      908
      ],
      "llmCostUsd": 0,
-     "durationMs": 4329,
+     "durationMs": 4241,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#save",
      "selectors": [
@@ -3506,12 +3520,12 @@
       3
      ],
      "ladderMs": [
-      935,
-      923,
-      951
+      937,
+      921,
+      922
      ],
      "llmCostUsd": 0,
-     "durationMs": 4339,
+     "durationMs": 4243,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -3564,12 +3578,12 @@
       3
      ],
      "ladderMs": [
-      954,
-      926,
-      972
+      932,
+      922,
+      921
      ],
      "llmCostUsd": 0,
-     "durationMs": 4394,
+     "durationMs": 4244,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -3620,10 +3634,10 @@
       3
      ],
      "ladderMs": [
-      913
+      899
      ],
      "llmCostUsd": 0,
-     "durationMs": 1645,
+     "durationMs": 1555,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -3659,11 +3673,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      909,
-      893
+      902,
+      903
      ],
      "llmCostUsd": 0,
-     "durationMs": 4108,
+     "durationMs": 4106,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -3713,10 +3727,10 @@
       3
      ],
      "ladderMs": [
-      927
+      914
      ],
      "llmCostUsd": 0,
-     "durationMs": 1457,
+     "durationMs": 1439,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -3751,10 +3765,10 @@
       3
      ],
      "ladderMs": [
-      915
+      921
      ],
      "llmCostUsd": 0,
-     "durationMs": 1447,
+     "durationMs": 1466,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#pricing",
      "selectors": [
@@ -3789,10 +3803,10 @@
       3
      ],
      "ladderMs": [
-      923
+      936
      ],
      "llmCostUsd": 0,
-     "durationMs": 1474,
+     "durationMs": 1465,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -3827,10 +3841,10 @@
       3
      ],
      "ladderMs": [
-      923
+      938
      ],
      "llmCostUsd": 0,
-     "durationMs": 1466,
+     "durationMs": 1449,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -3865,10 +3879,10 @@
       3
      ],
      "ladderMs": [
-      920
+      928
      ],
      "llmCostUsd": 0,
-     "durationMs": 1470,
+     "durationMs": 1477,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -3903,7 +3917,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1406,
+     "durationMs": 1368,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -3937,11 +3951,11 @@
       3
      ],
      "ladderMs": [
-      938,
-      915
+      935,
+      916
      ],
      "llmCostUsd": 0,
-     "durationMs": 2845,
+     "durationMs": 2829,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -3985,11 +3999,11 @@
       3
      ],
      "ladderMs": [
-      916,
-      908
+      922,
+      916
      ],
      "llmCostUsd": 0,
-     "durationMs": 2817,
+     "durationMs": 2829,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#add",
      "selectors": [
@@ -4033,8 +4047,8 @@
       3
      ],
      "ladderMs": [
-      927,
-      916
+      948,
+      920
      ],
      "llmCostUsd": 0,
      "durationMs": 2849,
@@ -4081,11 +4095,11 @@
       3
      ],
      "ladderMs": [
-      933,
-      906
+      941,
+      915
      ],
      "llmCostUsd": 0,
-     "durationMs": 2811,
+     "durationMs": 2851,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -4128,10 +4142,10 @@
       3
      ],
      "ladderMs": [
-      903
+      896
      ],
      "llmCostUsd": 0,
-     "durationMs": 1545,
+     "durationMs": 1495,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -4166,10 +4180,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      916
+      913
      ],
      "llmCostUsd": 0,
-     "durationMs": 2780,
+     "durationMs": 2732,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4211,10 +4225,10 @@
       1
      ],
      "ladderMs": [
-      364
+      362
      ],
      "llmCostUsd": 0,
-     "durationMs": 1088,
+     "durationMs": 943,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#place",
      "selectors": [
@@ -4250,10 +4264,10 @@
       1
      ],
      "ladderMs": [
-      349
+      343
      ],
      "llmCostUsd": 0,
-     "durationMs": 957,
+     "durationMs": 935,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#add",
      "selectors": [
@@ -4288,10 +4302,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      914
+      908
      ],
      "llmCostUsd": 0,
-     "durationMs": 2785,
+     "durationMs": 2716,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4332,11 +4346,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      909,
-      887
+      929,
+      905
      ],
      "llmCostUsd": 0,
-     "durationMs": 4082,
+     "durationMs": 4097,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4385,11 +4399,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      903,
-      910
+      917,
+      901
      ],
      "llmCostUsd": 0,
-     "durationMs": 4142,
+     "durationMs": 4099,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4439,7 +4453,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1393,
+     "durationMs": 1387,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4471,11 +4485,11 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      909,
-      895
+      908,
+      896
      ],
      "llmCostUsd": 0,
-     "durationMs": 4322,
+     "durationMs": 4301,
      "wrongElementAttempt": true,
      "primaryHealedTo": "[data-testid=\"t6514c4\"]",
      "selectors": [
@@ -4517,12 +4531,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      907,
-      904,
-      894
+      1175,
+      1162,
+      930
      ],
      "llmCostUsd": 0,
-     "durationMs": 5943,
+     "durationMs": 6426,
      "wrongElementAttempt": true,
      "primaryHealedTo": "[data-testid=\"t6514c4\"]",
      "selectors": [
@@ -4572,12 +4586,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      911,
-      891,
-      893
+      908,
+      1055,
+      917
      ],
      "llmCostUsd": 0,
-     "durationMs": 5717,
+     "durationMs": 5933,
      "wrongElementAttempt": true,
      "primaryHealedTo": "[data-testid=\"t7a8589\"]",
      "selectors": [
@@ -4628,7 +4642,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1398,
+     "durationMs": 1464,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -4660,11 +4674,11 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      944,
-      904
+      976,
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 4353,
+     "durationMs": 4468,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Place order\"i]",
      "selectors": [
@@ -4706,12 +4720,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      905,
-      899,
-      905
+      913,
+      902,
+      909
      ],
      "llmCostUsd": 0,
-     "durationMs": 5623,
+     "durationMs": 5636,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Sign in\"i]",
      "selectors": [
@@ -4761,11 +4775,11 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      901,
-      897
+      911,
+      899
      ],
      "llmCostUsd": 0,
-     "durationMs": 4281,
+     "durationMs": 4271,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Add\"i]",
      "selectors": [
@@ -4808,11 +4822,11 @@
      "levels": [],
      "ladderMs": [
       910,
-      907,
-      898
+      896,
+      899
      ],
      "llmCostUsd": 0,
-     "durationMs": 5699,
+     "durationMs": 5670,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Save\"i]",
      "selectors": [
@@ -4867,12 +4881,12 @@
       3
      ],
      "ladderMs": [
-      934,
-      928,
-      924
+      940,
+      914,
+      918
      ],
      "llmCostUsd": 0,
-     "durationMs": 4330,
+     "durationMs": 4240,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -4925,12 +4939,12 @@
       3
      ],
      "ladderMs": [
-      926,
       918,
-      921
+      914,
+      940
      ],
      "llmCostUsd": 0,
-     "durationMs": 4218,
+     "durationMs": 4221,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#submit",
      "selectors": [
@@ -4983,12 +4997,12 @@
       3
      ],
      "ladderMs": [
-      924,
-      926,
-      915
+      938,
+      913,
+      934
      ],
      "llmCostUsd": 0,
-     "durationMs": 4207,
+     "durationMs": 4198,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -5041,12 +5055,12 @@
       3
      ],
      "ladderMs": [
-      917,
-      940,
-      938
+      927,
+      912,
+      914
      ],
      "llmCostUsd": 0,
-     "durationMs": 4252,
+     "durationMs": 4163,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -5097,10 +5111,10 @@
       3
      ],
      "ladderMs": [
-      897
+      896
      ],
      "llmCostUsd": 0,
-     "durationMs": 1587,
+     "durationMs": 1532,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"submit\"]",
      "selectors": [
@@ -5136,11 +5150,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      908,
-      895
+      910,
+      904
      ],
      "llmCostUsd": 0,
-     "durationMs": 4085,
+     "durationMs": 4088,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -5192,10 +5206,10 @@
      ],
      "ladderMs": [
       926,
-      912
+      915
      ],
      "llmCostUsd": 0,
-     "durationMs": 2844,
+     "durationMs": 2825,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -5239,11 +5253,11 @@
       3
      ],
      "ladderMs": [
-      916,
-      918
+      915,
+      907
      ],
      "llmCostUsd": 0,
-     "durationMs": 2826,
+     "durationMs": 2803,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#place",
      "selectors": [
@@ -5287,11 +5301,11 @@
       3
      ],
      "ladderMs": [
-      938,
-      922
+      943,
+      916
      ],
      "llmCostUsd": 0,
-     "durationMs": 2872,
+     "durationMs": 2846,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -5335,11 +5349,11 @@
       3
      ],
      "ladderMs": [
-      938,
-      925
+      923,
+      929
      ],
      "llmCostUsd": 0,
-     "durationMs": 2865,
+     "durationMs": 2830,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -5382,10 +5396,10 @@
       3
      ],
      "ladderMs": [
-      898
+      902
      ],
      "llmCostUsd": 0,
-     "durationMs": 1507,
+     "durationMs": 1514,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"place\"]",
      "selectors": [
@@ -5420,10 +5434,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      923
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 2769,
+     "durationMs": 2760,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -5465,10 +5479,10 @@
       3
      ],
      "ladderMs": [
-      898
+      909
      ],
      "llmCostUsd": 0,
-     "durationMs": 1460,
+     "durationMs": 1432,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -5503,10 +5517,10 @@
       3
      ],
      "ladderMs": [
-      898
+      910
      ],
      "llmCostUsd": 0,
-     "durationMs": 1442,
+     "durationMs": 1479,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#archive2",
      "selectors": [
@@ -5541,10 +5555,10 @@
       3
      ],
      "ladderMs": [
-      902
+      921
      ],
      "llmCostUsd": 0,
-     "durationMs": 1471,
+     "durationMs": 1506,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -5579,10 +5593,10 @@
       3
      ],
      "ladderMs": [
-      914
+      931
      ],
      "llmCostUsd": 0,
-     "durationMs": 1449,
+     "durationMs": 1467,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -5617,10 +5631,10 @@
       3
      ],
      "ladderMs": [
-      901
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 1456,
+     "durationMs": 1502,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"archive2\"]",
      "selectors": [
@@ -5655,7 +5669,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1362,
+     "durationMs": 1402,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -5690,12 +5704,12 @@
       3
      ],
      "ladderMs": [
-      922,
-      909,
-      926
+      924,
+      906,
+      922
      ],
      "llmCostUsd": 0,
-     "durationMs": 4240,
+     "durationMs": 4228,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -5748,12 +5762,12 @@
       3
      ],
      "ladderMs": [
-      910,
-      911,
-      906
+      925,
+      914,
+      908
      ],
      "llmCostUsd": 0,
-     "durationMs": 4212,
+     "durationMs": 4191,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#save",
      "selectors": [
@@ -5806,12 +5820,12 @@
       3
      ],
      "ladderMs": [
-      942,
-      931,
-      917
+      934,
+      914,
+      913
      ],
      "llmCostUsd": 0,
-     "durationMs": 4279,
+     "durationMs": 4256,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -5864,12 +5878,12 @@
       3
      ],
      "ladderMs": [
-      930,
-      914,
-      921
+      949,
+      928,
+      933
      ],
      "llmCostUsd": 0,
-     "durationMs": 4241,
+     "durationMs": 4253,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -5920,10 +5934,10 @@
       3
      ],
      "ladderMs": [
-      902
+      909
      ],
      "llmCostUsd": 0,
-     "durationMs": 1584,
+     "durationMs": 1588,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"save\"]",
      "selectors": [
@@ -5959,11 +5973,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      911,
-      900
+      937,
+      903
      ],
      "llmCostUsd": 0,
-     "durationMs": 4151,
+     "durationMs": 4131,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6013,10 +6027,10 @@
       3
      ],
      "ladderMs": [
-      922
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 1446,
+     "durationMs": 1442,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -6051,10 +6065,10 @@
       3
      ],
      "ladderMs": [
-      919
+      928
      ],
      "llmCostUsd": 0,
-     "durationMs": 1454,
+     "durationMs": 1460,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#pricing",
      "selectors": [
@@ -6089,10 +6103,10 @@
       3
      ],
      "ladderMs": [
-      946
+      951
      ],
      "llmCostUsd": 0,
-     "durationMs": 1513,
+     "durationMs": 1501,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -6127,10 +6141,10 @@
       3
      ],
      "ladderMs": [
-      989
+      937
      ],
      "llmCostUsd": 0,
-     "durationMs": 1531,
+     "durationMs": 1452,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -6165,10 +6179,10 @@
       3
      ],
      "ladderMs": [
-      906
+      912
      ],
      "llmCostUsd": 0,
-     "durationMs": 1471,
+     "durationMs": 1440,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"pricing\"]",
      "selectors": [
@@ -6203,7 +6217,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1396,
+     "durationMs": 1393,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6237,11 +6251,11 @@
       3
      ],
      "ladderMs": [
-      935,
-      905
+      909,
+      921
      ],
      "llmCostUsd": 0,
-     "durationMs": 2838,
+     "durationMs": 2820,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -6285,11 +6299,11 @@
       3
      ],
      "ladderMs": [
-      910,
-      905
+      924,
+      910
      ],
      "llmCostUsd": 0,
-     "durationMs": 2810,
+     "durationMs": 2811,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#add",
      "selectors": [
@@ -6333,11 +6347,11 @@
       3
      ],
      "ladderMs": [
-      923,
-      920
+      934,
+      917
      ],
      "llmCostUsd": 0,
-     "durationMs": 2850,
+     "durationMs": 2844,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -6381,11 +6395,11 @@
       3
      ],
      "ladderMs": [
-      939,
-      916
+      922,
+      925
      ],
      "llmCostUsd": 0,
-     "durationMs": 2864,
+     "durationMs": 2848,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -6431,7 +6445,7 @@
       901
      ],
      "llmCostUsd": 0,
-     "durationMs": 1506,
+     "durationMs": 1492,
      "wrongElementAttempt": false,
      "primaryHealedTo": "[data-testid=\"add\"]",
      "selectors": [
@@ -6466,10 +6480,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      909
+      923
      ],
      "llmCostUsd": 0,
-     "durationMs": 2751,
+     "durationMs": 2762,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6514,7 +6528,7 @@
       341
      ],
      "llmCostUsd": 0,
-     "durationMs": 952,
+     "durationMs": 927,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#place",
      "selectors": [
@@ -6553,7 +6567,7 @@
       344
      ],
      "llmCostUsd": 0,
-     "durationMs": 948,
+     "durationMs": 933,
      "wrongElementAttempt": false,
      "primaryHealedTo": "#add",
      "selectors": [
@@ -6588,10 +6602,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      916
+      905
      ],
      "llmCostUsd": 0,
-     "durationMs": 2761,
+     "durationMs": 2746,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6632,11 +6646,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      916,
-      899
+      904,
+      896
      ],
      "llmCostUsd": 0,
-     "durationMs": 4069,
+     "durationMs": 4066,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6685,11 +6699,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      909,
-      899
+      914,
+      905
      ],
      "llmCostUsd": 0,
-     "durationMs": 4097,
+     "durationMs": 4128,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6739,7 +6753,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1364,
+     "durationMs": 1500,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6771,10 +6785,10 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      902
+      920
      ],
      "llmCostUsd": 0,
-     "durationMs": 2743,
+     "durationMs": 2804,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6815,12 +6829,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      906,
-      909,
+      908,
+      895,
       893
      ],
      "llmCostUsd": 0,
-     "durationMs": 5620,
+     "durationMs": 5634,
      "wrongElementAttempt": true,
      "primaryHealedTo": "[data-testid=\"t6514c4\"]",
      "selectors": [
@@ -6870,11 +6884,11 @@
      "refusals": 1,
      "levels": [],
      "ladderMs": [
-      912,
-      901
+      909,
+      902
      ],
      "llmCostUsd": 0,
-     "durationMs": 4112,
+     "durationMs": 4118,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6924,7 +6938,7 @@
      "levels": [],
      "ladderMs": [],
      "llmCostUsd": 0,
-     "durationMs": 1399,
+     "durationMs": 1357,
      "wrongElementAttempt": false,
      "primaryHealedTo": null,
      "selectors": [
@@ -6956,11 +6970,11 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      922,
-      902
+      909,
+      899
      ],
      "llmCostUsd": 0,
-     "durationMs": 4317,
+     "durationMs": 4307,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Place order\"i]",
      "selectors": [
@@ -7002,12 +7016,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
+      939,
       903,
-      902,
-      893
+      908
      ],
      "llmCostUsd": 0,
-     "durationMs": 5604,
+     "durationMs": 5675,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Sign in\"i]",
      "selectors": [
@@ -7057,11 +7071,11 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      902,
-      911
+      905,
+      895
      ],
      "llmCostUsd": 0,
-     "durationMs": 4332,
+     "durationMs": 4301,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Add\"i]",
      "selectors": [
@@ -7103,12 +7117,12 @@
      "refusals": 0,
      "levels": [],
      "ladderMs": [
-      922,
-      904,
-      899
+      909,
+      889,
+      896
      ],
      "llmCostUsd": 0,
-     "durationMs": 5677,
+     "durationMs": 5641,
      "wrongElementAttempt": false,
      "primaryHealedTo": "role=button[name=\"Save\"i]",
      "selectors": [
@@ -7136,6 +7150,2341 @@
        "healed": "role=button[name=\"Save\"i]",
        "level": 3,
        "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    }
+   ],
+   "full": [
+    {
+     "id": "login/rename-id",
+     "pattern": "login",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2983,
+      2942,
+      2957
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10361,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/rename-testid",
+     "pattern": "login",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2979,
+      2955,
+      2973
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10380,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#submit",
+     "selectors": [
+      "[data-testid=\"user\"]",
+      "[data-testid=\"pass\"]",
+      "[data-testid=\"submit\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"user\"]",
+       "healed": "#user",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"pass\"]",
+       "healed": "#pass",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"submit\"]",
+       "healed": "#submit",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/restructure",
+     "pattern": "login",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      3016,
+      2989,
+      3031
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10568,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > input",
+      "body > main > div:nth-of-type(3) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > input",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(3) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/class-scramble",
+     "pattern": "login",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      3040,
+      2994,
+      3041
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10670,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      ".btn-user",
+      ".btn-pass",
+      ".btn-submit"
+     ],
+     "healed": [
+      {
+       "original": ".btn-user",
+       "healed": "[data-testid=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-pass",
+       "healed": "[data-testid=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-submit",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/text-variation",
+     "pattern": "login",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2913
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3636,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"submit\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "button:has-text(\"Sign in\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Sign in\")",
+       "healed": "[data-testid=\"submit\"]",
+       "level": 3,
+       "confidence": 0.79,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/combined-hard",
+     "pattern": "login",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      4
+     ],
+     "ladderMs": [
+      2947,
+      2917,
+      2914
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10257,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t956a9d\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"t956a9d\"]",
+       "level": 4,
+       "confidence": 0.75,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-id",
+     "pattern": "checkout",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2950,
+      2933
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6880,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/rename-testid",
+     "pattern": "checkout",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2926,
+      2932
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6842,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "[data-testid=\"email\"]",
+      "[data-testid=\"place\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"email\"]",
+       "healed": "#email",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"place\"]",
+       "healed": "#place",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/restructure",
+     "pattern": "checkout",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2973,
+      2944
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6933,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(2) > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(2) > button:nth-of-type(2)",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/class-scramble",
+     "pattern": "checkout",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2961,
+      2952
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6924,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      ".btn-email",
+      ".btn-place"
+     ],
+     "healed": [
+      {
+       "original": ".btn-email",
+       "healed": "[data-testid=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-place",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/text-variation",
+     "pattern": "checkout",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2939
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3541,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"place\"]",
+     "selectors": [
+      "#email",
+      "button:has-text(\"Place order\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Place order\")",
+       "healed": "[data-testid=\"place\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/combined-hard",
+     "pattern": "checkout",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      4
+     ],
+     "ladderMs": [
+      2952,
+      2907
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6848,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t82c587\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"t82c587\"]",
+       "level": 4,
+       "confidence": 0.71,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/rename-id",
+     "pattern": "table",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2920
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3495,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/rename-testid",
+     "pattern": "table",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2937
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3458,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#archive2",
+     "selectors": [
+      "[data-testid=\"archive2\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"archive2\"]",
+       "healed": "#archive2",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/restructure",
+     "pattern": "table",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2942
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3482,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > button:nth-of-type(1)",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/class-scramble",
+     "pattern": "table",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2943
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3470,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      ".btn-archive2"
+     ],
+     "healed": [
+      {
+       "original": ".btn-archive2",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/text-variation",
+     "pattern": "table",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2929
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3444,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"archive2\"]",
+     "selectors": [
+      "[data-row=\"2\"] button:has-text(\"Archive\")"
+     ],
+     "healed": [
+      {
+       "original": "[data-row=\"2\"] button:has-text(\"Archive\")",
+       "healed": "[data-testid=\"archive2\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/combined-hard",
+     "pattern": "table",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      5917
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 9967,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t7b7253\"]",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "[data-testid=\"t7b7253\"]",
+       "level": 2,
+       "confidence": 0.9,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-id",
+     "pattern": "modal",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2958,
+      2942,
+      2958
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10329,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "#name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/rename-testid",
+     "pattern": "modal",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2939,
+      2920,
+      2915
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10279,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#save",
+     "selectors": [
+      "[data-testid=\"open\"]",
+      "[data-testid=\"name\"]",
+      "[data-testid=\"save\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"open\"]",
+       "healed": "#open",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"name\"]",
+       "healed": "#name",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"save\"]",
+       "healed": "#save",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/restructure",
+     "pattern": "modal",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2974,
+      2936,
+      2932
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10310,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "body > main > button",
+      "body > main > div:nth-of-type(1) > input",
+      "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > button",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > input",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div:nth-of-type(1) > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/class-scramble",
+     "pattern": "modal",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      3
+     ],
+     "ladderMs": [
+      2957,
+      2933,
+      2944
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 10293,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      ".btn-open",
+      ".btn-name",
+      ".btn-save"
+     ],
+     "healed": [
+      {
+       "original": ".btn-open",
+       "healed": "[data-testid=\"open\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-name",
+       "healed": "[data-testid=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-save",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/text-variation",
+     "pattern": "modal",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2922
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3614,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"save\"]",
+     "selectors": [
+      "button:has-text(\"Open settings\")",
+      "#name",
+      "button:has-text(\"Save\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Save\")",
+       "healed": "[data-testid=\"save\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/combined-hard",
+     "pattern": "modal",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 3,
+     "healsValidated": 3,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3,
+      2
+     ],
+     "ladderMs": [
+      2932,
+      2918,
+      5758
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 15086,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t52edda\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"t52edda\"]",
+       "level": 2,
+       "confidence": 0.9,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-id",
+     "pattern": "navbar",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2949
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3469,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [
+      {
+       "original": "#pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/rename-testid",
+     "pattern": "navbar",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2936
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3497,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#pricing",
+     "selectors": [
+      "[data-testid=\"pricing\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"pricing\"]",
+       "healed": "#pricing",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/restructure",
+     "pattern": "navbar",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2964
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3517,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "body > nav > a:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > nav > a:nth-of-type(2)",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/class-scramble",
+     "pattern": "navbar",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2955
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3479,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      ".btn-pricing"
+     ],
+     "healed": [
+      {
+       "original": ".btn-pricing",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/text-variation",
+     "pattern": "navbar",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2930
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3463,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"pricing\"]",
+     "selectors": [
+      "a:has-text(\"Pricing\")"
+     ],
+     "healed": [
+      {
+       "original": "a:has-text(\"Pricing\")",
+       "healed": "[data-testid=\"pricing\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "navbar/combined-hard",
+     "pattern": "navbar",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      2
+     ],
+     "ladderMs": [
+      6475
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 9035,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t07beb3\"]",
+     "selectors": [
+      "#pricing"
+     ],
+     "healed": [
+      {
+       "original": "#pricing",
+       "healed": "[data-testid=\"t07beb3\"]",
+       "level": 2,
+       "confidence": 0.95,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/rename-id",
+     "pattern": "list",
+     "category": "rename-id",
+     "kind": "positive",
+     "description": "every id renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2945,
+      2923
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6859,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/rename-testid",
+     "pattern": "list",
+     "category": "rename-testid",
+     "kind": "positive",
+     "description": "every data-testid renamed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2932,
+      2931
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 6843,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "[data-testid=\"item\"]",
+      "[data-testid=\"add\"]"
+     ],
+     "healed": [
+      {
+       "original": "[data-testid=\"item\"]",
+       "healed": "#item",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "[data-testid=\"add\"]",
+       "healed": "#add",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/restructure",
+     "pattern": "list",
+     "category": "restructure",
+     "kind": "positive",
+     "description": "controls moved into new wrapper elements",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      2972,
+      3181
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 7280,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "body > main > div > input",
+      "body > main > div > button:nth-of-type(2)"
+     ],
+     "healed": [
+      {
+       "original": "body > main > div > input",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "body > main > div > button:nth-of-type(2)",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/class-scramble",
+     "pattern": "list",
+     "category": "class-scramble",
+     "kind": "positive",
+     "description": "CSS classes regenerated (utility-class / CSS-in-JS refresh)",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      3
+     ],
+     "ladderMs": [
+      3091,
+      3429
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 7843,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      ".btn-item",
+      ".btn-add"
+     ],
+     "healed": [
+      {
+       "original": ".btn-item",
+       "healed": "[data-testid=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": ".btn-add",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/text-variation",
+     "pattern": "list",
+     "category": "text-variation",
+     "kind": "positive",
+     "description": "button / link wording changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3
+     ],
+     "ladderMs": [
+      2981
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 3831,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"add\"]",
+     "selectors": [
+      "#item",
+      "button:has-text(\"Add\")"
+     ],
+     "healed": [
+      {
+       "original": "button:has-text(\"Add\")",
+       "healed": "[data-testid=\"add\"]",
+       "level": 3,
+       "confidence": 0.7,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/combined-hard",
+     "pattern": "list",
+     "category": "combined-hard",
+     "kind": "positive",
+     "description": "ids, test ids, classes, wording and nesting ALL changed",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 2,
+     "healsValidated": 2,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      3,
+      2
+     ],
+     "ladderMs": [
+      3034,
+      6499
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 12743,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Create\"]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "validated"
+      },
+      {
+       "original": "#add",
+       "healed": "role=button[name=\"Create\"]",
+       "level": 2,
+       "confidence": 0.8,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/delayed-render",
+     "pattern": "checkout",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the primary button renders 700ms late",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      270
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 1036,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#place",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#place",
+       "healed": "#place",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/delayed-render",
+     "pattern": "list",
+     "category": "delayed-render",
+     "kind": "positive",
+     "description": "the Add button renders 700ms late",
+     "mode": "full",
+     "outcome": "healed",
+     "passed": true,
+     "healsApplied": 1,
+     "healsValidated": 1,
+     "healsRejected": 0,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [
+      1
+     ],
+     "ladderMs": [
+      276
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 981,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "#add",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#add",
+       "healed": "#add",
+       "level": 1,
+       "confidence": 1,
+       "verdict": "validated"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-removed",
+     "pattern": "checkout",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Place order was removed (Cancel remains)",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#place' (low_confidence): confidence 0.60 is below the 0.70 threshold",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      2994
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 12613,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#place",
+       "code": "low_confidence",
+       "reason": "confidence 0.60 is below the 0.70 threshold"
+      }
+     ]
+    },
+    {
+     "id": "login/negative-removed",
+     "pattern": "login",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Sign in was removed",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#submit' (low_confidence): confidence 0.60 is below the 0.70 threshold",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      2930,
+      2910
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 15824,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#submit",
+       "code": "low_confidence",
+       "reason": "confidence 0.60 is below the 0.70 threshold"
+      }
+     ]
+    },
+    {
+     "id": "modal/negative-removed",
+     "pattern": "modal",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Save was removed (Close remains)",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "AgentQA refused to heal '#save' (ambiguous): top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 1,
+     "levels": [],
+     "ladderMs": [
+      2950,
+      2909
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 15437,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": null,
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": [
+      {
+       "original": "#save",
+       "code": "ambiguous",
+       "reason": "top two matches are within 0.08 (0.58 \"Close\" vs 0.53 \"Open settings\")"
+      }
+     ]
+    },
+    {
+     "id": "table/negative-removed",
+     "pattern": "table",
+     "category": "negative-removed",
+     "kind": "negative",
+     "description": "Archive was removed (Delete remains)",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      7073
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 11098,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t7b7253\"]",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "[data-testid=\"t7b7253\"]",
+       "level": 2,
+       "confidence": 0.93,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-decoy",
+     "pattern": "checkout",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Place order replaced by a look-alike \"Save for later\"",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2941,
+      2924
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 8376,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t6514c4\"]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#place",
+       "healed": "[data-testid=\"t6514c4\"]",
+       "level": 4,
+       "confidence": 0.8,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/negative-decoy",
+     "pattern": "login",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Sign in replaced by \"Sign up\" (different action)",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2935,
+      2918,
+      2912
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 11679,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t6514c4\"]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "[data-testid=\"t6514c4\"]",
+       "level": 4,
+       "confidence": 0.88,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-decoy",
+     "pattern": "modal",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Save replaced by \"Apply preview\" (does not persist)",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2940,
+      2914,
+      2907
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 11687,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "[data-testid=\"t7a8589\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"t7a8589\"]",
+       "level": 4,
+       "confidence": 0.71,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "table/negative-decoy",
+     "pattern": "table",
+     "category": "negative-decoy",
+     "kind": "negative",
+     "description": "Archive replaced by a second Delete-looking control",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 1,
+     "healsValidated": 0,
+     "healsRejected": 1,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      10066
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 14137,
+     "wrongElementAttempt": true,
+     "primaryHealedTo": "button.btn-archive1",
+     "selectors": [
+      "#archive2"
+     ],
+     "healed": [
+      {
+       "original": "#archive2",
+       "healed": "button.btn-archive1",
+       "level": 5,
+       "confidence": 0.92,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "checkout/negative-broken",
+     "pattern": "checkout",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but placing an order silently does nothing",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2951,
+      2914
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 8339,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Place order\"i]",
+     "selectors": [
+      "#email",
+      "#place"
+     ],
+     "healed": [
+      {
+       "original": "#email",
+       "healed": "input[name=\"email\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#place",
+       "healed": "role=button[name=\"Place order\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "login/negative-broken",
+     "pattern": "login",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but signing in silently does nothing",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2927,
+      2910,
+      2909
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 11653,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Sign in\"i]",
+     "selectors": [
+      "#user",
+      "#pass",
+      "#submit"
+     ],
+     "healed": [
+      {
+       "original": "#user",
+       "healed": "input[name=\"user\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#pass",
+       "healed": "input[name=\"pass\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#submit",
+       "healed": "role=button[name=\"Sign in\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "list/negative-broken",
+     "pattern": "list",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Add silently does nothing",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 2,
+     "healsValidated": 0,
+     "healsRejected": 2,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2930,
+      2922
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 8330,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "role=button[name=\"Add\"i]",
+     "selectors": [
+      "#item",
+      "#add"
+     ],
+     "healed": [
+      {
+       "original": "#item",
+       "healed": "input[name=\"item\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#add",
+       "healed": "role=button[name=\"Add\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      }
+     ],
+     "refused": []
+    },
+    {
+     "id": "modal/negative-broken",
+     "pattern": "modal",
+     "category": "negative-broken",
+     "kind": "negative",
+     "description": "refactored UI, but Save silently does nothing",
+     "mode": "full",
+     "outcome": "fail",
+     "passed": false,
+     "failure": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed",
+     "healsApplied": 3,
+     "healsValidated": 0,
+     "healsRejected": 3,
+     "healsUnverified": 0,
+     "refusals": 0,
+     "levels": [],
+     "ladderMs": [
+      2946,
+      2906,
+      2904
+     ],
+     "llmCostUsd": 0,
+     "durationMs": 13712,
+     "wrongElementAttempt": false,
+     "primaryHealedTo": "[data-testid=\"t52edda\"]",
+     "selectors": [
+      "#open",
+      "#name",
+      "#save"
+     ],
+     "healed": [
+      {
+       "original": "#open",
+       "healed": "role=button[name=\"Open settings\"i]",
+       "level": 3,
+       "confidence": 0.97,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#name",
+       "healed": "input[name=\"name\"]",
+       "level": 3,
+       "confidence": 0.86,
+       "verdict": "rejected"
+      },
+      {
+       "original": "#save",
+       "healed": "[data-testid=\"t52edda\"]",
+       "level": 1,
+       "confidence": 0.9,
        "verdict": "rejected"
       }
      ],

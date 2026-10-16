@@ -1,6 +1,6 @@
 """
 AgentQA Visual Regression Service
-Handles screenshot pixel-diffing, semantic-diffing, and baseline storage per branch/env.
+Handles screenshot change detection (encoded-byte diff), semantic summaries, and baseline storage per branch/env.
 """
 
 import base64
@@ -68,17 +68,17 @@ class VisualRegressionService:
                 has_diff=False,
                 diff_percentage=0.0,
                 is_baseline_created=False,
-                semantic_summary="Pixel-perfect match with golden baseline."
+                semantic_summary="Byte-identical to the golden baseline."
             )
 
-        # 3. Compute pixel difference
+        # 3. Compare encoded bytes (legacy request field names retain API compatibility).
         base_bytes = base64.b64decode(baseline.image_base64)
         diff_pct = VisualRegressionService._calculate_byte_diff_ratio(img_bytes, base_bytes)
         has_diff = diff_pct > req.pixel_threshold_pct
 
-        summary = f"Visual difference detected: {diff_pct:.2f}% pixel variance."
+        summary = f"Visual difference detected: {diff_pct:.2f}% of encoded image bytes differ."
         if req.mode == "semantic":
-            summary += " Evaluated via semantic diff mode."
+            summary += " Semantic analysis is not implemented; this is an encoded-byte comparison only."
 
         return VisualCompareResponse(
             step_key=req.step_key,
@@ -90,7 +90,8 @@ class VisualRegressionService:
 
     @staticmethod
     def _calculate_byte_diff_ratio(img1: bytes, img2: bytes) -> float:
-        """Calculates pixel variance ratio between two image byte arrays."""
+        """Share of differing bytes between two *encoded* images (PNG/JPEG bytes). This is a cheap change detector, not a
+        decoded-pixel comparison: compression can make visually identical images differ."""
         if len(img1) == 0 or len(img2) == 0:
             return 100.0
 

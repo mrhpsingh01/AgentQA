@@ -20,7 +20,7 @@ const ARTIFACTS = process.env.AGENTQA_ARTIFACT_DIR;
 
 test.use({ viewport: { width: 1280, height: 800 } });
 
-test('customer buys a pair of trail shoes', async ({ page, agentqa }) => {
+test('customer buys an insulated bottle', async ({ page, agentqa }) => {
   await page.request.post(`${BASE}/api/reset`);
   await page.goto(`${BASE}/?state=${STATE}`);
 

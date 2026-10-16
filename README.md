@@ -21,19 +21,22 @@ The same Playwright test, written once against the original markup, run unchange
 
 38 harmless refactors (renamed ids / test ids, restructured DOM, regenerated CSS classes, reworded labels, late rendering, and a hard "everything changed" case) plus 12 real regressions (removed control, look-alike decoy, silently broken action). Full method and per-scenario results: [`BENCHMARK_RESULTS.md`](BENCHMARK_RESULTS.md). Every number comes from a real browser run.
 
-| | Plain Playwright | **AgentQA, default** (offline, no API key) | AgentQA, strict | AgentQA + LLM (Levels 2, 5) |
+<!-- benchmark-metrics:start -->
+| Metric | A. Standard Playwright | B. AgentQA deterministic (Levels 1, 3, 4) | B'. AgentQA deterministic, strict | C. AgentQA full (LLM Levels 2, 5) |
 |---|---|---|---|---|
-| **Correct repair rate** on harmless refactors | 0.0% (0/38) | **89.5% (34/38)** | 84.2% (32/38) | **97.4% (37/38)** |
-| **False-pass rate** on real bugs (target 0%) | 0.0% (0/12) | **0.0% (0/12)** | 0.0% (0/12) | **0.0% (0/12)** |
-| Wrong element clicked when the right one was gone | 0/8 | 3/8 | 1/8 | 5/8 |
-| Validated heals fixed at **$0.00**, offline | n/a | **61 of 61** (Levels 1, 3, 4) | 56 of 56 | 64 of 67 |
-| Heals that needed an LLM | n/a | 0 | 0 | 3 |
-| Mean / median ladder latency per heal | n/a | 912 / 927 ms | 900 / 918 ms | 2992 / 2943 ms |
-| Estimated LLM cost per heal | n/a | $0.00 | $0.00 | $0.00 (free tier; not a price) |
+| **Correct repair rate** on harmless UI refactors | **0.0%** (0/38) | **89.5%** (34/38) | **84.2%** (32/38) | **97.4%** (37/38) |
+| **False-pass rate** on real bugs (target 0%) | **0.0%** (0/12) | **0.0%** (0/12) | **0.0%** (0/12) | **0.0%** (0/12) |
+| Wrong-element rate when the right control is gone | 0.0% (0/8) | 37.5% (3/8) | 12.5% (1/8) | 62.5% (5/8) |
+| Validated heals fixed at $0.00, offline (Levels 1, 3, 4) | 0 | 61 | 56 | 64 |
+| Validated heals that needed an LLM (Levels 2, 5) | 0 | 0 | 0 | 3 |
+| Mean / median ladder latency per heal | - | 901 / 921 ms | 900 / 919 ms | 3032 / 2945 ms |
+| Estimated LLM cost per heal | $0.0000 | $0.0000 | $0.0000 | $0.0000 |
+<!-- benchmark-metrics:end -->
 
-LLM column: Groq free tier, `openai/gpt-oss-120b` for both LLM levels (single run, 50 scenarios, no fallback to other providers). The gain is in the hard "everything changed" category (2/6 to 5/6). The level breakdown credits Level 2 with 3 heals in 1 scenario and Level 5 with none, so the whole 3-scenario gain is not attributable to the LLM from this single run. **Caveat: the LLM column clicked the wrong element more often (5/8 vs 3/8)** in the look-alike cases. The test assertions still failed them, so 0 false passes held, but the model is not a precision upgrade. One run per mode, so treat small differences as noise.
+The LLM column is a single run with the configured backend. It is preserved when rerunning only offline modes; per-mode execution timestamps are included in `BENCHMARK_RESULTS.json`. LLM token costs are estimates from backend configuration, not billing receipts.
 
-How to read it: **a false pass never happened**, because a repair only counts if the test's own business-outcome assertions pass afterwards. The honest weak spot is the "wrong element" row: when the right control is gone and a look-alike sits in its place with the same intent ("Sign up" where "Sign in" was), Level 4 can *click* the look-alike. The assertion still fails the test and the heal is rejected, but the click happened. Strict mode cuts this at the cost of recall; closing the gap needs the LLM levels or a human. The 4 refactors that default AgentQA misses (all labels renamed *and* ids, classes and structure changed) are refused, not guessed.
+A repair counts only after downstream assertions pass. **Zero false passes in these 12 negative cases does not guarantee universal bug detection.** The wrong-element row records clicks on look-alike controls even when the final assertion correctly fails. Strict mode trades recall for fewer such clicks. The synthetic suite is small; repeat runs before drawing conclusions about small differences.
+
 
 ### What AgentQA prints (`python demo.py`)
 
@@ -157,7 +160,7 @@ extension/              Chrome MV3 recorder (see Additional capabilities)
 * The benchmark is synthetic (6 patterns, one mutation per category plus one combined case). It measures a healer against *known* ground truth; it is not a claim about your app.
 * Level 4 cannot tell a renamed control from a look-alike that shares its place and intent. That is the 3/8 above.
 * Fingerprints require the test to have **passed once** before the UI changed (or an explicit `hint` / `fallbacks`). A brand-new test with a broken selector has nothing to heal toward.
-* **LLM levels are implemented and protocol-tested against a stub, but not benchmarked** in this repository's environment (no provider credentials). No LLM accuracy, latency or cost figure is published here.
+* **LLM unit tests use labeled deterministic stubs.** The full-mode benchmark calls a configured provider; its per-mode timestamp and scenario results are preserved in the JSON artifact. A keyless rerun does not independently reverify the stored LLM column.
 * Heal latency includes Level 1's retry window (800 ms by default), which every heal pays before escalating.
 
 ## Additional capabilities
@@ -166,7 +169,7 @@ These exist in the repository and are not part of the healing evaluation above.
 
 * **Chrome MV3 recorder** (`extension/`): records flows with Shadow-DOM piercing and prioritized multi-strategy selectors, and exports Playwright (TS/Python), Cypress, Selenium and Puppeteer Replay.
 * **POM test generation** (`backend/`): turns a recording into a Page Object Model suite; uses an LLM when configured and an algorithmic synthesizer otherwise.
-* **Visual regression** (`backend/`): pixel-diff and semantic-diff baselines per branch.
+* **Visual regression** (`backend/`): byte-level change detection on screenshots and baselines per branch (secondary feature; not decoded-pixel comparison).
 * **Shared selector cache**: verified repairs are reusable across runs and, via component fingerprints, across repositories.
 * **Taskiq worker** (`backend/src/tasks`): purges stale cache entries.
 
@@ -175,9 +178,9 @@ See [`USER_GUIDE.md`](USER_GUIDE.md) for the extension and backend walkthrough.
 ## Development
 
 ```bash
-cd backend && uv sync && uv run pytest -q                  # 44 tests, no API key, Redis or Postgres needed
-cd runner  && npm ci && npx playwright install chromium    # once
-cd runner  && npx tsc --noEmit -p . && npx playwright test # per-level, guardrail and enforcement suites
+cd backend && uv sync --locked && uv run --locked pytest -q && cd ..
+cd runner && npm ci && npx playwright install chromium && cd ..
+cd runner && npm run typecheck && npm test && cd ..
 python demo.py                                              # the 4-state demo
 python scripts/run_benchmark.py                             # the benchmark (~8 min)
 ```

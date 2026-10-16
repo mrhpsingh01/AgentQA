@@ -1,6 +1,8 @@
 """
-AgentQA End-to-End System Verification Suite
-Tests the complete flow:
+AgentQA backend API integration suite using ASGI and deterministic fixture payloads.
+This does not launch a browser or execute generated tests; the submitted run report
+is fixture data. Real browser execution is covered by demo.py and the benchmark.
+Tests the API flow:
 1. Auth & API Keys
 2. Recording Ingestion
 3. AI POM Test Generation

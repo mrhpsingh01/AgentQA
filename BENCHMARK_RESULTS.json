@@ -1,5 +1,11 @@
 {
-  "generatedAt": "2026-10-16T03:25:02",
+  "generatedAt": "2026-10-16T12:28:30",
+  "sourceRuns": {
+    "standard": "2026-10-16T16:15:18.213Z",
+    "deterministic": "2026-10-16T16:17:48.831Z",
+    "strict": "2026-10-16T16:20:15.569Z",
+    "full": "2026-10-16T16:27:50.185Z"
+  },
   "summaries": {
     "standard": {
       "mode": "standard",
@@ -14,6 +20,7 @@
       "wrong_element_attempts": 0,
       "wrong_element_ids": [],
       "wrong_element_denominator": 8,
+      "wrong_element_rate": 0.0,
       "refused_scenarios": 0,
       "positives_needing_no_heal": 0,
       "validated_heals": 0,
@@ -56,6 +63,7 @@
         "modal/negative-decoy"
       ],
       "wrong_element_denominator": 8,
+      "wrong_element_rate": 0.375,
       "refused_scenarios": 5,
       "positives_needing_no_heal": 0,
       "validated_heals": 61,
@@ -75,9 +83,9 @@
       },
       "heals_free_offline": 61,
       "heals_llm": 0,
-      "latency_ms_mean": 911.8852459016393,
-      "latency_ms_median": 927,
-      "latency_ms_p95": 957,
+      "latency_ms_mean": 901.2131147540983,
+      "latency_ms_median": 921,
+      "latency_ms_p95": 938,
       "cost_usd_total": 0,
       "cost_usd_per_heal": 0.0
     },
@@ -96,6 +104,7 @@
         "login/negative-decoy"
       ],
       "wrong_element_denominator": 8,
+      "wrong_element_rate": 0.125,
       "refused_scenarios": 7,
       "positives_needing_no_heal": 0,
       "validated_heals": 56,
@@ -115,8 +124,8 @@
       },
       "heals_free_offline": 56,
       "heals_llm": 0,
-      "latency_ms_mean": 899.5714285714286,
-      "latency_ms_median": 918.5,
+      "latency_ms_mean": 900.3571428571429,
+      "latency_ms_median": 919.0,
       "latency_ms_p95": 940,
       "cost_usd_total": 0,
       "cost_usd_per_heal": 0.0
@@ -140,6 +149,7 @@
         "table/negative-decoy"
       ],
       "wrong_element_denominator": 8,
+      "wrong_element_rate": 0.625,
       "refused_scenarios": 3,
       "positives_needing_no_heal": 0,
       "validated_heals": 67,
@@ -159,9 +169,9 @@
       },
       "heals_free_offline": 64,
       "heals_llm": 3,
-      "latency_ms_mean": 2992.134328358209,
-      "latency_ms_median": 2943,
-      "latency_ms_p95": 3004,
+      "latency_ms_mean": 3031.9701492537315,
+      "latency_ms_median": 2945,
+      "latency_ms_p95": 3181,
       "cost_usd_total": 0,
       "cost_usd_per_heal": 0.0
     }
@@ -186,7 +196,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 650,
+        "durationMs": 601,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -215,7 +225,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 551,
+        "durationMs": 548,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -244,7 +254,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 564,
+        "durationMs": 551,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -273,7 +283,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 559,
+        "durationMs": 528,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -302,7 +312,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 619,
+        "durationMs": 586,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -331,7 +341,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 594,
+        "durationMs": 565,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -360,7 +370,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 562,
+        "durationMs": 525,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -388,7 +398,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 548,
+        "durationMs": 521,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -416,7 +426,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 546,
+        "durationMs": 540,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -444,7 +454,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 564,
+        "durationMs": 538,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -472,7 +482,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 572,
+        "durationMs": 549,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -500,7 +510,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 549,
+        "durationMs": 533,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -528,7 +538,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 524,
+        "durationMs": 520,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -555,7 +565,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 545,
+        "durationMs": 495,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -582,7 +592,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 535,
+        "durationMs": 491,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -636,7 +646,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 539,
+        "durationMs": 500,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -663,7 +673,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 535,
+        "durationMs": 520,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -690,7 +700,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 609,
+        "durationMs": 589,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -719,7 +729,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 611,
+        "durationMs": 557,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -777,7 +787,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 592,
+        "durationMs": 576,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -806,7 +816,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 658,
+        "durationMs": 623,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -835,7 +845,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 587,
+        "durationMs": 554,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -864,7 +874,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 548,
+        "durationMs": 490,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -891,7 +901,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 517,
+        "durationMs": 492,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -918,7 +928,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 515,
+        "durationMs": 492,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -945,7 +955,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 538,
+        "durationMs": 494,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -972,7 +982,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 570,
+        "durationMs": 515,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -999,7 +1009,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 530,
+        "durationMs": 508,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1026,7 +1036,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 569,
+        "durationMs": 526,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1054,7 +1064,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 559,
+        "durationMs": 542,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1082,7 +1092,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 555,
+        "durationMs": 525,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1110,7 +1120,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 544,
+        "durationMs": 510,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1138,7 +1148,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 574,
+        "durationMs": 550,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1166,7 +1176,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 641,
+        "durationMs": 547,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1194,7 +1204,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 794,
+        "durationMs": 552,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1222,7 +1232,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 574,
+        "durationMs": 559,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1250,7 +1260,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 562,
+        "durationMs": 524,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1278,7 +1288,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 611,
+        "durationMs": 542,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1307,7 +1317,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 617,
+        "durationMs": 586,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1336,7 +1346,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 532,
+        "durationMs": 489,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1363,7 +1373,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 665,
+        "durationMs": 522,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1391,7 +1401,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 592,
+        "durationMs": 595,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1420,7 +1430,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 666,
+        "durationMs": 542,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1449,7 +1459,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 537,
+        "durationMs": 491,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1476,7 +1486,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 566,
+        "durationMs": 552,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1504,7 +1514,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 632,
+        "durationMs": 602,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1533,7 +1543,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 663,
+        "durationMs": 550,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1561,7 +1571,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 625,
+        "durationMs": 599,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -1594,12 +1604,12 @@
           3
         ],
         "ladderMs": [
-          945,
-          944,
-          929
+          943,
+          916,
+          919
         ],
         "llmCostUsd": 0,
-        "durationMs": 4435,
+        "durationMs": 4286,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -1652,12 +1662,12 @@
           3
         ],
         "ladderMs": [
-          931,
-          915,
-          918
+          922,
+          922,
+          925
         ],
         "llmCostUsd": 0,
-        "durationMs": 4237,
+        "durationMs": 4219,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#submit",
         "selectors": [
@@ -1710,12 +1720,12 @@
           3
         ],
         "ladderMs": [
-          943,
-          935,
-          935
+          929,
+          921,
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 4299,
+        "durationMs": 4189,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -1768,12 +1778,12 @@
           3
         ],
         "ladderMs": [
-          946,
-          910,
-          940
+          918,
+          911,
+          921
         ],
         "llmCostUsd": 0,
-        "durationMs": 4257,
+        "durationMs": 4148,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -1824,10 +1834,10 @@
           3
         ],
         "ladderMs": [
-          929
+          903
         ],
         "llmCostUsd": 0,
-        "durationMs": 1629,
+        "durationMs": 1548,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -1866,12 +1876,12 @@
           4
         ],
         "ladderMs": [
-          917,
-          905,
-          899
+          910,
+          898,
+          895
         ],
         "llmCostUsd": 0,
-        "durationMs": 4267,
+        "durationMs": 4119,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t956a9d\"]",
         "selectors": [
@@ -1923,11 +1933,11 @@
           3
         ],
         "ladderMs": [
-          1001,
-          933
+          922,
+          912
         ],
         "llmCostUsd": 0,
-        "durationMs": 3015,
+        "durationMs": 2814,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -1971,11 +1981,11 @@
           3
         ],
         "ladderMs": [
-          945,
-          921
+          910,
+          917
         ],
         "llmCostUsd": 0,
-        "durationMs": 2875,
+        "durationMs": 2795,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -2019,11 +2029,11 @@
           3
         ],
         "ladderMs": [
-          966,
-          933
+          924,
+          923
         ],
         "llmCostUsd": 0,
-        "durationMs": 2921,
+        "durationMs": 2826,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -2067,11 +2077,11 @@
           3
         ],
         "ladderMs": [
-          956,
+          936,
           924
         ],
         "llmCostUsd": 0,
-        "durationMs": 2907,
+        "durationMs": 2849,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -2114,10 +2124,10 @@
           3
         ],
         "ladderMs": [
-          924
+          912
         ],
         "llmCostUsd": 0,
-        "durationMs": 1569,
+        "durationMs": 1518,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -2154,11 +2164,11 @@
           4
         ],
         "ladderMs": [
-          929,
-          906
+          917,
+          893
         ],
         "llmCostUsd": 0,
-        "durationMs": 2920,
+        "durationMs": 2800,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t82c587\"]",
         "selectors": [
@@ -2201,10 +2211,10 @@
           3
         ],
         "ladderMs": [
-          920
+          900
         ],
         "llmCostUsd": 0,
-        "durationMs": 1511,
+        "durationMs": 1461,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -2239,10 +2249,10 @@
           3
         ],
         "ladderMs": [
-          910
+          905
         ],
         "llmCostUsd": 0,
-        "durationMs": 1470,
+        "durationMs": 1444,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#archive2",
         "selectors": [
@@ -2277,10 +2287,10 @@
           3
         ],
         "ladderMs": [
-          979
+          905
         ],
         "llmCostUsd": 0,
-        "durationMs": 1589,
+        "durationMs": 1455,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -2315,10 +2325,10 @@
           3
         ],
         "ladderMs": [
-          921
+          927
         ],
         "llmCostUsd": 0,
-        "durationMs": 1515,
+        "durationMs": 1435,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -2353,10 +2363,10 @@
           3
         ],
         "ladderMs": [
-          957
+          908
         ],
         "llmCostUsd": 0,
-        "durationMs": 1594,
+        "durationMs": 1449,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -2391,7 +2401,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1518,
+        "durationMs": 1357,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -2426,12 +2436,12 @@
           3
         ],
         "ladderMs": [
-          925,
-          930,
-          953
+          924,
+          915,
+          930
         ],
         "llmCostUsd": 0,
-        "durationMs": 4356,
+        "durationMs": 4231,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -2484,12 +2494,12 @@
           3
         ],
         "ladderMs": [
-          929,
-          943,
-          922
+          951,
+          933,
+          908
         ],
         "llmCostUsd": 0,
-        "durationMs": 4329,
+        "durationMs": 4241,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#save",
         "selectors": [
@@ -2542,12 +2552,12 @@
           3
         ],
         "ladderMs": [
-          935,
-          923,
-          951
+          937,
+          921,
+          922
         ],
         "llmCostUsd": 0,
-        "durationMs": 4339,
+        "durationMs": 4243,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -2600,12 +2610,12 @@
           3
         ],
         "ladderMs": [
-          954,
-          926,
-          972
+          932,
+          922,
+          921
         ],
         "llmCostUsd": 0,
-        "durationMs": 4394,
+        "durationMs": 4244,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -2656,10 +2666,10 @@
           3
         ],
         "ladderMs": [
-          913
+          899
         ],
         "llmCostUsd": 0,
-        "durationMs": 1645,
+        "durationMs": 1555,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -2695,11 +2705,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          909,
-          893
+          902,
+          903
         ],
         "llmCostUsd": 0,
-        "durationMs": 4108,
+        "durationMs": 4106,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -2749,10 +2759,10 @@
           3
         ],
         "ladderMs": [
-          927
+          914
         ],
         "llmCostUsd": 0,
-        "durationMs": 1457,
+        "durationMs": 1439,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -2787,10 +2797,10 @@
           3
         ],
         "ladderMs": [
-          915
+          921
         ],
         "llmCostUsd": 0,
-        "durationMs": 1447,
+        "durationMs": 1466,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#pricing",
         "selectors": [
@@ -2825,10 +2835,10 @@
           3
         ],
         "ladderMs": [
-          923
+          936
         ],
         "llmCostUsd": 0,
-        "durationMs": 1474,
+        "durationMs": 1465,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -2863,10 +2873,10 @@
           3
         ],
         "ladderMs": [
-          923
+          938
         ],
         "llmCostUsd": 0,
-        "durationMs": 1466,
+        "durationMs": 1449,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -2901,10 +2911,10 @@
           3
         ],
         "ladderMs": [
-          920
+          928
         ],
         "llmCostUsd": 0,
-        "durationMs": 1470,
+        "durationMs": 1477,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -2939,7 +2949,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1406,
+        "durationMs": 1368,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -2973,11 +2983,11 @@
           3
         ],
         "ladderMs": [
-          938,
-          915
+          935,
+          916
         ],
         "llmCostUsd": 0,
-        "durationMs": 2845,
+        "durationMs": 2829,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -3021,11 +3031,11 @@
           3
         ],
         "ladderMs": [
-          916,
-          908
+          922,
+          916
         ],
         "llmCostUsd": 0,
-        "durationMs": 2817,
+        "durationMs": 2829,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -3069,8 +3079,8 @@
           3
         ],
         "ladderMs": [
-          927,
-          916
+          948,
+          920
         ],
         "llmCostUsd": 0,
         "durationMs": 2849,
@@ -3117,11 +3127,11 @@
           3
         ],
         "ladderMs": [
-          933,
-          906
+          941,
+          915
         ],
         "llmCostUsd": 0,
-        "durationMs": 2811,
+        "durationMs": 2851,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -3164,10 +3174,10 @@
           3
         ],
         "ladderMs": [
-          903
+          896
         ],
         "llmCostUsd": 0,
-        "durationMs": 1545,
+        "durationMs": 1495,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -3202,10 +3212,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          916
+          913
         ],
         "llmCostUsd": 0,
-        "durationMs": 2780,
+        "durationMs": 2732,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3247,10 +3257,10 @@
           1
         ],
         "ladderMs": [
-          364
+          362
         ],
         "llmCostUsd": 0,
-        "durationMs": 1088,
+        "durationMs": 943,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -3286,10 +3296,10 @@
           1
         ],
         "ladderMs": [
-          349
+          343
         ],
         "llmCostUsd": 0,
-        "durationMs": 957,
+        "durationMs": 935,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -3324,10 +3334,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          914
+          908
         ],
         "llmCostUsd": 0,
-        "durationMs": 2785,
+        "durationMs": 2716,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3368,11 +3378,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          909,
-          887
+          929,
+          905
         ],
         "llmCostUsd": 0,
-        "durationMs": 4082,
+        "durationMs": 4097,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3421,11 +3431,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          903,
-          910
+          917,
+          901
         ],
         "llmCostUsd": 0,
-        "durationMs": 4142,
+        "durationMs": 4099,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3475,7 +3485,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1393,
+        "durationMs": 1387,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3507,11 +3517,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          909,
-          895
+          908,
+          896
         ],
         "llmCostUsd": 0,
-        "durationMs": 4322,
+        "durationMs": 4301,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t6514c4\"]",
         "selectors": [
@@ -3553,12 +3563,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          907,
-          904,
-          894
+          1175,
+          1162,
+          930
         ],
         "llmCostUsd": 0,
-        "durationMs": 5943,
+        "durationMs": 6426,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t6514c4\"]",
         "selectors": [
@@ -3608,12 +3618,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          911,
-          891,
-          893
+          908,
+          1055,
+          917
         ],
         "llmCostUsd": 0,
-        "durationMs": 5717,
+        "durationMs": 5933,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t7a8589\"]",
         "selectors": [
@@ -3664,7 +3674,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1398,
+        "durationMs": 1464,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -3696,11 +3706,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          944,
-          904
+          976,
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 4353,
+        "durationMs": 4468,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Place order\"i]",
         "selectors": [
@@ -3742,12 +3752,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          905,
-          899,
-          905
+          913,
+          902,
+          909
         ],
         "llmCostUsd": 0,
-        "durationMs": 5623,
+        "durationMs": 5636,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Sign in\"i]",
         "selectors": [
@@ -3797,11 +3807,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          901,
-          897
+          911,
+          899
         ],
         "llmCostUsd": 0,
-        "durationMs": 4281,
+        "durationMs": 4271,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Add\"i]",
         "selectors": [
@@ -3844,11 +3854,11 @@
         "levels": [],
         "ladderMs": [
           910,
-          907,
-          898
+          896,
+          899
         ],
         "llmCostUsd": 0,
-        "durationMs": 5699,
+        "durationMs": 5670,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Save\"i]",
         "selectors": [
@@ -3903,12 +3913,12 @@
           3
         ],
         "ladderMs": [
-          934,
-          928,
-          924
+          940,
+          914,
+          918
         ],
         "llmCostUsd": 0,
-        "durationMs": 4330,
+        "durationMs": 4240,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -3961,12 +3971,12 @@
           3
         ],
         "ladderMs": [
-          926,
           918,
-          921
+          914,
+          940
         ],
         "llmCostUsd": 0,
-        "durationMs": 4218,
+        "durationMs": 4221,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#submit",
         "selectors": [
@@ -4019,12 +4029,12 @@
           3
         ],
         "ladderMs": [
-          924,
-          926,
-          915
+          938,
+          913,
+          934
         ],
         "llmCostUsd": 0,
-        "durationMs": 4207,
+        "durationMs": 4198,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -4077,12 +4087,12 @@
           3
         ],
         "ladderMs": [
-          917,
-          940,
-          938
+          927,
+          912,
+          914
         ],
         "llmCostUsd": 0,
-        "durationMs": 4252,
+        "durationMs": 4163,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -4133,10 +4143,10 @@
           3
         ],
         "ladderMs": [
-          897
+          896
         ],
         "llmCostUsd": 0,
-        "durationMs": 1587,
+        "durationMs": 1532,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -4172,11 +4182,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          908,
-          895
+          910,
+          904
         ],
         "llmCostUsd": 0,
-        "durationMs": 4085,
+        "durationMs": 4088,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -4228,10 +4238,10 @@
         ],
         "ladderMs": [
           926,
-          912
+          915
         ],
         "llmCostUsd": 0,
-        "durationMs": 2844,
+        "durationMs": 2825,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -4275,11 +4285,11 @@
           3
         ],
         "ladderMs": [
-          916,
-          918
+          915,
+          907
         ],
         "llmCostUsd": 0,
-        "durationMs": 2826,
+        "durationMs": 2803,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -4323,11 +4333,11 @@
           3
         ],
         "ladderMs": [
-          938,
-          922
+          943,
+          916
         ],
         "llmCostUsd": 0,
-        "durationMs": 2872,
+        "durationMs": 2846,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -4371,11 +4381,11 @@
           3
         ],
         "ladderMs": [
-          938,
-          925
+          923,
+          929
         ],
         "llmCostUsd": 0,
-        "durationMs": 2865,
+        "durationMs": 2830,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -4418,10 +4428,10 @@
           3
         ],
         "ladderMs": [
-          898
+          902
         ],
         "llmCostUsd": 0,
-        "durationMs": 1507,
+        "durationMs": 1514,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -4456,10 +4466,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          923
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 2769,
+        "durationMs": 2760,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -4501,10 +4511,10 @@
           3
         ],
         "ladderMs": [
-          898
+          909
         ],
         "llmCostUsd": 0,
-        "durationMs": 1460,
+        "durationMs": 1432,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -4539,10 +4549,10 @@
           3
         ],
         "ladderMs": [
-          898
+          910
         ],
         "llmCostUsd": 0,
-        "durationMs": 1442,
+        "durationMs": 1479,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#archive2",
         "selectors": [
@@ -4577,10 +4587,10 @@
           3
         ],
         "ladderMs": [
-          902
+          921
         ],
         "llmCostUsd": 0,
-        "durationMs": 1471,
+        "durationMs": 1506,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -4615,10 +4625,10 @@
           3
         ],
         "ladderMs": [
-          914
+          931
         ],
         "llmCostUsd": 0,
-        "durationMs": 1449,
+        "durationMs": 1467,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -4653,10 +4663,10 @@
           3
         ],
         "ladderMs": [
-          901
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 1456,
+        "durationMs": 1502,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -4691,7 +4701,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1362,
+        "durationMs": 1402,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -4726,12 +4736,12 @@
           3
         ],
         "ladderMs": [
-          922,
-          909,
-          926
+          924,
+          906,
+          922
         ],
         "llmCostUsd": 0,
-        "durationMs": 4240,
+        "durationMs": 4228,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -4784,12 +4794,12 @@
           3
         ],
         "ladderMs": [
-          910,
-          911,
-          906
+          925,
+          914,
+          908
         ],
         "llmCostUsd": 0,
-        "durationMs": 4212,
+        "durationMs": 4191,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#save",
         "selectors": [
@@ -4842,12 +4852,12 @@
           3
         ],
         "ladderMs": [
-          942,
-          931,
-          917
+          934,
+          914,
+          913
         ],
         "llmCostUsd": 0,
-        "durationMs": 4279,
+        "durationMs": 4256,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -4900,12 +4910,12 @@
           3
         ],
         "ladderMs": [
-          930,
-          914,
-          921
+          949,
+          928,
+          933
         ],
         "llmCostUsd": 0,
-        "durationMs": 4241,
+        "durationMs": 4253,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -4956,10 +4966,10 @@
           3
         ],
         "ladderMs": [
-          902
+          909
         ],
         "llmCostUsd": 0,
-        "durationMs": 1584,
+        "durationMs": 1588,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -4995,11 +5005,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          911,
-          900
+          937,
+          903
         ],
         "llmCostUsd": 0,
-        "durationMs": 4151,
+        "durationMs": 4131,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5049,10 +5059,10 @@
           3
         ],
         "ladderMs": [
-          922
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 1446,
+        "durationMs": 1442,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -5087,10 +5097,10 @@
           3
         ],
         "ladderMs": [
-          919
+          928
         ],
         "llmCostUsd": 0,
-        "durationMs": 1454,
+        "durationMs": 1460,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#pricing",
         "selectors": [
@@ -5125,10 +5135,10 @@
           3
         ],
         "ladderMs": [
-          946
+          951
         ],
         "llmCostUsd": 0,
-        "durationMs": 1513,
+        "durationMs": 1501,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -5163,10 +5173,10 @@
           3
         ],
         "ladderMs": [
-          989
+          937
         ],
         "llmCostUsd": 0,
-        "durationMs": 1531,
+        "durationMs": 1452,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -5201,10 +5211,10 @@
           3
         ],
         "ladderMs": [
-          906
+          912
         ],
         "llmCostUsd": 0,
-        "durationMs": 1471,
+        "durationMs": 1440,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -5239,7 +5249,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1396,
+        "durationMs": 1393,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5273,11 +5283,11 @@
           3
         ],
         "ladderMs": [
-          935,
-          905
+          909,
+          921
         ],
         "llmCostUsd": 0,
-        "durationMs": 2838,
+        "durationMs": 2820,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -5321,11 +5331,11 @@
           3
         ],
         "ladderMs": [
-          910,
-          905
+          924,
+          910
         ],
         "llmCostUsd": 0,
-        "durationMs": 2810,
+        "durationMs": 2811,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -5369,11 +5379,11 @@
           3
         ],
         "ladderMs": [
-          923,
-          920
+          934,
+          917
         ],
         "llmCostUsd": 0,
-        "durationMs": 2850,
+        "durationMs": 2844,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -5417,11 +5427,11 @@
           3
         ],
         "ladderMs": [
-          939,
-          916
+          922,
+          925
         ],
         "llmCostUsd": 0,
-        "durationMs": 2864,
+        "durationMs": 2848,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -5467,7 +5477,7 @@
           901
         ],
         "llmCostUsd": 0,
-        "durationMs": 1506,
+        "durationMs": 1492,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -5502,10 +5512,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          909
+          923
         ],
         "llmCostUsd": 0,
-        "durationMs": 2751,
+        "durationMs": 2762,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5550,7 +5560,7 @@
           341
         ],
         "llmCostUsd": 0,
-        "durationMs": 952,
+        "durationMs": 927,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -5589,7 +5599,7 @@
           344
         ],
         "llmCostUsd": 0,
-        "durationMs": 948,
+        "durationMs": 933,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -5624,10 +5634,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          916
+          905
         ],
         "llmCostUsd": 0,
-        "durationMs": 2761,
+        "durationMs": 2746,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5668,11 +5678,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          916,
-          899
+          904,
+          896
         ],
         "llmCostUsd": 0,
-        "durationMs": 4069,
+        "durationMs": 4066,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5721,11 +5731,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          909,
-          899
+          914,
+          905
         ],
         "llmCostUsd": 0,
-        "durationMs": 4097,
+        "durationMs": 4128,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5775,7 +5785,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1364,
+        "durationMs": 1500,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5807,10 +5817,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          902
+          920
         ],
         "llmCostUsd": 0,
-        "durationMs": 2743,
+        "durationMs": 2804,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5851,12 +5861,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          906,
-          909,
+          908,
+          895,
           893
         ],
         "llmCostUsd": 0,
-        "durationMs": 5620,
+        "durationMs": 5634,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t6514c4\"]",
         "selectors": [
@@ -5906,11 +5916,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          912,
-          901
+          909,
+          902
         ],
         "llmCostUsd": 0,
-        "durationMs": 4112,
+        "durationMs": 4118,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5960,7 +5970,7 @@
         "levels": [],
         "ladderMs": [],
         "llmCostUsd": 0,
-        "durationMs": 1399,
+        "durationMs": 1357,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -5992,11 +6002,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          922,
-          902
+          909,
+          899
         ],
         "llmCostUsd": 0,
-        "durationMs": 4317,
+        "durationMs": 4307,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Place order\"i]",
         "selectors": [
@@ -6038,12 +6048,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
+          939,
           903,
-          902,
-          893
+          908
         ],
         "llmCostUsd": 0,
-        "durationMs": 5604,
+        "durationMs": 5675,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Sign in\"i]",
         "selectors": [
@@ -6093,11 +6103,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          902,
-          911
+          905,
+          895
         ],
         "llmCostUsd": 0,
-        "durationMs": 4332,
+        "durationMs": 4301,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Add\"i]",
         "selectors": [
@@ -6139,12 +6149,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          922,
-          904,
-          899
+          909,
+          889,
+          896
         ],
         "llmCostUsd": 0,
-        "durationMs": 5677,
+        "durationMs": 5641,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Save\"i]",
         "selectors": [
@@ -6199,12 +6209,12 @@
           3
         ],
         "ladderMs": [
-          2969,
-          2932,
-          2932
+          2983,
+          2942,
+          2957
         ],
         "llmCostUsd": 0,
-        "durationMs": 10329,
+        "durationMs": 10361,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -6257,12 +6267,12 @@
           3
         ],
         "ladderMs": [
-          2935,
-          2918,
-          2943
+          2979,
+          2955,
+          2973
         ],
         "llmCostUsd": 0,
-        "durationMs": 10265,
+        "durationMs": 10380,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#submit",
         "selectors": [
@@ -6315,12 +6325,12 @@
           3
         ],
         "ladderMs": [
-          2965,
-          2947,
-          2949
+          3016,
+          2989,
+          3031
         ],
         "llmCostUsd": 0,
-        "durationMs": 10322,
+        "durationMs": 10568,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -6373,12 +6383,12 @@
           3
         ],
         "ladderMs": [
-          2957,
-          2955,
-          2948
+          3040,
+          2994,
+          3041
         ],
         "llmCostUsd": 0,
-        "durationMs": 10307,
+        "durationMs": 10670,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -6429,10 +6439,10 @@
           3
         ],
         "ladderMs": [
-          2945
+          2913
         ],
         "llmCostUsd": 0,
-        "durationMs": 3601,
+        "durationMs": 3636,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"submit\"]",
         "selectors": [
@@ -6471,12 +6481,12 @@
           4
         ],
         "ladderMs": [
-          2949,
-          2913,
-          2919
+          2947,
+          2917,
+          2914
         ],
         "llmCostUsd": 0,
-        "durationMs": 10222,
+        "durationMs": 10257,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t956a9d\"]",
         "selectors": [
@@ -6528,11 +6538,11 @@
           3
         ],
         "ladderMs": [
-          2939,
-          2949
+          2950,
+          2933
         ],
         "llmCostUsd": 0,
-        "durationMs": 6872,
+        "durationMs": 6880,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -6576,11 +6586,11 @@
           3
         ],
         "ladderMs": [
-          3013,
-          2966
+          2926,
+          2932
         ],
         "llmCostUsd": 0,
-        "durationMs": 7001,
+        "durationMs": 6842,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -6624,11 +6634,11 @@
           3
         ],
         "ladderMs": [
-          3004,
-          2995
+          2973,
+          2944
         ],
         "llmCostUsd": 0,
-        "durationMs": 7051,
+        "durationMs": 6933,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -6672,11 +6682,11 @@
           3
         ],
         "ladderMs": [
-          2988,
-          2945
+          2961,
+          2952
         ],
         "llmCostUsd": 0,
-        "durationMs": 6986,
+        "durationMs": 6924,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -6719,10 +6729,10 @@
           3
         ],
         "ladderMs": [
-          2943
+          2939
         ],
         "llmCostUsd": 0,
-        "durationMs": 3563,
+        "durationMs": 3541,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"place\"]",
         "selectors": [
@@ -6759,11 +6769,11 @@
           4
         ],
         "ladderMs": [
-          2946,
-          2922
+          2952,
+          2907
         ],
         "llmCostUsd": 0,
-        "durationMs": 6874,
+        "durationMs": 6848,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t82c587\"]",
         "selectors": [
@@ -6806,10 +6816,10 @@
           3
         ],
         "ladderMs": [
-          2927
+          2920
         ],
         "llmCostUsd": 0,
-        "durationMs": 3498,
+        "durationMs": 3495,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -6844,10 +6854,10 @@
           3
         ],
         "ladderMs": [
-          2931
+          2937
         ],
         "llmCostUsd": 0,
-        "durationMs": 3465,
+        "durationMs": 3458,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#archive2",
         "selectors": [
@@ -6882,10 +6892,10 @@
           3
         ],
         "ladderMs": [
-          2925
+          2942
         ],
         "llmCostUsd": 0,
-        "durationMs": 3519,
+        "durationMs": 3482,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -6920,10 +6930,10 @@
           3
         ],
         "ladderMs": [
-          2940
+          2943
         ],
         "llmCostUsd": 0,
-        "durationMs": 3468,
+        "durationMs": 3470,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"archive2\"]",
         "selectors": [
@@ -6958,7 +6968,7 @@
           3
         ],
         "ladderMs": [
-          2919
+          2929
         ],
         "llmCostUsd": 0,
         "durationMs": 3444,
@@ -6995,21 +7005,21 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          8713
+          5917
         ],
         "llmCostUsd": 0,
-        "durationMs": 12754,
+        "durationMs": 9967,
         "wrongElementAttempt": false,
-        "primaryHealedTo": "#e667ee8",
+        "primaryHealedTo": "[data-testid=\"t7b7253\"]",
         "selectors": [
           "#archive2"
         ],
         "healed": [
           {
             "original": "#archive2",
-            "healed": "#e667ee8",
-            "level": 5,
-            "confidence": 0.85,
+            "healed": "[data-testid=\"t7b7253\"]",
+            "level": 2,
+            "confidence": 0.9,
             "verdict": "rejected"
           }
         ],
@@ -7035,12 +7045,12 @@
           3
         ],
         "ladderMs": [
-          2954,
-          2927,
-          2924
+          2958,
+          2942,
+          2958
         ],
         "llmCostUsd": 0,
-        "durationMs": 10302,
+        "durationMs": 10329,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -7093,12 +7103,12 @@
           3
         ],
         "ladderMs": [
-          2942,
-          2930,
-          2946
+          2939,
+          2920,
+          2915
         ],
         "llmCostUsd": 0,
-        "durationMs": 10285,
+        "durationMs": 10279,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#save",
         "selectors": [
@@ -7151,12 +7161,12 @@
           3
         ],
         "ladderMs": [
-          2964,
-          2946,
-          2943
+          2974,
+          2936,
+          2932
         ],
         "llmCostUsd": 0,
-        "durationMs": 10445,
+        "durationMs": 10310,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -7209,12 +7219,12 @@
           3
         ],
         "ladderMs": [
-          2966,
-          2931,
-          2937
+          2957,
+          2933,
+          2944
         ],
         "llmCostUsd": 0,
-        "durationMs": 10300,
+        "durationMs": 10293,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -7265,10 +7275,10 @@
           3
         ],
         "ladderMs": [
-          2936
+          2922
         ],
         "llmCostUsd": 0,
-        "durationMs": 3631,
+        "durationMs": 3614,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"save\"]",
         "selectors": [
@@ -7307,12 +7317,12 @@
           2
         ],
         "ladderMs": [
-          2938,
-          2911,
-          5790
+          2932,
+          2918,
+          5758
         ],
         "llmCostUsd": 0,
-        "durationMs": 15149,
+        "durationMs": 15086,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t52edda\"]",
         "selectors": [
@@ -7363,10 +7373,10 @@
           3
         ],
         "ladderMs": [
-          2952
+          2949
         ],
         "llmCostUsd": 0,
-        "durationMs": 3492,
+        "durationMs": 3469,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -7401,10 +7411,10 @@
           3
         ],
         "ladderMs": [
-          2941
+          2936
         ],
         "llmCostUsd": 0,
-        "durationMs": 3474,
+        "durationMs": 3497,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#pricing",
         "selectors": [
@@ -7439,10 +7449,10 @@
           3
         ],
         "ladderMs": [
-          2959
+          2964
         ],
         "llmCostUsd": 0,
-        "durationMs": 3508,
+        "durationMs": 3517,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -7477,10 +7487,10 @@
           3
         ],
         "ladderMs": [
-          2961
+          2955
         ],
         "llmCostUsd": 0,
-        "durationMs": 3514,
+        "durationMs": 3479,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -7515,10 +7525,10 @@
           3
         ],
         "ladderMs": [
-          2947
+          2930
         ],
         "llmCostUsd": 0,
-        "durationMs": 3504,
+        "durationMs": 3463,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"pricing\"]",
         "selectors": [
@@ -7553,10 +7563,10 @@
           2
         ],
         "ladderMs": [
-          5868
+          6475
         ],
         "llmCostUsd": 0,
-        "durationMs": 8429,
+        "durationMs": 9035,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t07beb3\"]",
         "selectors": [
@@ -7592,11 +7602,11 @@
           3
         ],
         "ladderMs": [
-          2932,
-          2922
+          2945,
+          2923
         ],
         "llmCostUsd": 0,
-        "durationMs": 6831,
+        "durationMs": 6859,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -7640,11 +7650,11 @@
           3
         ],
         "ladderMs": [
-          2941,
-          2925
+          2932,
+          2931
         ],
         "llmCostUsd": 0,
-        "durationMs": 6864,
+        "durationMs": 6843,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -7688,11 +7698,11 @@
           3
         ],
         "ladderMs": [
-          2952,
-          2929
+          2972,
+          3181
         ],
         "llmCostUsd": 0,
-        "durationMs": 6854,
+        "durationMs": 7280,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -7736,11 +7746,11 @@
           3
         ],
         "ladderMs": [
-          2960,
-          2924
+          3091,
+          3429
         ],
         "llmCostUsd": 0,
-        "durationMs": 6859,
+        "durationMs": 7843,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -7783,10 +7793,10 @@
           3
         ],
         "ladderMs": [
-          2919
+          2981
         ],
         "llmCostUsd": 0,
-        "durationMs": 3511,
+        "durationMs": 3831,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"add\"]",
         "selectors": [
@@ -7823,13 +7833,13 @@
           2
         ],
         "ladderMs": [
-          2930,
-          5595
+          3034,
+          6499
         ],
         "llmCostUsd": 0,
-        "durationMs": 11548,
+        "durationMs": 12743,
         "wrongElementAttempt": false,
-        "primaryHealedTo": "button:has-text(\"Create\")",
+        "primaryHealedTo": "role=button[name=\"Create\"]",
         "selectors": [
           "#item",
           "#add"
@@ -7844,7 +7854,7 @@
           },
           {
             "original": "#add",
-            "healed": "button:has-text(\"Create\")",
+            "healed": "role=button[name=\"Create\"]",
             "level": 2,
             "confidence": 0.8,
             "verdict": "validated"
@@ -7870,10 +7880,10 @@
           1
         ],
         "ladderMs": [
-          352
+          270
         ],
         "llmCostUsd": 0,
-        "durationMs": 964,
+        "durationMs": 1036,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#place",
         "selectors": [
@@ -7909,10 +7919,10 @@
           1
         ],
         "ladderMs": [
-          351
+          276
         ],
         "llmCostUsd": 0,
-        "durationMs": 970,
+        "durationMs": 981,
         "wrongElementAttempt": false,
         "primaryHealedTo": "#add",
         "selectors": [
@@ -7947,10 +7957,10 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          2932
+          2994
         ],
         "llmCostUsd": 0,
-        "durationMs": 11784,
+        "durationMs": 12613,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -7991,11 +8001,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          2945,
-          2920
+          2930,
+          2910
         ],
         "llmCostUsd": 0,
-        "durationMs": 15573,
+        "durationMs": 15824,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -8044,11 +8054,11 @@
         "refusals": 1,
         "levels": [],
         "ladderMs": [
-          2929,
-          2943
+          2950,
+          2909
         ],
         "llmCostUsd": 0,
-        "durationMs": 15651,
+        "durationMs": 15437,
         "wrongElementAttempt": false,
         "primaryHealedTo": null,
         "selectors": [
@@ -8097,10 +8107,10 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          5769
+          7073
         ],
         "llmCostUsd": 0,
-        "durationMs": 9795,
+        "durationMs": 11098,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t7b7253\"]",
         "selectors": [
@@ -8111,7 +8121,7 @@
             "original": "#archive2",
             "healed": "[data-testid=\"t7b7253\"]",
             "level": 2,
-            "confidence": 0.95,
+            "confidence": 0.93,
             "verdict": "rejected"
           }
         ],
@@ -8134,11 +8144,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2934,
-          2903
+          2941,
+          2924
         ],
         "llmCostUsd": 0,
-        "durationMs": 8298,
+        "durationMs": 8376,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t6514c4\"]",
         "selectors": [
@@ -8180,12 +8190,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2930,
-          2916,
-          2908
+          2935,
+          2918,
+          2912
         ],
         "llmCostUsd": 0,
-        "durationMs": 11673,
+        "durationMs": 11679,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t6514c4\"]",
         "selectors": [
@@ -8235,12 +8245,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2949,
-          2916,
-          2899
+          2940,
+          2914,
+          2907
         ],
         "llmCostUsd": 0,
-        "durationMs": 11785,
+        "durationMs": 11687,
         "wrongElementAttempt": true,
         "primaryHealedTo": "[data-testid=\"t7a8589\"]",
         "selectors": [
@@ -8290,21 +8300,21 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          5804
+          10066
         ],
         "llmCostUsd": 0,
-        "durationMs": 9902,
+        "durationMs": 14137,
         "wrongElementAttempt": true,
-        "primaryHealedTo": "[data-testid=\"td96abf\"]",
+        "primaryHealedTo": "button.btn-archive1",
         "selectors": [
           "#archive2"
         ],
         "healed": [
           {
             "original": "#archive2",
-            "healed": "[data-testid=\"td96abf\"]",
-            "level": 2,
-            "confidence": 0.7,
+            "healed": "button.btn-archive1",
+            "level": 5,
+            "confidence": 0.92,
             "verdict": "rejected"
           }
         ],
@@ -8327,11 +8337,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2939,
-          2927
+          2951,
+          2914
         ],
         "llmCostUsd": 0,
-        "durationMs": 8373,
+        "durationMs": 8339,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Place order\"i]",
         "selectors": [
@@ -8373,12 +8383,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2943,
-          2911,
-          2927
+          2927,
+          2910,
+          2909
         ],
         "llmCostUsd": 0,
-        "durationMs": 11739,
+        "durationMs": 11653,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Sign in\"i]",
         "selectors": [
@@ -8428,11 +8438,11 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2947,
-          2921
+          2930,
+          2922
         ],
         "llmCostUsd": 0,
-        "durationMs": 8365,
+        "durationMs": 8330,
         "wrongElementAttempt": false,
         "primaryHealedTo": "role=button[name=\"Add\"i]",
         "selectors": [
@@ -8474,12 +8484,12 @@
         "refusals": 0,
         "levels": [],
         "ladderMs": [
-          2943,
-          2925,
-          2909
+          2946,
+          2906,
+          2904
         ],
         "llmCostUsd": 0,
-        "durationMs": 13778,
+        "durationMs": 13712,
         "wrongElementAttempt": false,
         "primaryHealedTo": "[data-testid=\"t52edda\"]",
         "selectors": [

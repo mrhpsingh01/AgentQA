@@ -1,6 +1,9 @@
 """The pull-request comment generator (scripts/pr_comment.py) on reports shaped exactly like the runner's output."""
 
 import json
+import re
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -79,6 +82,16 @@ def test_the_patch_targets_the_reported_line_even_if_the_selector_appears_twice(
 def test_selectors_with_quotes_are_escaped_in_the_patch(base_dir):
     patch = pr_comment.make_patch(base_dir, "tests/shop.spec.ts", 5, "#place-order", "button:has-text('Pay')")
     assert "button:has-text(\\'Pay\\')" in patch
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="git is needed to validate a unified patch")
+def test_markdown_patch_with_blank_context_is_accepted_by_git(base_dir):
+    spec = base_dir / "tests" / "shop.spec.ts"
+    spec.write_text("before\nawait agentqa.click('#place-order');\nafter\n\n", encoding="utf-8", newline="\n")
+    md = pr_comment.build_comment(report([heal(line=2)]), base_dir)
+    patch = next(p for p in re.findall(r"```diff\n(.*?)```", md, re.S) if p.startswith("--- a/"))
+    result = subprocess.run(["git", "apply", "--check", "-"], input=patch.encode(), cwd=base_dir, capture_output=True)
+    assert result.returncode == 0, result.stderr.decode()
 
 
 def test_a_rejected_heal_is_reported_as_not_applied_and_gets_no_patch(base_dir):
